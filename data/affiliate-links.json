@@ -1,122 +1,122 @@
 {
-  "_readme": "Central affiliate link registry for growingmj.com. Each key is an affiliate ID referenced in article HTML as href=\"[[AFFILIATE:<id>]]\". The 'url' field is a PLAIN (non-tagged) product or search URL. Do not add an Amazon tracking tag here manually for every entry -- instead set 'amazon_tag' below once you're approved, then run scripts/apply_affiliate_links.py to stamp every placeholder across the whole site in one pass. See README.md for full instructions.",
+  "_readme": "Central affiliate link registry for growingmj.com. Each key is an affiliate ID referenced in article HTML as href=\"[[AFFILIATE:<id>]]\". The 'url' field is a PLAIN (non-tagged) Amazon search URL for a specific, currently-sold product -- specific-name searches instead of hardcoded product-page/ASIN links so they don't go dead when a listing changes. Do not add an Amazon tracking tag here manually for every entry -- instead set 'amazon_tag' below once you're approved, then run scripts/apply_affiliate_links.py to stamp every placeholder across the whole site in one pass. See README.md for full instructions.",
   "amazon_tag": "",
   "links": {
     "grow-tent-2x2": {
-      "label": "2x2 ft beginner grow tent",
-      "url": "https://www.amazon.com/s?k=2x2+grow+tent"
+      "label": "VIVOSUN 2x2 ft grow tent",
+      "url": "https://www.amazon.com/s?k=VIVOSUN+2x2+grow+tent"
     },
     "grow-tent-4x4": {
-      "label": "4x4 ft grow tent kit",
-      "url": "https://www.amazon.com/s?k=4x4+grow+tent+kit"
+      "label": "AC Infinity Cloudlab 844 4x4 ft grow tent",
+      "url": "https://www.amazon.com/s?k=AC+Infinity+Cloudlab+844+4x4+grow+tent"
     },
     "led-grow-light-quantum": {
-      "label": "Full-spectrum LED quantum board grow light",
-      "url": "https://www.amazon.com/s?k=led+quantum+board+grow+light"
+      "label": "Spider Farmer SF-4000 LED quantum board grow light",
+      "url": "https://www.amazon.com/s?k=Spider+Farmer+SF-4000+LED+grow+light"
     },
     "grow-light-timer": {
-      "label": "Digital outlet timer for grow lights",
-      "url": "https://www.amazon.com/s?k=digital+outlet+timer"
+      "label": "BN-LINK 7-day digital programmable outlet timer",
+      "url": "https://www.amazon.com/s?k=BN-LINK+7+day+digital+programmable+outlet+timer"
     },
     "hydroponic-kit-dwc": {
-      "label": "Deep water culture (DWC) hydroponic bucket kit",
-      "url": "https://www.amazon.com/s?k=deep+water+culture+hydroponic+kit"
+      "label": "General Hydroponics WaterFarm complete hydroponic system",
+      "url": "https://www.amazon.com/s?k=General+Hydroponics+WaterFarm+complete+system"
     },
     "ph-meter": {
-      "label": "Digital pH meter/tester for nutrient solution",
-      "url": "https://www.amazon.com/s?k=ph+meter+hydroponics"
+      "label": "Apera Instruments PH20 pH meter",
+      "url": "https://www.amazon.com/s?k=Apera+Instruments+PH20+pH+meter"
     },
     "ppm-ec-meter": {
-      "label": "PPM/EC meter for nutrient strength",
-      "url": "https://www.amazon.com/s?k=ppm+ec+meter+hydroponics"
+      "label": "Apera Instruments EC20 EC/TDS meter kit",
+      "url": "https://www.amazon.com/s?k=Apera+Instruments+EC20+EC+meter+kit"
     },
     "air-pump-stone": {
-      "label": "Aquarium-style air pump and air stone",
-      "url": "https://www.amazon.com/s?k=air+pump+air+stone+hydroponics"
+      "label": "General Hydroponics dual diaphragm air pump",
+      "url": "https://www.amazon.com/s?k=General+Hydroponics+dual+diaphragm+air+pump"
     },
     "indoor-herb-garden-kit": {
-      "label": "Countertop indoor herb garden starter kit",
-      "url": "https://www.amazon.com/s?k=indoor+herb+garden+kit"
+      "label": "AeroGarden Harvest countertop hydroponic garden",
+      "url": "https://www.amazon.com/s?k=AeroGarden+Harvest+countertop+garden"
     },
     "seed-starting-tray": {
-      "label": "Seed starting tray with humidity dome and heat mat",
-      "url": "https://www.amazon.com/s?k=seed+starting+tray+heat+mat"
+      "label": "Jump Start seedling heat mat, tray, and dome kit",
+      "url": "https://www.amazon.com/s?k=Jump+Start+seedling+heat+mat+tray+dome+kit"
     },
     "hygrometer-thermometer": {
-      "label": "Digital thermometer/hygrometer for grow spaces",
-      "url": "https://www.amazon.com/s?k=grow+tent+thermometer+hygrometer"
+      "label": "ThermoPro TP50 digital hygrometer/thermometer",
+      "url": "https://www.amazon.com/s?k=ThermoPro+TP50+digital+hygrometer+thermometer"
     },
     "inline-fan-carbon-filter": {
-      "label": "Inline exhaust fan and carbon filter combo",
-      "url": "https://www.amazon.com/s?k=inline+fan+carbon+filter+combo"
+      "label": "AC Infinity Cloudline inline fan and carbon filter kit",
+      "url": "https://www.amazon.com/s?k=AC+Infinity+Cloudline+inline+fan+carbon+filter+kit"
     },
     "soil-moisture-meter": {
-      "label": "Soil moisture meter for houseplants",
-      "url": "https://www.amazon.com/s?k=soil+moisture+meter"
+      "label": "XLUX T10 soil moisture meter (no battery)",
+      "url": "https://www.amazon.com/s?k=XLUX+T10+soil+moisture+meter"
     },
     "self-watering-planter": {
-      "label": "Self-watering planter pot",
-      "url": "https://www.amazon.com/s?k=self+watering+planter"
+      "label": "Gardenix Decor self-watering planter pot",
+      "url": "https://www.amazon.com/s?k=Gardenix+Decor+self+watering+planter"
     },
     "potting-mix-general": {
-      "label": "All-purpose indoor potting mix",
-      "url": "https://www.amazon.com/s?k=indoor+potting+mix"
+      "label": "Miracle-Gro Indoor Potting Mix",
+      "url": "https://www.amazon.com/s?k=Miracle-Gro+Indoor+Potting+Mix"
     },
     "coco-coir-growing-medium": {
-      "label": "Coco coir growing medium",
-      "url": "https://www.amazon.com/s?k=coco+coir+grow+medium"
+      "label": "General Hydroponics CocoTek coco coir brick",
+      "url": "https://www.amazon.com/s?k=General+Hydroponics+CocoTek+coco+coir+brick"
     },
     "clip-fan-grow-tent": {
-      "label": "Small clip oscillating fan for air circulation",
-      "url": "https://www.amazon.com/s?k=clip+fan+grow+tent"
+      "label": "Hurricane Classic 6-inch clip fan",
+      "url": "https://www.amazon.com/s?k=Hurricane+Classic+6+inch+clip+fan"
     },
     "pruning-snips": {
-      "label": "Micro pruning snips for houseplants and herbs",
-      "url": "https://www.amazon.com/s?k=micro+pruning+snips"
+      "label": "Fiskars Micro-Tip pruning snips",
+      "url": "https://www.amazon.com/s?k=Fiskars+Micro-Tip+pruning+snips"
     },
     "neem-oil-spray": {
-      "label": "Cold-pressed neem oil concentrate",
-      "url": "https://www.amazon.com/s?k=neem+oil+concentrate+plants"
+      "label": "Bonide Neem Max cold-pressed neem oil concentrate",
+      "url": "https://www.amazon.com/s?k=Bonide+Neem+Max+concentrate"
     },
     "yellow-sticky-traps": {
-      "label": "Yellow sticky traps for fungus gnats",
-      "url": "https://www.amazon.com/s?k=yellow+sticky+traps+fungus+gnats"
+      "label": "Sticky Trapz dual-sided yellow sticky traps",
+      "url": "https://www.amazon.com/s?k=Sticky+Trapz+dual+sided+yellow+sticky+traps"
     },
     "insecticidal-soap": {
-      "label": "Ready-to-use insecticidal soap spray",
-      "url": "https://www.amazon.com/s?k=insecticidal+soap+spray+plants"
+      "label": "Garden Safe Brand insecticidal soap",
+      "url": "https://www.amazon.com/s?k=Garden+Safe+Brand+insecticidal+soap"
     },
     "general-purpose-fertilizer": {
-      "label": "Balanced liquid plant fertilizer",
-      "url": "https://www.amazon.com/s?k=balanced+liquid+plant+fertilizer"
+      "label": "Dyna-Gro Foliage-Pro 9-3-6 liquid fertilizer",
+      "url": "https://www.amazon.com/s?k=Dyna-Gro+Foliage-Pro+9-3-6+liquid+fertilizer"
     },
     "cal-mag-supplement": {
-      "label": "Cal-mag calcium/magnesium supplement",
-      "url": "https://www.amazon.com/s?k=cal+mag+supplement+plants"
+      "label": "General Hydroponics CALiMAGic cal-mag supplement",
+      "url": "https://www.amazon.com/s?k=General+Hydroponics+CALiMAGic"
     },
     "ducting-and-clamps": {
-      "label": "Insulated ducting with clamps kit",
-      "url": "https://www.amazon.com/s?k=insulated+ducting+clamps+grow+tent"
+      "label": "TerraBloom insulated ducting with clamps",
+      "url": "https://www.amazon.com/s?k=TerraBloom+insulated+ducting+with+clamps"
     },
     "indoor-vegetable-seed-kit": {
-      "label": "Indoor vegetable seed starter variety pack",
-      "url": "https://www.amazon.com/s?k=indoor+vegetable+seed+variety+pack"
+      "label": "Survival Garden Seeds 20-variety vegetable starter collection",
+      "url": "https://www.amazon.com/s?k=Survival+Garden+Seeds+20+variety+vegetable+starter+collection"
     },
     "seed-starting-mix": {
-      "label": "Sterile seed starting mix",
-      "url": "https://www.amazon.com/s?k=sterile+seed+starting+mix"
+      "label": "Espoma Organic Seed Starter mix",
+      "url": "https://www.amazon.com/s?k=Espoma+Organic+Seed+Starter+mix"
     },
     "seedling-grow-light": {
-      "label": "Compact seedling grow light stand",
-      "url": "https://www.amazon.com/s?k=seedling+grow+light+stand"
+      "label": "iPower 2 ft T5 fluorescent grow light stand",
+      "url": "https://www.amazon.com/s?k=iPower+2+ft+T5+fluorescent+grow+light+stand"
     },
     "rockwool-starter-cubes": {
-      "label": "Rockwool starter cubes",
-      "url": "https://www.amazon.com/s?k=rockwool+starter+cubes"
+      "label": "Grodan A-OK rockwool starter cubes",
+      "url": "https://www.amazon.com/s?k=Grodan+A-OK+rockwool+starter+cubes"
     },
     "perlite": {
-      "label": "Horticultural perlite soil amendment",
-      "url": "https://www.amazon.com/s?k=horticultural+perlite"
+      "label": "Espoma Organic Perlite",
+      "url": "https://www.amazon.com/s?k=Espoma+Organic+Perlite"
     }
   }
 }
