@@ -1,6 +1,6 @@
 {
   "_readme": "Central affiliate link registry for growingmj.com. Each key is an affiliate ID referenced in article HTML as href=\"[[AFFILIATE:<id>]]\". The 'url' field is a PLAIN (non-tagged) Amazon search URL for a specific, currently-sold product -- specific-name searches instead of hardcoded product-page/ASIN links so they don't go dead when a listing changes. Do not add an Amazon tracking tag here manually for every entry -- instead set 'amazon_tag' below once you're approved, then run scripts/apply_affiliate_links.py to stamp every placeholder across the whole site in one pass. See README.md for full instructions.",
-  "amazon_tag": "",
+  "amazon_tag": "ngineer420-20",
   "links": {
     "grow-tent-2x2": {
       "label": "VIVOSUN 2x2 ft grow tent",
