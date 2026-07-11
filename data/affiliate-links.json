@@ -73,6 +73,50 @@
     "pruning-snips": {
       "label": "Micro pruning snips for houseplants and herbs",
       "url": "https://www.amazon.com/s?k=micro+pruning+snips"
+    },
+    "neem-oil-spray": {
+      "label": "Cold-pressed neem oil concentrate",
+      "url": "https://www.amazon.com/s?k=neem+oil+concentrate+plants"
+    },
+    "yellow-sticky-traps": {
+      "label": "Yellow sticky traps for fungus gnats",
+      "url": "https://www.amazon.com/s?k=yellow+sticky+traps+fungus+gnats"
+    },
+    "insecticidal-soap": {
+      "label": "Ready-to-use insecticidal soap spray",
+      "url": "https://www.amazon.com/s?k=insecticidal+soap+spray+plants"
+    },
+    "general-purpose-fertilizer": {
+      "label": "Balanced liquid plant fertilizer",
+      "url": "https://www.amazon.com/s?k=balanced+liquid+plant+fertilizer"
+    },
+    "cal-mag-supplement": {
+      "label": "Cal-mag calcium/magnesium supplement",
+      "url": "https://www.amazon.com/s?k=cal+mag+supplement+plants"
+    },
+    "ducting-and-clamps": {
+      "label": "Insulated ducting with clamps kit",
+      "url": "https://www.amazon.com/s?k=insulated+ducting+clamps+grow+tent"
+    },
+    "indoor-vegetable-seed-kit": {
+      "label": "Indoor vegetable seed starter variety pack",
+      "url": "https://www.amazon.com/s?k=indoor+vegetable+seed+variety+pack"
+    },
+    "seed-starting-mix": {
+      "label": "Sterile seed starting mix",
+      "url": "https://www.amazon.com/s?k=sterile+seed+starting+mix"
+    },
+    "seedling-grow-light": {
+      "label": "Compact seedling grow light stand",
+      "url": "https://www.amazon.com/s?k=seedling+grow+light+stand"
+    },
+    "rockwool-starter-cubes": {
+      "label": "Rockwool starter cubes",
+      "url": "https://www.amazon.com/s?k=rockwool+starter+cubes"
+    },
+    "perlite": {
+      "label": "Horticultural perlite soil amendment",
+      "url": "https://www.amazon.com/s?k=horticultural+perlite"
     }
   }
 }

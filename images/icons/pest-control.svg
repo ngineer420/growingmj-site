@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A leaf with a pest bug being warded off">
+  <path d="M18 46 C18 30 26 18 34 14 C34 26 40 32 36 44 C32 52 22 52 18 46 Z" fill="#6fbf73" stroke="#1f4d2c" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="46" cy="24" rx="6" ry="4.5" fill="#f7f5ee" stroke="#1f4d2c" stroke-width="2.5" transform="rotate(30 46 24)"/>
+  <line x1="41" y1="19" x2="36" y2="14" stroke="#1f4d2c" stroke-width="2" stroke-linecap="round"/>
+  <line x1="51" y1="19" x2="56" y2="15" stroke="#1f4d2c" stroke-width="2" stroke-linecap="round"/>
+  <line x1="38" y1="30" x2="30" y2="30" stroke="#1f4d2c" stroke-width="2" stroke-linecap="round"/>
+  <line x1="34" y1="34" x2="26" y2="38" stroke="#1f4d2c" stroke-width="2" stroke-linecap="round"/>
+</svg>
