@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="An herb sprout in a small pot">
+  <path d="M18 40 L46 40 L42 56 L22 56 Z" fill="#fff" stroke="#1f4d2c" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M32 40 C32 28 24 26 20 18 C28 18 34 24 32 34" fill="#2e7d42"/>
+  <path d="M32 40 C32 26 40 24 44 16 C36 16 30 22 32 32" fill="#6fbf73"/>
+</svg>

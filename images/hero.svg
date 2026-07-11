@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" role="img" aria-label="A grow light shining on three potted plants inside a grow tent">
+  <path d="M120 190 L320 40 L520 190" fill="none" stroke="#1f4d2c" stroke-width="3" opacity="0.35"/>
+
+  <rect x="260" y="30" width="120" height="14" rx="3" fill="#1f4d2c"/>
+  <line x1="280" y1="48" x2="270" y2="80" stroke="#6fbf73" stroke-width="3" stroke-linecap="round"/>
+  <line x1="320" y1="48" x2="320" y2="84" stroke="#6fbf73" stroke-width="3" stroke-linecap="round"/>
+  <line x1="360" y1="48" x2="370" y2="80" stroke="#6fbf73" stroke-width="3" stroke-linecap="round"/>
+
+  <g transform="translate(220,190)">
+    <path d="M-16 0 L16 0 L12 26 L-12 26 Z" fill="#fff" stroke="#1f4d2c" stroke-width="3"/>
+    <path d="M0 0 C0 -14 -10 -16 -14 -26 C-6 -24 2 -18 0 -6" fill="#2e7d42"/>
+    <path d="M0 0 C0 -12 8 -14 12 -22 C6 -20 0 -14 0 -4" fill="#6fbf73"/>
+  </g>
+  <g transform="translate(320,196)">
+    <path d="M-20 0 L20 0 L15 30 L-15 30 Z" fill="#fff" stroke="#1f4d2c" stroke-width="3"/>
+    <path d="M0 0 C0 -18 -12 -20 -16 -32 C-6 -28 2 -22 0 -8" fill="#6fbf73"/>
+    <path d="M0 0 C0 -16 10 -18 14 -28 C6 -24 0 -18 0 -6" fill="#2e7d42"/>
+  </g>
+  <g transform="translate(420,190)">
+    <path d="M-16 0 L16 0 L12 26 L-12 26 Z" fill="#fff" stroke="#1f4d2c" stroke-width="3"/>
+    <path d="M0 0 C0 -14 -10 -16 -14 -26 C-6 -24 2 -18 0 -6" fill="#2e7d42"/>
+    <path d="M0 0 C0 -12 8 -14 12 -22 C6 -20 0 -14 0 -4" fill="#6fbf73"/>
+  </g>
+</svg>
