@@ -1,0 +1,198 @@
+/* Growing MJ — indoor gardening site
+   Plain, dependency-free CSS. Mobile-first, no frameworks. */
+
+:root {
+  --green-dark: #1f4d2c;
+  --green: #2e7d42;
+  --green-light: #6fbf73;
+  --cream: #f7f5ee;
+  --ink: #22281f;
+  --ink-soft: #4a5245;
+  --border: #dcd8c8;
+  --card-bg: #ffffff;
+  --max-width: 960px;
+  font-size: 17px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.65;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--green-dark); text-decoration: underline; text-decoration-color: var(--green-light); text-underline-offset: 2px; }
+a:hover { color: var(--green); }
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Header */
+header.site-header {
+  background: var(--green-dark);
+  color: #fff;
+  padding: 1rem 0;
+}
+header.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.brand span { color: var(--green-light); }
+nav.main-nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+}
+nav.main-nav a {
+  color: #eef7ee;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+nav.main-nav a:hover { color: var(--green-light); text-decoration: underline; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
+  color: #fff;
+  padding: 3rem 0;
+  text-align: center;
+}
+.hero h1 { margin: 0 0 0.6rem; font-size: 2.2rem; }
+.hero p { max-width: 640px; margin: 0 auto; font-size: 1.1rem; color: #eaf4ea; }
+
+/* Main content */
+main { padding: 2.5rem 0 3rem; }
+
+.page-title { font-size: 2rem; margin-bottom: 0.25rem; color: var(--green-dark); }
+.page-subtitle { color: var(--ink-soft); margin-top: 0; }
+
+/* Article grid on homepage */
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.article-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+.article-card h3 { margin-top: 0; font-size: 1.15rem; }
+.article-card p { color: var(--ink-soft); font-size: 0.95rem; flex-grow: 1; }
+.article-card .read-more { font-weight: 600; font-size: 0.9rem; }
+
+/* Article body */
+article.post {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+article.post h1 { color: var(--green-dark); margin-top: 0; }
+article.post h2 { color: var(--green-dark); margin-top: 2rem; }
+article.post h3 { color: var(--green); }
+article.post ul, article.post ol { padding-left: 1.3rem; }
+article.post .meta { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+/* Disclosure banners */
+.disclosure-banner {
+  background: #fdf6e3;
+  border: 1px solid #e6d8a8;
+  color: #5c4a12;
+  font-size: 0.88rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.disclosure-banner a { color: #5c4a12; }
+
+/* Affiliate link styling — clearly marked per FTC guidance */
+.affiliate-link {
+  font-weight: 600;
+}
+.affiliate-link .tag {
+  font-weight: 400;
+  font-size: 0.78em;
+  color: var(--ink-soft);
+  margin-left: 0.15rem;
+}
+
+/* Callout box for product mentions */
+.product-box {
+  background: #f0f7ee;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--green);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.product-box p { margin: 0.4rem 0; }
+
+/* Simple content boxes */
+.callout {
+  background: #eef4ea;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+/* Footer */
+footer.site-footer {
+  background: var(--green-dark);
+  color: #d9e8da;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+}
+footer.site-footer a { color: #d9e8da; }
+footer.site-footer .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+footer.site-footer .fine-print {
+  color: #a9c2ac;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* Table */
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+th, td { border: 1px solid var(--border); padding: 0.6rem 0.75rem; text-align: left; font-size: 0.95rem; }
+th { background: #eef4ea; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.7rem; }
+  article.post { padding: 1.25rem; }
+}

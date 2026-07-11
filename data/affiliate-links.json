@@ -1,0 +1,78 @@
+{
+  "_readme": "Central affiliate link registry for growingmj.com. Each key is an affiliate ID referenced in article HTML as href=\"[[AFFILIATE:<id>]]\". The 'url' field is a PLAIN (non-tagged) product or search URL. Do not add an Amazon tracking tag here manually for every entry -- instead set 'amazon_tag' below once you're approved, then run scripts/apply_affiliate_links.py to stamp every placeholder across the whole site in one pass. See README.md for full instructions.",
+  "amazon_tag": "",
+  "links": {
+    "grow-tent-2x2": {
+      "label": "2x2 ft beginner grow tent",
+      "url": "https://www.amazon.com/s?k=2x2+grow+tent"
+    },
+    "grow-tent-4x4": {
+      "label": "4x4 ft grow tent kit",
+      "url": "https://www.amazon.com/s?k=4x4+grow+tent+kit"
+    },
+    "led-grow-light-quantum": {
+      "label": "Full-spectrum LED quantum board grow light",
+      "url": "https://www.amazon.com/s?k=led+quantum+board+grow+light"
+    },
+    "grow-light-timer": {
+      "label": "Digital outlet timer for grow lights",
+      "url": "https://www.amazon.com/s?k=digital+outlet+timer"
+    },
+    "hydroponic-kit-dwc": {
+      "label": "Deep water culture (DWC) hydroponic bucket kit",
+      "url": "https://www.amazon.com/s?k=deep+water+culture+hydroponic+kit"
+    },
+    "ph-meter": {
+      "label": "Digital pH meter/tester for nutrient solution",
+      "url": "https://www.amazon.com/s?k=ph+meter+hydroponics"
+    },
+    "ppm-ec-meter": {
+      "label": "PPM/EC meter for nutrient strength",
+      "url": "https://www.amazon.com/s?k=ppm+ec+meter+hydroponics"
+    },
+    "air-pump-stone": {
+      "label": "Aquarium-style air pump and air stone",
+      "url": "https://www.amazon.com/s?k=air+pump+air+stone+hydroponics"
+    },
+    "indoor-herb-garden-kit": {
+      "label": "Countertop indoor herb garden starter kit",
+      "url": "https://www.amazon.com/s?k=indoor+herb+garden+kit"
+    },
+    "seed-starting-tray": {
+      "label": "Seed starting tray with humidity dome and heat mat",
+      "url": "https://www.amazon.com/s?k=seed+starting+tray+heat+mat"
+    },
+    "hygrometer-thermometer": {
+      "label": "Digital thermometer/hygrometer for grow spaces",
+      "url": "https://www.amazon.com/s?k=grow+tent+thermometer+hygrometer"
+    },
+    "inline-fan-carbon-filter": {
+      "label": "Inline exhaust fan and carbon filter combo",
+      "url": "https://www.amazon.com/s?k=inline+fan+carbon+filter+combo"
+    },
+    "soil-moisture-meter": {
+      "label": "Soil moisture meter for houseplants",
+      "url": "https://www.amazon.com/s?k=soil+moisture+meter"
+    },
+    "self-watering-planter": {
+      "label": "Self-watering planter pot",
+      "url": "https://www.amazon.com/s?k=self+watering+planter"
+    },
+    "potting-mix-general": {
+      "label": "All-purpose indoor potting mix",
+      "url": "https://www.amazon.com/s?k=indoor+potting+mix"
+    },
+    "coco-coir-growing-medium": {
+      "label": "Coco coir growing medium",
+      "url": "https://www.amazon.com/s?k=coco+coir+grow+medium"
+    },
+    "clip-fan-grow-tent": {
+      "label": "Small clip oscillating fan for air circulation",
+      "url": "https://www.amazon.com/s?k=clip+fan+grow+tent"
+    },
+    "pruning-snips": {
+      "label": "Micro pruning snips for houseplants and herbs",
+      "url": "https://www.amazon.com/s?k=micro+pruning+snips"
+    }
+  }
+}
