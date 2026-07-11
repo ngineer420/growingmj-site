@@ -164,7 +164,42 @@ article.post h1 { color: var(--green-dark); margin-top: 0; }
 article.post h2 { color: var(--green-dark); margin-top: 2rem; }
 article.post h3 { color: var(--green); }
 article.post ul, article.post ol { padding-left: 1.3rem; }
-article.post .meta { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1.5rem; }
+article.post .meta { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 0.25rem; }
+article.post .updated { color: var(--ink-soft); font-size: 0.82rem; font-style: italic; margin: 0 0 1.5rem; }
+
+/* FAQ section */
+.faq-section {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.faq-section h2 { margin-top: 0; }
+.faq-item {
+  background: #f0f7ee;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.9rem 1.25rem;
+  margin: 0 0 0.9rem;
+}
+.faq-item h3 { margin: 0 0 0.4rem; font-size: 1rem; color: var(--green-dark); }
+.faq-item p { margin: 0; color: var(--ink-soft); }
+
+/* Related articles */
+.related-articles {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.related-articles h2 { margin-top: 0; }
+.related-articles ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+.related-articles li {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+}
+.related-articles a { font-weight: 600; text-decoration: none; }
+.related-articles a:hover { text-decoration: underline; }
 
 /* Disclosure banners */
 .disclosure-banner {
