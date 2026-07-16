@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A water drop dripping from a line into a potted plant">
+  <path d="M18 40 L46 40 L42 56 L22 56 Z" fill="#fff" stroke="#1f4d2c" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M32 40 C32 32 28 30 26 24 C31 25 34 29 33 35" fill="#2e7d42"/>
+  <path d="M33 40 C34 33 38 31 40 26 C41 32 38 36 34 38" fill="#6fbf73"/>
+  <path d="M10 10 L54 10" stroke="#1f4d2c" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="48" cy="10" r="4" fill="#c99a4a" stroke="#1f4d2c" stroke-width="2"/>
+  <path d="M48 20 C45 24 44 26 44 28 A4 4 0 0 0 52 28 C52 26 51 24 48 20 Z" fill="#5aa9d6" stroke="#1f4d2c" stroke-width="2" stroke-linejoin="round"/>
+</svg>

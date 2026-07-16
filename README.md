@@ -25,6 +25,18 @@ articles/
   starting-an-indoor-herb-garden.html
   common-indoor-gardening-mistakes.html
   houseplant-care-fundamentals.html
+  dealing-with-indoor-plant-pests-naturally.html
+  nutrient-deficiency-identification-chart.html
+  grow-tent-odor-control-and-ventilation.html
+  best-vegetables-to-grow-indoors-year-round.html
+  seed-starting-guide-for-beginners.html
+  choosing-a-grow-medium-soil-vs-coco-vs-rockwool.html
+  propagating-plants-from-cuttings.html
+  pruning-and-training-indoor-plants.html
+  harvesting-and-drying-herbs.html
+  automating-your-indoor-garden-watering.html
+  growing-microgreens-indoors.html
+  understanding-grow-light-schedules.html
 css/style.css                  All site styling
 data/affiliate-links.json      Central affiliate link registry (see below)
 scripts/apply_affiliate_links.py   One-command script to stamp your real Amazon tag site-wide

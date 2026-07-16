@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A shallow tray densely planted with microgreen sprouts">
+  <rect x="10" y="42" width="44" height="12" rx="2" fill="#fff" stroke="#1f4d2c" stroke-width="3"/>
+  <path d="M18 42 C17 36 15 34 14 30 C18 32 20 36 19 42" fill="#6fbf73"/>
+  <path d="M25 42 C25 34 23 32 23 27 C27 30 28 35 26 42" fill="#2e7d42"/>
+  <path d="M32 42 C32 33 30 30 31 24 C35 28 35 34 33 42" fill="#6fbf73"/>
+  <path d="M39 42 C39 35 38 32 38 28 C42 31 42 36 40 42" fill="#2e7d42"/>
+  <path d="M46 42 C46 37 45 34 44 31 C48 33 49 37 47 42" fill="#6fbf73"/>
+</svg>
