@@ -117,6 +117,46 @@
     "perlite": {
       "label": "Espoma Organic Perlite",
       "url": "https://www.amazon.com/s?k=Espoma+Organic+Perlite"
+    },
+    "rooting-gel": {
+      "label": "HydroDynamics Clonex rooting gel",
+      "url": "https://www.amazon.com/s?k=HydroDynamics+Clonex+rooting+gel"
+    },
+    "trellis-netting": {
+      "label": "VIVOSUN heavy-duty polyester trellis netting",
+      "url": "https://www.amazon.com/s?k=VIVOSUN+heavy+duty+polyester+trellis+netting"
+    },
+    "soft-plant-ties": {
+      "label": "VELCRO Brand One-Wrap adjustable plant ties",
+      "url": "https://www.amazon.com/s?k=VELCRO+Brand+One-Wrap+plant+ties"
+    },
+    "herb-drying-rack": {
+      "label": "iPower 8-layer hanging herb drying rack",
+      "url": "https://www.amazon.com/s?k=iPower+8+layer+hanging+herb+drying+rack"
+    },
+    "microgreens-seed-assortment": {
+      "label": "True Leaf Market microgreens seed assortment",
+      "url": "https://www.amazon.com/s?k=True+Leaf+Market+microgreens+seed+assortment"
+    },
+    "growing-trays-1020": {
+      "label": "Bootstrap Farmer 1020 shallow growing trays (no holes)",
+      "url": "https://www.amazon.com/s?k=Bootstrap+Farmer+1020+shallow+trays+no+holes"
+    },
+    "drip-irrigation-kit": {
+      "label": "Raindrip automatic container drip irrigation kit",
+      "url": "https://www.amazon.com/s?k=Raindrip+automatic+container+drip+irrigation+kit"
+    },
+    "watering-stakes": {
+      "label": "Blumat Classic ceramic self-watering stakes",
+      "url": "https://www.amazon.com/s?k=Blumat+Classic+ceramic+watering+stakes"
+    },
+    "smart-plug-wifi": {
+      "label": "Kasa Smart Plug wifi outlet (2-pack)",
+      "url": "https://www.amazon.com/s?k=Kasa+Smart+Plug+HS103+2+pack"
+    },
+    "small-humidifier": {
+      "label": "LEVOIT Classic 200 ultrasonic cool mist humidifier",
+      "url": "https://www.amazon.com/s?k=LEVOIT+Classic+200+ultrasonic+humidifier"
     }
   }
 }
