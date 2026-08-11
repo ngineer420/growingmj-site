@@ -40,6 +40,7 @@ articles/
 css/style.css                  All site styling
 data/affiliate-links.json      Central affiliate link registry (see below)
 scripts/apply_affiliate_links.py   One-command script to stamp your real Amazon tag site-wide
+scripts/check_affiliate_links.py   Guard: fails if a placeholder or dead affiliate link is live
 robots.txt
 sitemap.xml
 CNAME                           Custom domain for GitHub Pages (growingmj.com)
@@ -102,6 +103,23 @@ them.
 5. To add a new product later, just add a new entry to
    `data/affiliate-links.json` and reference it in your article as
    `href="[[AFFILIATE:your-new-id]]"`, then re-run the script.
+
+### Always run the check before publishing
+
+Stamping is a manual step, so it is possible to write an article and
+publish it with the raw `[[AFFILIATE:id]]` placeholder still in the page.
+That has already happened once — 22 placeholders across 8 articles went
+live as literal text where a product link should have been. Run this
+before every push:
+
+```bash
+python3 scripts/check_affiliate_links.py
+```
+
+It exits non-zero and names the file and line if any page still contains a
+`[[...]]` placeholder, if any `affiliate-link` anchor has no `href` (a link
+that looks clickable and isn't), or if any affiliate URL is missing the
+Associates tag. A clean run prints how many links it checked.
 
 ### Adding other affiliate programs later
 
