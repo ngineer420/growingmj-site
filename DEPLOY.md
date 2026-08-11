@@ -89,8 +89,14 @@ domain). Once `https://growingmj.com` is live and working end to end:
    python3 scripts/apply_affiliate_links.py growingmj-20
    ```
    This rewrites every `[[AFFILIATE:id]]` placeholder across every article
-   into a real, tagged Amazon link in a single pass. Commit and push the
-   result.
+   into a real, tagged Amazon link in a single pass.
+6. Confirm nothing was missed, then commit and push the result:
+   ```bash
+   python3 scripts/check_affiliate_links.py
+   ```
+   This exits non-zero if any placeholder, href-less anchor, or untagged
+   affiliate URL survived into a page. Run it before every push, not just
+   after stamping — an article written later can reintroduce a placeholder.
 
 ## 4. Ongoing maintenance
 
