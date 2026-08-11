@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Growing MJ">
+  <rect width="64" height="64" rx="14" fill="#2e7d42"/>
+  <path d="M32 11 C 48 21, 50 39, 32 53 C 14 39, 16 21, 32 11 Z" fill="#f7f5ee"/>
+  <path d="M32 16 L32 50" stroke="#2e7d42" stroke-width="4.5" stroke-linecap="round"/>
+</svg>
