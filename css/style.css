@@ -10,11 +10,84 @@
   --ink-soft: #4a5245;
   --border: #dcd8c8;
   --card-bg: #ffffff;
+
+  /* --green-dark was doing two jobs that pull apart in a dark theme: it was
+     the ground of the header/footer/hero *and* the colour of links and
+     headings sitting on the page. On a dark page the ground has to stay dark
+     while the link has to go light, so the two roles are named separately.
+     Both still resolve to --green-dark here, so light output is unchanged. */
+  --chrome: var(--green-dark);      /* header, footer, foot of the hero */
+  --chrome-hi: var(--green);        /* head of the hero gradient */
+  --accent-ink: var(--green-dark);  /* links and headings on the page ground */
+
+  /* Colours that used to be written as literals in the rules below. Same
+     values, named so the dark block can move them. */
+  --on-chrome: #ffffff;
+  --on-chrome-soft: #eef7ee;         /* nav links */
+  --on-chrome-body: #eaf4ea;         /* the hero's body copy */
+  --on-chrome-mute: #d9e8da;         /* footer */
+  --on-chrome-faint: #a9c2ac;
+  --wash: #f0f7ee;                  /* FAQ items, product boxes */
+  --wash-2: #eef4ea;                /* callouts, table headers */
+  --notice-bg: #fdf6e3;
+  --notice-line: #e6d8a8;
+  --notice-ink: #5c4a12;
+
   --max-width: 960px;
   font-size: 17px;
+  color-scheme: light;
+}
+
+/* Dark theme.
+   This is a long-form reading site, which is exactly the case where somebody
+   reading at night wants the lights down. Colours are redefined here and
+   nowhere else, so the two themes cannot drift. font-size and --max-width are
+   deliberately not repeated: this block moves colour only, never layout. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --green: #57b06e;
+    --green-light: #8fd493;
+    --cream: #12160f;
+    --ink: #e4e9df;
+    --ink-soft: #a7b0a2;
+    --border: #2c332a;
+    --card-bg: #1a1f18;
+
+    --chrome: #16301f;
+    --chrome-hi: #1e4429;
+    --accent-ink: #7dcb8e;
+
+    --on-chrome: #eaf3ea;
+    --on-chrome-soft: #cfe2d1;
+    --on-chrome-body: #c9dfcb;
+    --on-chrome-mute: #c2d6c4;
+    --on-chrome-faint: #93a996;
+    --wash: #1a2519;
+    --wash-2: #182219;
+    --notice-bg: #2a2413;
+    --notice-line: #4c4222;
+    --notice-ink: #ddcb90;
+    color-scheme: dark;
+  }
 }
 
 * { box-sizing: border-box; }
+
+/* Keyboard focus was invisible, which on a page whose main interactive
+   elements are links makes the whole site unnavigable without a mouse.
+   :focus-visible rather than :focus so a mouse click doesn't ring the link
+   it just activated. --green reads against the cream page and against the
+   dark one, because the token moves with the theme; on the green header and
+   footer it would not, so those get the light side of the pair instead. */
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+header.site-header :focus-visible,
+footer.site-footer :focus-visible,
+.hero :focus-visible {
+  outline-color: var(--on-chrome);
+}
 
 html, body {
   margin: 0;
@@ -30,7 +103,7 @@ body {
 
 img { max-width: 100%; display: block; }
 
-a { color: var(--green-dark); text-decoration: underline; text-decoration-color: var(--green-light); text-underline-offset: 2px; }
+a { color: var(--accent-ink); text-decoration: underline; text-decoration-color: var(--green-light); text-underline-offset: 2px; }
 a:hover { color: var(--green); }
 
 .wrap {
@@ -41,8 +114,8 @@ a:hover { color: var(--green); }
 
 /* Header */
 header.site-header {
-  background: var(--green-dark);
-  color: #fff;
+  background: var(--chrome);
+  color: var(--on-chrome);
   padding: 1rem 0;
 }
 header.site-header .wrap {
@@ -55,7 +128,7 @@ header.site-header .wrap {
 .brand {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--on-chrome);
   text-decoration: none;
   letter-spacing: 0.02em;
 }
@@ -69,7 +142,7 @@ nav.main-nav ul {
   padding: 0;
 }
 nav.main-nav a {
-  color: #eef7ee;
+  color: var(--on-chrome-soft);
   text-decoration: none;
   font-size: 0.95rem;
 }
@@ -77,13 +150,13 @@ nav.main-nav a:hover { color: var(--green-light); text-decoration: underline; }
 
 /* Hero */
 .hero {
-  background: linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
-  color: #fff;
+  background: linear-gradient(180deg, var(--chrome-hi) 0%, var(--chrome) 100%);
+  color: var(--on-chrome);
   padding: 3rem 0;
   text-align: center;
 }
 .hero h1 { margin: 0 0 0.6rem; font-size: 2.2rem; }
-.hero p { max-width: 640px; margin: 0 auto; font-size: 1.1rem; color: #eaf4ea; }
+.hero p { max-width: 640px; margin: 0 auto; font-size: 1.1rem; color: var(--on-chrome-body); }
 
 .hero-image { max-width: 480px; margin: 2rem auto 0; }
 .hero-image img { width: 100%; height: auto; }
@@ -129,7 +202,7 @@ nav.main-nav a:hover { color: var(--green-light); text-decoration: underline; }
 /* Main content */
 main { padding: 2.5rem 0 3rem; }
 
-.page-title { font-size: 2rem; margin-bottom: 0.25rem; color: var(--green-dark); }
+.page-title { font-size: 2rem; margin-bottom: 0.25rem; color: var(--accent-ink); }
 .page-subtitle { color: var(--ink-soft); margin-top: 0; }
 
 /* Article grid on homepage */
@@ -160,8 +233,8 @@ article.post {
   max-width: 760px;
   margin: 0 auto;
 }
-article.post h1 { color: var(--green-dark); margin-top: 0; }
-article.post h2 { color: var(--green-dark); margin-top: 2rem; }
+article.post h1 { color: var(--accent-ink); margin-top: 0; }
+article.post h2 { color: var(--accent-ink); margin-top: 2rem; }
 article.post h3 { color: var(--green); }
 article.post ul, article.post ol { padding-left: 1.3rem; }
 article.post .meta { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 0.25rem; }
@@ -176,13 +249,13 @@ article.post .signature { color: var(--ink-soft); font-size: 0.95rem; font-style
 }
 .faq-section h2 { margin-top: 0; }
 .faq-item {
-  background: #f0f7ee;
+  background: var(--wash);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.9rem 1.25rem;
   margin: 0 0 0.9rem;
 }
-.faq-item h3 { margin: 0 0 0.4rem; font-size: 1rem; color: var(--green-dark); }
+.faq-item h3 { margin: 0 0 0.4rem; font-size: 1rem; color: var(--accent-ink); }
 .faq-item p { margin: 0; color: var(--ink-soft); }
 
 /* Related articles */
@@ -204,15 +277,15 @@ article.post .signature { color: var(--ink-soft); font-size: 0.95rem; font-style
 
 /* Disclosure banners */
 .disclosure-banner {
-  background: #fdf6e3;
-  border: 1px solid #e6d8a8;
-  color: #5c4a12;
+  background: var(--notice-bg);
+  border: 1px solid var(--notice-line);
+  color: var(--notice-ink);
   font-size: 0.88rem;
   padding: 0.75rem 1rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
 }
-.disclosure-banner a { color: #5c4a12; }
+.disclosure-banner a { color: var(--notice-ink); }
 
 /* Affiliate link styling — clearly marked per FTC guidance */
 .affiliate-link {
@@ -227,7 +300,7 @@ article.post .signature { color: var(--ink-soft); font-size: 0.95rem; font-style
 
 /* Callout box for product mentions */
 .product-box {
-  background: #f0f7ee;
+  background: var(--wash);
   border: 1px solid var(--border);
   border-left: 4px solid var(--green);
   border-radius: 6px;
@@ -238,7 +311,7 @@ article.post .signature { color: var(--ink-soft); font-size: 0.95rem; font-style
 
 /* Simple content boxes */
 .callout {
-  background: #eef4ea;
+  background: var(--wash-2);
   border-radius: 8px;
   padding: 1rem 1.25rem;
   margin: 1.5rem 0;
@@ -246,12 +319,12 @@ article.post .signature { color: var(--ink-soft); font-size: 0.95rem; font-style
 
 /* Footer */
 footer.site-footer {
-  background: var(--green-dark);
-  color: #d9e8da;
+  background: var(--chrome);
+  color: var(--on-chrome-mute);
   padding: 2rem 0;
   font-size: 0.9rem;
 }
-footer.site-footer a { color: #d9e8da; }
+footer.site-footer a { color: var(--on-chrome-mute); }
 footer.site-footer .footer-links {
   display: flex;
   flex-wrap: wrap;
@@ -259,7 +332,7 @@ footer.site-footer .footer-links {
   margin-bottom: 0.75rem;
 }
 footer.site-footer .fine-print {
-  color: #a9c2ac;
+  color: var(--on-chrome-faint);
   font-size: 0.8rem;
   line-height: 1.5;
 }
@@ -267,7 +340,7 @@ footer.site-footer .fine-print {
 /* Table */
 table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
 th, td { border: 1px solid var(--border); padding: 0.6rem 0.75rem; text-align: left; font-size: 0.95rem; }
-th { background: #eef4ea; }
+th { background: var(--wash-2); }
 
 @media (max-width: 600px) {
   .hero h1 { font-size: 1.7rem; }
