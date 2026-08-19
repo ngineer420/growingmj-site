@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPD Calculator with Leaf Temperature Offset (kPa) — Growing MJ</title>
+<meta name="description" content="Free VPD calculator that uses leaf temperature, not just air temperature. Enter temp, humidity and a leaf-temp offset to get VPD in kPa, a stage verdict, and a colour-coded VPD chart.">
+<link rel="canonical" href="https://growingmj.com/tools/vpd-calculator/">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f7f5ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161a15" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="VPD Calculator with Leaf Temperature Offset (kPa)">
+<meta property="og:description" content="Free VPD calculator that uses leaf temperature, not just air temperature. Enter temp, humidity and a leaf-temp offset to get VPD in kPa, a stage verdict, and a colour-coded VPD chart.">
+<meta property="og:image" content="https://growingmj.com/images/photos/grow-tent-setup.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://growingmj.com/tools/vpd-calculator/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a good VPD for growing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Roughly 0.4-0.8 kPa for clones and seedlings, 0.8-1.2 kPa through vegetative growth, and 1.2-1.6 kPa in flower. Those are leaf-based figures using a leaf temperature about 2 C below air. Below about 0.4 kPa transpiration nearly stops and disease risk climbs; above about 1.6 kPa plants close stomata and growth slows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does a VPD calculator ask for a leaf temperature offset?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because VPD is the difference between the vapour pressure inside the leaf and the vapour pressure of the air, and the inside of the leaf is at leaf temperature, not air temperature. A transpiring leaf is evaporatively cooled and typically runs about 2 C (3.6 F) below air temperature under LEDs. Using air temperature for both halves overstates VPD, often by 0.2-0.3 kPa, which is enough to move you a whole band."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I measure leaf temperature?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "With an infrared thermometer pointed at a large, healthy fan leaf in the canopy from about 15 cm away, taken with the lights on and at the same time of day. Take three leaves and average them. Subtract that reading from your air temperature and use the difference as your offset."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is VPD measured in kPa or millibars?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Horticulture almost always uses kilopascals (kPa). Some older equipment reports millibars or hectopascals: 1 kPa = 10 mbar = 10 hPa, so a 1.2 kPa target is 12 mbar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My VPD is too low. Should I raise the temperature or drop the humidity?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Drop the humidity first. Humidity moves VPD far more per unit than temperature does, and raising tent temperature to fix humidity usually creates a heat problem instead. In a sealed tent that means more extraction or a dehumidifier; in a dry climate it can mean simply running the exhaust harder."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which saturation vapour pressure equation does this calculator use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Buck (1996) equation for saturation vapour pressure over liquid water. Over the 10-40 C range that matters indoors it agrees with the older Tetens equation to within about 0.1%, which is far smaller than the error in your hygrometer."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Growing<span>MJ</span></a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/index.html#articles">Articles</a></li>
+        <li><a href="/tools/" aria-current="true">Tools</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <article class="post">
+
+      <p class="tool-crumb"><a href="/tools/">Calculators</a> &rsaquo; VPD Calculator</p>
+
+      <div class="article-icon"><img src="/images/icons/vpd.svg" alt="" width="34" height="34"></div>
+      <h1>VPD Calculator</h1>
+      <p class="tool-lede">Vapour pressure deficit in kPa, calculated from
+      <strong>leaf</strong> temperature rather than air temperature &mdash; which is
+      the difference between a number that means something and a number that
+      looks right.</p>
+
+      <noscript>
+        <p class="noscript-note">This calculator needs JavaScript. With it
+        switched off you can still use the printed VPD chart further down the
+        page &mdash; find your air temperature row and your humidity column.</p>
+      </noscript>
+
+      <div class="calc" id="vpd-calc">
+        <h2>Your numbers</h2>
+
+        <div class="calc-fields">
+          <div class="calc-field is-wide">
+            <label id="unit-label">Temperature units</label>
+            <div class="calc-toggle" role="group" aria-labelledby="unit-label">
+              <button type="button" id="unit-f" aria-pressed="true">&deg;F</button>
+              <button type="button" id="unit-c" aria-pressed="false">&deg;C</button>
+            </div>
+          </div>
+
+          <div class="calc-field">
+            <label for="air-temp">Air temperature (<span class="u-temp">&deg;F</span>)</label>
+            <input type="number" id="air-temp" value="78" step="0.5" min="32" max="122" inputmode="decimal">
+            <p class="calc-hint">Measured at canopy height, lights on.</p>
+          </div>
+
+          <div class="calc-field">
+            <label for="rh">Relative humidity (%)</label>
+            <input type="number" id="rh" value="60" step="1" min="1" max="100" inputmode="decimal">
+            <p class="calc-hint">The tent&rsquo;s hygrometer, not the room&rsquo;s.</p>
+          </div>
+
+          <div class="calc-field">
+            <label for="leaf-offset">Leaf temperature offset (<span class="u-temp">&deg;F</span> below air)</label>
+            <input type="number" id="leaf-offset" value="3.6" step="0.1" min="-10" max="20" inputmode="decimal">
+            <p class="calc-hint">Default 3.6&thinsp;&deg;F (2&thinsp;&deg;C), the usual assumption for a
+            transpiring leaf under LEDs. Set it to 0 to get air-only VPD.</p>
+          </div>
+
+          <div class="calc-field">
+            <label for="stage">Growth stage</label>
+            <select id="stage">
+              <option value="clone">Clones, seedlings &amp; propagation</option>
+              <option value="veg" selected>Vegetative growth</option>
+              <option value="early">Early flower / transition</option>
+              <option value="late">Mid to late flower</option>
+            </select>
+            <p class="calc-hint">Sets the target band the verdict is judged against.</p>
+          </div>
+        </div>
+
+        <div class="calc-out" aria-live="polite">
+          <p class="calc-figure"><span id="out-vpd">&mdash;</span><span class="calc-unit">kPa</span></p>
+          <p class="calc-verdict" id="out-verdict">&mdash;</p>
+          <ul class="calc-lines">
+            <li><span>Leaf temperature used</span><span class="calc-line-value" id="out-leaf">&mdash;</span></li>
+            <li><span>Saturation vapour pressure at leaf temp</span><span class="calc-line-value" id="out-svp-leaf">&mdash;</span></li>
+            <li><span>Saturation vapour pressure at air temp</span><span class="calc-line-value" id="out-svp-air">&mdash;</span></li>
+            <li><span>Actual vapour pressure of the air</span><span class="calc-line-value" id="out-avp">&mdash;</span></li>
+            <li><span>Dew point (condensation risk below this)</span><span class="calc-line-value" id="out-dew">&mdash;</span></li>
+            <li class="is-total"><span>Target for this stage</span><span class="calc-line-value" id="out-target">&mdash;</span></li>
+          </ul>
+          <p class="calc-hint" id="out-advice"></p>
+        </div>
+      </div>
+
+      <h2>Your VPD Chart</h2>
+      <p>Air temperature down the side, relative humidity across the top, VPD in
+      kPa in each cell, and the square you are currently standing in outlined in
+      bold. This chart is generated from <em>your</em> leaf-temperature offset,
+      so it moves when you change the offset above &mdash; unlike the printed charts
+      floating around grow forums, which never say which offset they assumed.</p>
+
+      <div class="chart-wrap">
+        <table class="vpd-chart" id="vpd-chart">
+          <caption class="calc-hint" style="caption-side:bottom; text-align:left; padding-top:0.5rem;">VPD in kPa at each air temperature and relative humidity, using the leaf-temperature offset set above.</caption>
+        </table>
+      </div>
+      <ul class="chart-legend">
+        <li><span class="swatch" style="background:var(--band-humid)"></span> Under 0.4 &mdash; too humid</li>
+        <li><span class="swatch" style="background:var(--band-prop)"></span> 0.4&ndash;0.8 &mdash; propagation</li>
+        <li><span class="swatch" style="background:var(--band-veg)"></span> 0.8&ndash;1.2 &mdash; vegetative</li>
+        <li><span class="swatch" style="background:var(--band-flower)"></span> 1.2&ndash;1.6 &mdash; flowering</li>
+        <li><span class="swatch" style="background:var(--band-dry)"></span> Over 1.6 &mdash; too dry</li>
+      </ul>
+      <p class="calc-hint">The top-right corner goes slightly negative, and that
+      is not a rounding error: with a leaf 2&thinsp;&deg;C cooler than the air, at 90%
+      humidity the leaf is at or below the dew point and water condenses
+      <em>onto</em> it rather than evaporating off. That corner of the chart is
+      where bud rot lives.</p>
+
+      <h2>What VPD Actually Is</h2>
+      <p>Vapour pressure deficit is the gap between how much water vapour the
+      air is holding and how much it <em>could</em> hold at the temperature of
+      the leaf. It is the pull on the plant &mdash; the force that drags water up
+      through the roots, through the stem and out of the stomata, carrying
+      calcium and every other immobile nutrient along for the ride.</p>
+      <p>That is why VPD does a job that temperature and humidity cannot do
+      separately. 75&thinsp;&deg;F at 70% humidity and 82&thinsp;&deg;F at 70% humidity look like
+      the same humidity problem on a hygrometer and are completely different
+      environments for a plant: the first is a stalled 0.7&thinsp;kPa, the second a
+      healthy 1.0&thinsp;kPa. Two numbers you can control, one number that decides
+      what happens.</p>
+      <p>When VPD is too low, transpiration slows to a crawl. The plant stops
+      pulling, calcium stops arriving at new growth, leaves stay wet longer, and
+      you get the classic humid-tent trio of soft growth, powdery mildew and
+      bud rot. When VPD is too high, the plant defends itself by closing its
+      stomata &mdash; and a closed stoma is not taking in CO&#8322; either, so
+      photosynthesis stops along with the water loss. That is the part growers
+      miss: a too-dry tent does not just wilt plants, it switches off the
+      factory.</p>
+
+      <h2>Leaf Temperature Is Not Air Temperature</h2>
+      <p>This is the single thing most VPD calculators get wrong, and it is
+      worth being precise about because the correction is large enough to move
+      you a whole band.</p>
+      <p>VPD is a difference between two vapour pressures. The one inside the
+      leaf is saturated at <strong>leaf</strong> temperature. The one in the air
+      is whatever the air is holding, which is saturation at <strong>air</strong>
+      temperature multiplied by relative humidity. If you use air temperature
+      for both halves you get "air VPD" or "atmospheric VPD" &mdash; a real quantity,
+      but not the one the plant experiences.</p>
+      <p>A transpiring leaf is evaporatively cooled. Under LEDs, with reasonable
+      airflow, a healthy leaf typically sits about 2&thinsp;&deg;C (3.6&thinsp;&deg;F) below air
+      temperature, which is the default this calculator ships with and the
+      convention most commercial VPD charts assume. Under HPS the radiant heat
+      load can push leaves closer to air temperature or even above it, and a
+      plant that has already closed its stomata is not cooling itself at all.
+      Both of those are reasons the offset is a field you can edit rather than a
+      constant baked into the code.</p>
+      <p>The direction of the error is always the same. Assuming leaf and air
+      temperature are equal <em>overstates</em> VPD &mdash; by about 0.25&thinsp;kPa at
+      70&thinsp;&deg;F and about 0.37&thinsp;kPa at 78&thinsp;&deg;F, and the gap widens as the tent gets
+      warmer, because saturation vapour pressure climbs exponentially with
+      temperature. A calculator that says you
+      are at a comfortable 1.2&thinsp;kPa when the leaf is really at 0.95&thinsp;kPa has told
+      you to leave a flowering tent alone that actually needed drying out.</p>
+
+      <div class="product-box">
+        <p><strong>Measuring it yourself.</strong> If you want your real offset
+        rather than the 2&thinsp;&deg;C assumption, point an
+        <a class="affiliate-link" href="https://www.amazon.com/s?k=infrared+thermometer+plant+leaf+temperature&amp;tag=ngineer420-20">infrared thermometer</a>
+        at a big healthy fan leaf from about six inches away, lights on, and
+        subtract the reading from your air temperature. Average three leaves.
+        The number you get is usually somewhere between 1 and 4&thinsp;&deg;C, and it is
+        worth re-checking once per grow, because a canopy that has filled out
+        moves air differently than one that has not.</p>
+      </div>
+
+      <h2>Target VPD by Growth Stage</h2>
+      <p>These are the leaf-based bands, assuming the roughly 2&thinsp;&deg;C offset. They
+      are broad on purpose: VPD is a range to stay inside, not a set point to
+      chase, and chasing 0.05&thinsp;kPa with a humidifier that cycles every ten
+      minutes causes more problems than it solves.</p>
+      <div class="table-scroll">
+      <table id="stage-table">
+        <thead>
+          <tr><th scope="col">Stage</th><th scope="col">Target VPD</th><th scope="col">Why</th></tr>
+        </thead>
+        <tbody>
+          <tr data-stage="clone"><td>Clones, seedlings, propagation</td><td>0.4&ndash;0.8&thinsp;kPa</td><td>No root system yet, so the plant cannot replace water it loses. Keep the pull gentle.</td></tr>
+          <tr data-stage="veg"><td>Vegetative growth</td><td>0.8&ndash;1.2&thinsp;kPa</td><td>Roots can supply the leaves. Push transpiration to move nutrients and build structure.</td></tr>
+          <tr data-stage="early"><td>Early flower / transition</td><td>1.0&ndash;1.4&thinsp;kPa</td><td>Stretch phase. Raise the pull gradually rather than in one jump.</td></tr>
+          <tr data-stage="late"><td>Mid to late flower</td><td>1.2&ndash;1.6&thinsp;kPa</td><td>Dense flowers hold moisture. Drier air keeps rot out of the middle of a bud.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="calc-source">The row matching the stage you selected above is
+      highlighted. Sources for these bands are listed at the bottom of the
+      page.</p>
+
+      <h2>Fixing a VPD That Is Out of Range</h2>
+      <p>There are only two levers, and the difference between them is not
+      really about strength.</p>
+      <ul>
+        <li><strong>Per step they are comparable.</strong> Around a typical
+        78&thinsp;&deg;F / 60% tent, moving relative humidity by 5 percentage points moves
+        VPD by about 0.16&thinsp;kPa, and moving air temperature by 5&thinsp;&deg;F moves it by
+        about 0.18&thinsp;kPa. Anyone telling you humidity is ten times the lever has
+        not run the numbers.</li>
+        <li><strong>The steps are not comparable.</strong> Five points of
+        humidity is a nudge on the exhaust fan. Five degrees is a large change
+        to a tent you are already holding inside a narrow band for
+        photosynthesis, for the lights and for the plants&rsquo; own heat tolerance.
+        Using temperature to chase VPD usually means trading a humidity problem
+        for a heat problem.</li>
+      </ul>
+      <p>So the practical order is: fix humidity first with extraction or a
+      dehumidifier, only then touch temperature, and only then reach for a
+      humidifier. In most tents the exhaust fan is already the humidity control
+      &mdash; running it harder is free and instant, which is one more reason to
+      <a href="/tools/grow-tent-fan-calculator/">size the fan with some headroom</a>
+      instead of buying exactly enough.</p>
+      <p>One caveat worth stating plainly: VPD is a target for a healthy plant
+      with a working root system. A plant that is wilting, root-bound, sitting
+      in cold wet medium or already sick will not transpire properly at any VPD,
+      and pushing the environment harder to make it drink is a way to kill it
+      faster. Fix the roots, then aim the air.</p>
+
+      <h2>How This Calculator Works</h2>
+      <p>Saturation vapour pressure comes from the <strong>Buck (1996)</strong>
+      equation for vapour over liquid water, with temperature in &deg;C and the
+      result in kPa:</p>
+      <div class="callout">
+        <p style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:0.9rem; margin:0;">
+        SVP(T) = 0.61121 &times; exp[ (18.678 &minus; T/234.5) &times; (T / (257.14 + T)) ]</p>
+      </div>
+      <p>VPD is then the leaf-to-air deficit:</p>
+      <div class="callout">
+        <p style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:0.9rem; margin:0;">
+        VPD = SVP(T<sub>leaf</sub>) &minus; SVP(T<sub>air</sub>) &times; RH/100<br>
+        where T<sub>leaf</sub> = T<sub>air</sub> &minus; offset</p>
+      </div>
+      <p>Buck rather than the older Tetens equation because it is the more
+      accurate of the two, though honesty compels the note that over the
+      10&ndash;40&thinsp;&deg;C range that matters indoors the two agree to about 0.1%
+      &mdash; roughly a hundred times better than the &plusmn;3% accuracy of a typical
+      tent hygrometer. Your sensor, not the equation, is the limit on this
+      number. Setting the leaf offset to 0 reduces the formula to air VPD, which
+      is what a calculator that never mentions leaf temperature is giving you.</p>
+      <p class="calc-source"><strong>References.</strong>
+      Buck, A. L. (1981), <em>New equations for computing vapor pressure and enhancement factor</em>,
+      Journal of Applied Meteorology 20:1527&ndash;1532, with the 1996 revised
+      coefficients published in the Buck Research CR-1A manual, for saturation
+      vapour pressure. Stage target bands follow published controlled-environment
+      horticulture guidance on leaf-based VPD, cross-checked against the
+      propagation / vegetative / flowering ranges used in commercial greenhouse
+      climate control. Leaf temperature is treated as roughly 2&thinsp;&deg;C below air for
+      a transpiring canopy under LED lighting, the standard assumption behind
+      published VPD charts.</p>
+
+      <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h3>What is a good VPD for growing?</h3>
+          <p>Roughly 0.4&ndash;0.8&thinsp;kPa for clones and seedlings, 0.8&ndash;1.2&thinsp;kPa through vegetative growth, and 1.2&ndash;1.6&thinsp;kPa in flower. Those are leaf-based figures using a leaf temperature about 2&thinsp;&deg;C below air. Below about 0.4&thinsp;kPa transpiration nearly stops and disease risk climbs; above about 1.6&thinsp;kPa plants close stomata and growth slows.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Why does a VPD calculator ask for a leaf temperature offset?</h3>
+          <p>Because VPD is the difference between the vapour pressure inside the leaf and the vapour pressure of the air, and the inside of the leaf is at leaf temperature, not air temperature. A transpiring leaf is evaporatively cooled and typically runs about 2&thinsp;&deg;C (3.6&thinsp;&deg;F) below air temperature under LEDs. Using air temperature for both halves overstates VPD, often by 0.2&ndash;0.3&thinsp;kPa, which is enough to move you a whole band.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I measure leaf temperature?</h3>
+          <p>With an infrared thermometer pointed at a large, healthy fan leaf in the canopy from about 15&thinsp;cm away, taken with the lights on and at the same time of day. Take three leaves and average them. Subtract that reading from your air temperature and use the difference as your offset.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is VPD measured in kPa or millibars?</h3>
+          <p>Horticulture almost always uses kilopascals (kPa). Some older equipment reports millibars or hectopascals: 1&thinsp;kPa = 10&thinsp;mbar = 10&thinsp;hPa, so a 1.2&thinsp;kPa target is 12&thinsp;mbar.</p>
+        </div>
+        <div class="faq-item">
+          <h3>My VPD is too low. Should I raise the temperature or drop the humidity?</h3>
+          <p>Drop the humidity first. Humidity moves VPD far more per unit than temperature does, and raising tent temperature to fix humidity usually creates a heat problem instead. In a sealed tent that means more extraction or a dehumidifier; in a dry climate it can mean simply running the exhaust harder.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Which saturation vapour pressure equation does this calculator use?</h3>
+          <p>The Buck (1996) equation for saturation vapour pressure over liquid water. Over the 10&ndash;40&thinsp;&deg;C range that matters indoors it agrees with the older Tetens equation to within about 0.1%, which is far smaller than the error in your hygrometer.</p>
+        </div>
+      </div>
+
+      <div class="related-articles">
+        <h2>Keep Going</h2>
+        <ul>
+          <li><a href="/tools/grow-tent-fan-calculator/">Grow Tent Fan (CFM) Calculator</a> &mdash; the exhaust fan is your humidity control</li>
+          <li><a href="/articles/grow-tent-odor-control-and-ventilation.html">Grow Tent Odor Control and Ventilation</a></li>
+          <li><a href="/articles/common-indoor-gardening-mistakes.html">Common Indoor Gardening Mistakes</a></li>
+          <li><a href="/articles/choosing-a-grow-tent-for-beginners.html">Choosing a Grow Tent for Beginners</a></li>
+        </ul>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="/about.html">About</a>
+      <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/sitemap.xml">Sitemap</a>
+    </div>
+    <p class="fine-print">
+      &copy; 2026 Growing MJ. Growing MJ is a participant in the Amazon
+      Services LLC Associates Program, an affiliate advertising program
+      designed to provide a means for sites to earn advertising fees by
+      advertising and linking to Amazon.com. As an Amazon Associate we earn
+      from qualifying purchases. Content on this site is for general
+      informational purposes only and is not professional horticultural,
+      electrical, or safety advice.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* Buck (1996), saturation vapour pressure over liquid water.
+     T in degrees C, result in kPa. */
+  function svp(tC) {
+    return 0.61121 * Math.exp((18.678 - tC / 234.5) * (tC / (257.14 + tC)));
+  }
+
+  /* Inverse of the same equation, so the dew point we report is consistent
+     with the SVP we report rather than borrowed from a different formula.
+     Rearranging gives a quadratic in T; the physical root is the smaller one. */
+  function dewPoint(vapourKpa) {
+    if (vapourKpa <= 0) { return NaN; }
+    var L = Math.log(vapourKpa / 0.61121);
+    var b = 234.5 * (18.678 - L);
+    var c = 234.5 * 257.14 * L;
+    var disc = b * b - 4 * c;
+    if (disc < 0) { return NaN; }
+    return (b - Math.sqrt(disc)) / 2;
+  }
+
+  var STAGES = {
+    clone: { label: "clones and propagation", lo: 0.4, hi: 0.8 },
+    veg:   { label: "vegetative growth",      lo: 0.8, hi: 1.2 },
+    early: { label: "early flower",           lo: 1.0, hi: 1.4 },
+    late:  { label: "mid to late flower",     lo: 1.2, hi: 1.6 }
+  };
+
+  /* Band boundaries shared by the chart colours and the legend. */
+  function bandClass(vpd) {
+    if (vpd < 0.4) { return "b-humid"; }
+    if (vpd < 0.8) { return "b-prop"; }
+    if (vpd < 1.2) { return "b-veg"; }
+    if (vpd < 1.6) { return "b-flower"; }
+    return "b-dry";
+  }
+
+  var el = {
+    unitF: document.getElementById("unit-f"),
+    unitC: document.getElementById("unit-c"),
+    temp: document.getElementById("air-temp"),
+    rh: document.getElementById("rh"),
+    offset: document.getElementById("leaf-offset"),
+    stage: document.getElementById("stage"),
+    vpd: document.getElementById("out-vpd"),
+    verdict: document.getElementById("out-verdict"),
+    leaf: document.getElementById("out-leaf"),
+    svpLeaf: document.getElementById("out-svp-leaf"),
+    svpAir: document.getElementById("out-svp-air"),
+    avp: document.getElementById("out-avp"),
+    dew: document.getElementById("out-dew"),
+    target: document.getElementById("out-target"),
+    advice: document.getElementById("out-advice"),
+    chart: document.getElementById("vpd-chart"),
+    stageTable: document.getElementById("stage-table")
+  };
+
+  var unit = "F";
+
+  function toC(t) { return unit === "C" ? t : (t - 32) * 5 / 9; }
+  /* An offset is a temperature *difference*, so it converts with the ratio
+     only — subtracting 32 here would be the classic sign-flipping bug. */
+  function deltaToC(d) { return unit === "C" ? d : d * 5 / 9; }
+  function fromC(tC) { return unit === "C" ? tC : tC * 9 / 5 + 32; }
+
+  function num(input, fallback) {
+    var v = parseFloat(input.value);
+    return isFinite(v) ? v : fallback;
+  }
+
+  function setUnit(next) {
+    if (next === unit) { return; }
+    var t = num(el.temp, unit === "F" ? 78 : 25);
+    var o = num(el.offset, unit === "F" ? 3.6 : 2);
+    if (next === "C") {
+      el.temp.value = Math.round(((t - 32) * 5 / 9) * 10) / 10;
+      el.offset.value = Math.round((o * 5 / 9) * 10) / 10;
+      el.temp.min = 0; el.temp.max = 50; el.temp.step = 0.5;
+    } else {
+      el.temp.value = Math.round((t * 9 / 5 + 32) * 10) / 10;
+      el.offset.value = Math.round((o * 9 / 5) * 10) / 10;
+      el.temp.min = 32; el.temp.max = 122; el.temp.step = 0.5;
+    }
+    unit = next;
+    el.unitF.setAttribute("aria-pressed", String(unit === "F"));
+    el.unitC.setAttribute("aria-pressed", String(unit === "C"));
+    var marks = document.querySelectorAll(".u-temp");
+    for (var i = 0; i < marks.length; i++) {
+      marks[i].innerHTML = unit === "C" ? "&deg;C" : "&deg;F";
+    }
+    render();
+  }
+
+  function buildChart(offsetC) {
+    var temps = [];
+    var i;
+    if (unit === "C") {
+      for (i = 16; i <= 32; i++) { temps.push(i); }
+    } else {
+      for (i = 60; i <= 90; i += 2) { temps.push(i); }
+    }
+    var hums = [];
+    for (i = 30; i <= 90; i += 5) { hums.push(i); }
+
+    var airT = num(el.temp, 78);
+    var rh = num(el.rh, 60);
+
+    /* Nearest row and column to the live inputs, so the highlight lands on the
+       cell a reader would have looked up by hand. */
+    var bestT = 0, bestH = 0, j;
+    for (i = 1; i < temps.length; i++) {
+      if (Math.abs(temps[i] - airT) < Math.abs(temps[bestT] - airT)) { bestT = i; }
+    }
+    for (i = 1; i < hums.length; i++) {
+      if (Math.abs(hums[i] - rh) < Math.abs(hums[bestH] - rh)) { bestH = i; }
+    }
+
+    var html = "<thead><tr><th scope=\"col\">" + (unit === "C" ? "&deg;C" : "&deg;F") + " \\ RH%</th>";
+    for (i = 0; i < hums.length; i++) {
+      html += "<th scope=\"col\">" + hums[i] + "</th>";
+    }
+    html += "</tr></thead><tbody>";
+
+    for (i = 0; i < temps.length; i++) {
+      var tC = toC(temps[i]);
+      var svpAir = svp(tC);
+      var svpLeaf = svp(tC - offsetC);
+      html += "<tr><th scope=\"row\">" + temps[i] + "</th>";
+      for (j = 0; j < hums.length; j++) {
+        var v = svpLeaf - svpAir * hums[j] / 100;
+        var cls = bandClass(v);
+        if (i === bestT && j === bestH) { cls += " is-current"; }
+        html += "<td class=\"" + cls + "\">" + v.toFixed(2) + "</td>";
+      }
+      html += "</tr>";
+    }
+    html += "</tbody>";
+
+    /* Keep the <caption> the markup already carries; replace everything else. */
+    var caption = el.chart.querySelector("caption");
+    el.chart.innerHTML = html;
+    if (caption) { el.chart.insertBefore(caption, el.chart.firstChild); }
+  }
+
+  function render() {
+    var airRaw = num(el.temp, unit === "C" ? 25 : 78);
+    var rh = Math.min(100, Math.max(1, num(el.rh, 60)));
+    var offsetRaw = num(el.offset, unit === "C" ? 2 : 3.6);
+
+    var airC = toC(airRaw);
+    var offsetC = deltaToC(offsetRaw);
+    var leafC = airC - offsetC;
+
+    var svpAir = svp(airC);
+    var svpLeaf = svp(leafC);
+    var avp = svpAir * rh / 100;
+    var vpd = svpLeaf - avp;
+    var dewC = dewPoint(avp);
+
+    var stage = STAGES[el.stage.value] || STAGES.veg;
+    var deg = unit === "C" ? "°C" : "°F";
+
+    el.vpd.textContent = vpd.toFixed(2);
+    el.leaf.textContent = fromC(leafC).toFixed(1) + " " + deg;
+    el.svpLeaf.textContent = svpLeaf.toFixed(3) + " kPa";
+    el.svpAir.textContent = svpAir.toFixed(3) + " kPa";
+    el.avp.textContent = avp.toFixed(3) + " kPa";
+    el.dew.textContent = isFinite(dewC) ? fromC(dewC).toFixed(1) + " " + deg : "—";
+    el.target.textContent = stage.lo.toFixed(1) + "–" + stage.hi.toFixed(1) + " kPa";
+
+    var v = el.verdict;
+    v.classList.remove("is-good", "is-warn");
+    if (vpd < stage.lo) {
+      v.textContent = "Too low for " + stage.label + " — air is too humid";
+      v.classList.add("is-warn");
+      /* Local sensitivities measured off this same model at typical tent
+         conditions: about 0.033 kPa per point of RH, about 0.035 kPa per °F
+         (0.063 per °C). Deliberately rounded — this is a nudge, not a setpoint. */
+      el.advice.textContent = "Transpiration is being held back. Drop humidity by about " +
+        Math.max(1, Math.round((stage.lo - vpd) / 0.033)) +
+        " percentage points, or raise air temperature by about " +
+        (unit === "C" ? Math.max(0.5, Math.round((stage.lo - vpd) / 0.063 * 2) / 2) + " °C" :
+                        Math.max(1, Math.round((stage.lo - vpd) / 0.035)) + " °F") +
+        ". Humidity is usually the easier of the two to move.";
+    } else if (vpd > stage.hi) {
+      v.textContent = "Too high for " + stage.label + " — air is too dry";
+      v.classList.add("is-warn");
+      el.advice.textContent = "Plants will start closing stomata, which stops CO₂ uptake as well as water loss. Raise humidity by about " +
+        Math.max(1, Math.round((vpd - stage.hi) / 0.033)) +
+        " percentage points, or slow the exhaust fan slightly.";
+    } else {
+      v.textContent = "In range for " + stage.label;
+      v.classList.add("is-good");
+      el.advice.textContent = "Leave it alone. VPD is a band to sit inside, not a set point to chase.";
+    }
+
+    var rows = el.stageTable.querySelectorAll("tbody tr");
+    for (var i = 0; i < rows.length; i++) {
+      rows[i].classList.toggle("is-current", rows[i].getAttribute("data-stage") === el.stage.value);
+    }
+
+    buildChart(offsetC);
+  }
+
+  el.unitF.addEventListener("click", function () { setUnit("F"); });
+  el.unitC.addEventListener("click", function () { setUnit("C"); });
+  var live = [el.temp, el.rh, el.offset, el.stage];
+  for (var i = 0; i < live.length; i++) {
+    live[i].addEventListener("input", render);
+    live[i].addEventListener("change", render);
+  }
+  render();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grow Room Calculators — VPD, CFM, DLI and EC/PPM — Growing MJ</title>
+<meta name="description" content="Four free grow room calculators: VPD with a leaf-temperature offset, grow tent exhaust fan CFM with filter and ducting derates, DLI from PPFD, and EC to PPM on the 500, 640 and 700 scales.">
+<link rel="canonical" href="https://growingmj.com/tools/">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f7f5ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161a15" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Grow Room Calculators &mdash; VPD, CFM, DLI and EC/PPM">
+<meta property="og:description" content="Four free grow room calculators: VPD with a leaf-temperature offset, grow tent exhaust fan CFM with filter and ducting derates, DLI from PPFD, and EC to PPM on the 500, 640 and 700 scales.">
+<meta property="og:image" content="https://growingmj.com/images/photos/grow-tent-setup.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://growingmj.com/tools/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Grow Room Calculators",
+  "description": "Four free grow room calculators: VPD with a leaf-temperature offset, grow tent exhaust fan CFM with filter and ducting derates, DLI from PPFD, and EC to PPM on the 500, 640 and 700 scales.",
+  "url": "https://growingmj.com/tools/",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "VPD Calculator", "url": "https://growingmj.com/tools/vpd-calculator/" },
+      { "@type": "ListItem", "position": 2, "name": "Grow Tent Fan (CFM) Calculator", "url": "https://growingmj.com/tools/grow-tent-fan-calculator/" },
+      { "@type": "ListItem", "position": 3, "name": "DLI Calculator", "url": "https://growingmj.com/tools/dli-calculator/" },
+      { "@type": "ListItem", "position": 4, "name": "EC to PPM Converter", "url": "https://growingmj.com/tools/ppm-ec-converter/" }
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do these grow calculators need an account or an internet connection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every calculator runs entirely in your browser with no account, no sign-up and no data sent anywhere. Once the page has loaded it keeps working offline, so a phone in a tent with no signal still gets an answer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which calculator should I use first?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If the plants are already in the tent, start with VPD — it is the single number that ties your temperature and humidity together and explains most transpiration problems. If you are still buying gear, start with the fan calculator, because an undersized exhaust fan is the hardest mistake to fix later."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do different websites give different answers for the same inputs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because they quietly use different conventions. VPD changes depending on whether leaf temperature or air temperature is used. EC to PPM changes by 40% depending on whether the meter uses the 500, 640 or 700 scale. CFM changes depending on which derates are baked in. Every calculator here names the convention it uses and lets you change it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are these calculators only for cannabis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. VPD, DLI, EC and air exchange are plant physiology and building physics, not crop-specific tricks. The same numbers apply to lettuce, basil, tomatoes, orchids and seedlings — only the target ranges change, and each page lists targets for several crops."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Growing<span>MJ</span></a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/index.html#articles">Articles</a></li>
+        <li><a href="/tools/" aria-current="page">Tools</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <h1 class="page-title">Grow Room Calculators</h1>
+    <p class="page-subtitle">Four numbers that decide whether an indoor grow works, worked out for you.</p>
+
+    <p style="max-width:700px;">
+      Every one of these runs in your browser. Nothing is uploaded, nothing is
+      stored, and there is no sign-up — once the page has loaded it keeps
+      working with the phone in aeroplane mode, which is the usual state of a
+      phone standing in a tent. More importantly, each one <em>names the
+      convention it uses</em>. Grow calculators disagree with each other
+      constantly, and it is almost never because one is broken; it is because
+      one silently used air temperature where another used leaf temperature, or
+      the 500 scale where your meter uses 700. Those choices are exposed here as
+      inputs you control rather than assumptions buried in the code.
+    </p>
+
+    <div class="article-grid tool-grid">
+
+      <div class="article-card">
+        <div class="card-icon"><img src="/images/icons/vpd.svg" alt="" width="28" height="28"></div>
+        <span class="tool-card-tag">Temperature &amp; humidity</span>
+        <h3><a href="/tools/vpd-calculator/">VPD Calculator</a></h3>
+        <p>Air temperature, humidity and a leaf-temperature offset to VPD in kPa, with a stage verdict and a full colour-coded VPD chart that highlights the square you are standing in.</p>
+        <a class="read-more" href="/tools/vpd-calculator/">Open the calculator &rarr;</a>
+      </div>
+
+      <div class="article-card">
+        <div class="card-icon"><img src="/images/icons/grow-tent-ventilation.svg" alt="" width="28" height="28"></div>
+        <span class="tool-card-tag">Ventilation</span>
+        <h3><a href="/tools/grow-tent-fan-calculator/">Grow Tent Fan (CFM) Calculator</a></h3>
+        <p>Tent size to the fan rating you should actually buy, with the carbon filter, ducting bends, silencer and speed-headroom derates shown as separate lines you can argue with.</p>
+        <a class="read-more" href="/tools/grow-tent-fan-calculator/">Open the calculator &rarr;</a>
+      </div>
+
+      <div class="article-card">
+        <div class="card-icon"><img src="/images/icons/dli.svg" alt="" width="28" height="28"></div>
+        <span class="tool-card-tag">Lighting</span>
+        <h3><a href="/tools/dli-calculator/">DLI Calculator</a></h3>
+        <p>PPFD and photoperiod to daily light integral, with per-crop target ranges — and a reverse mode that solves for the hours or the PPFD you need to hit a target DLI.</p>
+        <a class="read-more" href="/tools/dli-calculator/">Open the calculator &rarr;</a>
+      </div>
+
+      <div class="article-card">
+        <div class="card-icon"><img src="/images/icons/ec-ppm.svg" alt="" width="28" height="28"></div>
+        <span class="tool-card-tag">Nutrients</span>
+        <h3><a href="/tools/ppm-ec-converter/">EC to PPM Converter</a></h3>
+        <p>Convert between EC and PPM on the 500, 640 and 700 scales at once — the three conversion factors disagree by 40%, which is why two growers can both be right about the same reservoir.</p>
+        <a class="read-more" href="/tools/ppm-ec-converter/">Open the calculator &rarr;</a>
+      </div>
+
+    </div>
+
+    <div style="max-width:700px; margin-top:3rem;">
+      <h2 style="color:var(--accent-ink);">Why These Four</h2>
+      <p>
+        An indoor grow is four control loops wearing a trench coat. Light in
+        (DLI), water out (VPD), air through (CFM), and salt in solution (EC).
+        Nearly every problem a beginner posts a photo of is one of those four
+        being out of range, and nearly every one of them is invisible without a
+        number: a tent can look and smell perfect at 0.4 kPa while the plants
+        quietly stop drinking.
+      </p>
+      <p>
+        The other reason to run the numbers is money. Two of these — the fan
+        calculator and the DLI calculator — are shopping tools. Buying a fan
+        that turns out to be 40% too small once a carbon filter is bolted to it
+        is one of the most common and most expensive first-grow mistakes, and
+        the fix is a second fan, not a refund.
+      </p>
+
+      <h2 style="color:var(--accent-ink);">Frequently Asked Questions</h2>
+      <div class="faq-section" style="margin-top:1rem; padding-top:0; border-top:0;">
+        <div class="faq-item">
+          <h3>Do these grow calculators need an account or an internet connection?</h3>
+          <p>No. Every calculator runs entirely in your browser with no account, no sign-up and no data sent anywhere. Once the page has loaded it keeps working offline, so a phone in a tent with no signal still gets an answer.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Which calculator should I use first?</h3>
+          <p>If the plants are already in the tent, start with VPD &mdash; it is the single number that ties your temperature and humidity together and explains most transpiration problems. If you are still buying gear, start with the fan calculator, because an undersized exhaust fan is the hardest mistake to fix later.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Why do different websites give different answers for the same inputs?</h3>
+          <p>Because they quietly use different conventions. VPD changes depending on whether leaf temperature or air temperature is used. EC to PPM changes by 40% depending on whether the meter uses the 500, 640 or 700 scale. CFM changes depending on which derates are baked in. Every calculator here names the convention it uses and lets you change it.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Are these calculators only for cannabis?</h3>
+          <p>No. VPD, DLI, EC and air exchange are plant physiology and building physics, not crop-specific tricks. The same numbers apply to lettuce, basil, tomatoes, orchids and seedlings &mdash; only the target ranges change, and each page lists targets for several crops.</p>
+        </div>
+      </div>
+
+      <div class="related-articles">
+        <h2>Guides That Go With These</h2>
+        <ul>
+          <li><a href="/articles/grow-tent-odor-control-and-ventilation.html">Grow Tent Odor Control and Ventilation</a></li>
+          <li><a href="/articles/understanding-grow-light-schedules.html">Understanding Grow Light Schedules</a></li>
+          <li><a href="/articles/setting-up-a-basic-hydroponic-system.html">Setting Up a Basic Hydroponic System</a></li>
+          <li><a href="/articles/choosing-a-grow-tent-for-beginners.html">Choosing a Grow Tent for Beginners</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="/about.html">About</a>
+      <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/sitemap.xml">Sitemap</a>
+    </div>
+    <p class="fine-print">
+      &copy; 2026 Growing MJ. Growing MJ is a participant in the Amazon
+      Services LLC Associates Program, an affiliate advertising program
+      designed to provide a means for sites to earn advertising fees by
+      advertising and linking to Amazon.com. As an Amazon Associate we earn
+      from qualifying purchases. Content on this site is for general
+      informational purposes only and is not professional horticultural,
+      electrical, or safety advice.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

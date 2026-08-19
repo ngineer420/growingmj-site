@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DLI Calculator — PPFD to Daily Light Integral — Growing MJ</title>
+<meta name="description" content="Convert PPFD and photoperiod to DLI in mol/m2/day, or work backwards from a target DLI to the hours or PPFD you need. Includes DLI targets for lettuce, herbs, tomatoes and seedlings.">
+<link rel="canonical" href="https://growingmj.com/tools/dli-calculator/">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f7f5ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161a15" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="DLI Calculator &mdash; PPFD to Daily Light Integral">
+<meta property="og:description" content="Convert PPFD and photoperiod to DLI in mol/m2/day, or work backwards from a target DLI to the hours or PPFD you need. Includes DLI targets for lettuce, herbs, tomatoes and seedlings.">
+<meta property="og:image" content="https://growingmj.com/images/photos/tomato-seedlings-grow-light.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://growingmj.com/tools/dli-calculator/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do you calculate DLI from PPFD?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DLI (mol/m2/day) = PPFD (umol/m2/s) x photoperiod (hours) x 3600 / 1,000,000. The 3600 converts hours to seconds and the million converts micromoles to moles, so the whole thing collapses to PPFD x hours x 0.0036."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What DLI does lettuce need?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lettuce and most leafy greens do well between about 12 and 17 mol/m2/day. Below roughly 10 the heads stay loose and light; much above 17 you start risking tipburn rather than gaining yield, especially without good airflow."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is more DLI always better?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every crop has a saturation point past which extra light produces no extra growth, and beyond that it produces damage — bleaching, tipburn and heat stress — while you pay full price for the electricity. DLI is a target range, not a score to maximise."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get the same DLI with fewer hours and a brighter light?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Within limits, yes — DLI is a product, so 300 PPFD for 16 hours and 400 PPFD for 12 hours both give about 17 mol/m2/day. The limits are that photoperiod-sensitive plants use day length as a flowering signal regardless of intensity, and that very high instantaneous PPFD can saturate or bleach a crop even when the daily total is reasonable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between PPF and PPFD?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PPF is the total photon output of the fixture in umol/s, measured in an integrating sphere. PPFD is how many of those photons land on a square metre of your canopy, in umol/m2/s, and it depends on hanging height, reflectivity and where under the light you measure. DLI is built from PPFD, so use a canopy-level average and not the single brightest spot on the manufacturer's chart."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Growing<span>MJ</span></a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/index.html#articles">Articles</a></li>
+        <li><a href="/tools/" aria-current="true">Tools</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <article class="post">
+
+      <p class="tool-crumb"><a href="/tools/">Calculators</a> &rsaquo; DLI Calculator</p>
+
+      <div class="article-icon"><img src="/images/icons/dli.svg" alt="" width="34" height="34"></div>
+      <h1>DLI Calculator</h1>
+      <p class="tool-lede">Daily light integral from PPFD and photoperiod &mdash; the
+      one number that says whether your light is actually feeding the plant, or
+      just looking bright.</p>
+
+      <noscript>
+        <p class="noscript-note">This calculator needs JavaScript. The formula
+        is simple enough to do by hand: DLI = PPFD &times; hours &times; 0.0036.</p>
+      </noscript>
+
+      <div class="calc" id="dli-calc">
+        <h2>Your numbers</h2>
+
+        <div class="calc-fields">
+          <div class="calc-field is-wide">
+            <label for="solve">Solve for</label>
+            <select id="solve">
+              <option value="dli" selected>DLI &mdash; I know my PPFD and my hours</option>
+              <option value="hours">Hours &mdash; I have a target DLI and a fixed PPFD</option>
+              <option value="ppfd">PPFD &mdash; I have a target DLI and a fixed photoperiod</option>
+            </select>
+          </div>
+
+          <div class="calc-field" id="f-ppfd">
+            <label for="ppfd">PPFD (&micro;mol/m&sup2;/s)</label>
+            <input type="number" id="ppfd" value="400" step="10" min="1" max="3000" inputmode="decimal">
+            <p class="calc-hint">Average across the canopy, not the brightest spot.</p>
+          </div>
+
+          <div class="calc-field" id="f-hours">
+            <label for="hours">Photoperiod (hours per day)</label>
+            <input type="number" id="hours" value="16" step="0.5" min="0.5" max="24" inputmode="decimal">
+            <p class="calc-hint">Lights-on time, not counting ramp-up.</p>
+          </div>
+
+          <div class="calc-field" id="f-target" hidden>
+            <label for="target-dli">Target DLI (mol/m&sup2;/day)</label>
+            <input type="number" id="target-dli" value="17" step="0.5" min="0.5" max="80" inputmode="decimal">
+            <p class="calc-hint">Pick from the crop table below if you are not sure.</p>
+          </div>
+
+          <div class="calc-field">
+            <label for="crop">Crop (sets the target band)</label>
+            <select id="crop">
+              <option value="houseplant">Houseplants, low-light foliage</option>
+              <option value="seedling">Seedlings, plugs &amp; transplants</option>
+              <option value="microgreen">Microgreens</option>
+              <option value="lettuce" selected>Lettuce &amp; leafy greens</option>
+              <option value="herb">Herbs (basil, mint, parsley)</option>
+              <option value="fruiting">Fruiting crops (tomato, pepper, cucumber)</option>
+              <option value="highlight">High-light flowering crops</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc-out" aria-live="polite">
+          <p class="calc-figure"><span id="out-main">&mdash;</span><span class="calc-unit" id="out-main-unit">mol/m&sup2;/day</span></p>
+          <p class="calc-verdict" id="out-verdict">&mdash;</p>
+          <ul class="calc-lines">
+            <li><span>PPFD</span><span class="calc-line-value" id="out-ppfd">&mdash;</span></li>
+            <li><span>Photoperiod</span><span class="calc-line-value" id="out-hours">&mdash;</span></li>
+            <li><span>DLI</span><span class="calc-line-value" id="out-dli">&mdash;</span></li>
+            <li><span>Moles of light per m&sup2; per hour</span><span class="calc-line-value" id="out-per-hour">&mdash;</span></li>
+            <li class="is-total"><span>Target for this crop</span><span class="calc-line-value" id="out-target">&mdash;</span></li>
+          </ul>
+          <p class="calc-hint" id="out-advice"></p>
+        </div>
+      </div>
+
+      <h2>DLI Targets by Crop</h2>
+      <p>The row for the crop you selected is highlighted, and if your calculated
+      DLI lands inside a different crop&rsquo;s band you can see at a glance what you
+      are actually growing conditions for.</p>
+      <div class="table-scroll">
+      <table id="crop-table">
+        <thead>
+          <tr><th scope="col">Crop</th><th scope="col">Target DLI (mol/m&sup2;/day)</th><th scope="col">Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr data-crop="houseplant"><td>Houseplants, low-light foliage</td><td>2&ndash;6</td><td>Pothos, philodendron, snake plant. A bright windowsill often already does this.</td></tr>
+          <tr data-crop="seedling"><td>Seedlings, plugs &amp; transplants</td><td>6&ndash;12</td><td>Enough to stop stretch without cooking a plant that has almost no roots.</td></tr>
+          <tr data-crop="microgreen"><td>Microgreens</td><td>6&ndash;12</td><td>Harvested before they need much. Most of the crop is stored seed energy.</td></tr>
+          <tr data-crop="lettuce"><td>Lettuce &amp; leafy greens</td><td>12&ndash;17</td><td>The classic hydroponic target. Above roughly 17 you buy tipburn, not yield.</td></tr>
+          <tr data-crop="herb"><td>Herbs (basil, mint, parsley)</td><td>12&ndash;20</td><td>Basil sits at the top of this band and rewards the extra light with oil content.</td></tr>
+          <tr data-crop="fruiting"><td>Fruiting crops (tomato, pepper, cucumber)</td><td>20&ndash;30</td><td>Fruit is expensive to build. Under about 15 they flower and then drop it.</td></tr>
+          <tr data-crop="highlight"><td>High-light flowering crops</td><td>30&ndash;45</td><td>Only worth chasing with CO&#8322; supplementation and the cooling to match.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="calc-source">Ranges follow published horticultural lighting
+      guidance; sources are listed at the bottom of the page.</p>
+
+      <h2>What DLI Is, and Why Watts Are Not It</h2>
+      <p>PPFD tells you how bright it is right now. DLI tells you how much light
+      the plant actually received today. Photosynthesis works on photons
+      accumulated over a day, not on instantaneous brightness, which is why two
+      setups with identical PPFD can produce completely different plants if one
+      runs 12 hours and the other runs 18.</p>
+      <p>DLI is measured in <strong>moles of photosynthetically active photons
+      per square metre per day</strong>. A mole is 6.02 &times; 10&sup2;&sup3; photons, which is
+      an absurd-sounding unit until you realise a bright summer day outdoors
+      delivers 40 to 60 of them and a north-facing windowsill in December
+      delivers about 1.</p>
+      <p>Notice what is not in that definition: watts. A fixture&rsquo;s wattage tells
+      you what it costs to run, not what it delivers &mdash; two 200&thinsp;W lights can
+      differ by 60% in photon output, and the same fixture at two different
+      hanging heights differs by more than that at canopy level. Any lighting
+      decision made on watts, "equivalent watts", or lumens is a decision made
+      with the wrong instrument. Lumens are weighted for the human eye, which is
+      most sensitive to green &mdash; exactly the colour plants reflect.</p>
+
+      <h2>Getting a PPFD Number You Can Trust</h2>
+      <p>The calculation above is trivially correct. The input usually is not,
+      and there are three common ways to feed it a bad number:</p>
+      <ul>
+        <li><strong>Using the manufacturer&rsquo;s centre-point figure.</strong> PPFD
+        charts quote the value directly under the middle of the fixture. Your
+        plants are not all standing there. Take an average across the actual
+        footprint &mdash; the corners of a 4&times;4 tent commonly read 40&ndash;60% of the
+        centre.</li>
+        <li><strong>Confusing PPF with PPFD.</strong> PPF (&micro;mol/s) is the whole
+        fixture&rsquo;s output. PPFD (&micro;mol/m&sup2;/s) is what lands on a square metre of
+        your canopy. They are different numbers with similar names, and the
+        bigger one is always the one on the box.</li>
+        <li><strong>Trusting a phone app.</strong> Phone light meters read lux
+        through a camera sensor with an unknown spectral response. Converting
+        lux to PPFD requires a conversion factor specific to the light source,
+        and getting it wrong by 30% is easy. A cheap dedicated quantum sensor
+        is the only way to actually know.</li>
+      </ul>
+      <p>If you have no meter at all, work the calculator backwards instead: pick
+      the DLI your crop wants, set your photoperiod, and read off the PPFD you
+      need. Then compare that against the fixture&rsquo;s published PPFD map at your
+      hanging height. It is not a measurement, but it is a much better guess than
+      buying by wattage.</p>
+
+      <h2>Trading Hours Against Intensity</h2>
+      <p>Because DLI is a product, the same daily total can be reached several
+      ways: 300&thinsp;&micro;mol/m&sup2;/s for 16 hours and 400 for 12 both land near
+      17&thinsp;mol/m&sup2;/day. Longer and dimmer is often the cheaper route, since running
+      LEDs at lower drive current is more efficient per photon and produces less
+      heat for your exhaust fan to remove.</p>
+      <p>Two limits stop this from being a free trade. Photoperiod-sensitive
+      plants read day <em>length</em> as a flowering signal independently of
+      intensity, so you cannot extend hours on a short-day crop in flower without
+      consequences &mdash; that is the whole subject of
+      <a href="/articles/understanding-grow-light-schedules.html">grow light schedules</a>.
+      And every crop has a saturation point where extra instantaneous intensity
+      simply stops converting into growth, which is why 45&thinsp;mol/m&sup2;/day into a
+      lettuce crop buys tipburn rather than lettuce.</p>
+
+      <h2>How This Calculator Works</h2>
+      <div class="callout">
+        <p style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:0.9rem; margin:0;">
+        DLI (mol/m&sup2;/day) = PPFD (&micro;mol/m&sup2;/s) &times; hours &times; 3600 &divide; 1,000,000<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= PPFD &times; hours &times; 0.0036</p>
+      </div>
+      <p>The 3600 converts hours into seconds, because PPFD is a per-second rate.
+      The 1,000,000 converts micromoles into moles. That is the entire
+      derivation &mdash; there is no fudge factor and no proprietary adjustment, and
+      any DLI calculator that produces a different answer from the same inputs is
+      simply wrong.</p>
+      <p>The reverse modes rearrange the same equation:
+      hours = DLI &divide; (PPFD &times; 0.0036), and
+      PPFD = DLI &divide; (hours &times; 0.0036).</p>
+      <p class="calc-source"><strong>References.</strong> The DLI definition and
+      the PPFD &times; photoperiod &times; 3600 / 10&#8310; conversion follow standard
+      horticultural lighting metrology as published by university extension
+      programmes on measuring daily light integral. Crop target ranges follow
+      published greenhouse and controlled-environment DLI recommendations for
+      each crop group; treat them as bands to sit inside rather than exact
+      thresholds, since cultivar, temperature and CO&#8322; all shift them.</p>
+
+      <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h3>How do you calculate DLI from PPFD?</h3>
+          <p>DLI (mol/m&sup2;/day) = PPFD (&micro;mol/m&sup2;/s) &times; photoperiod (hours) &times; 3600 &divide; 1,000,000. The 3600 converts hours to seconds and the million converts micromoles to moles, so the whole thing collapses to PPFD &times; hours &times; 0.0036.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What DLI does lettuce need?</h3>
+          <p>Lettuce and most leafy greens do well between about 12 and 17&thinsp;mol/m&sup2;/day. Below roughly 10 the heads stay loose and light; much above 17 you start risking tipburn rather than gaining yield, especially without good airflow.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is more DLI always better?</h3>
+          <p>No. Every crop has a saturation point past which extra light produces no extra growth, and beyond that it produces damage &mdash; bleaching, tipburn and heat stress &mdash; while you pay full price for the electricity. DLI is a target range, not a score to maximise.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can I get the same DLI with fewer hours and a brighter light?</h3>
+          <p>Within limits, yes &mdash; DLI is a product, so 300&thinsp;PPFD for 16 hours and 400&thinsp;PPFD for 12 hours both give about 17&thinsp;mol/m&sup2;/day. The limits are that photoperiod-sensitive plants use day length as a flowering signal regardless of intensity, and that very high instantaneous PPFD can saturate or bleach a crop even when the daily total is reasonable.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is the difference between PPF and PPFD?</h3>
+          <p>PPF is the total photon output of the fixture in &micro;mol/s, measured in an integrating sphere. PPFD is how many of those photons land on a square metre of your canopy, in &micro;mol/m&sup2;/s, and it depends on hanging height, reflectivity and where under the light you measure. DLI is built from PPFD, so use a canopy-level average and not the single brightest spot on the manufacturer&rsquo;s chart.</p>
+        </div>
+      </div>
+
+      <div class="related-articles">
+        <h2>Keep Going</h2>
+        <ul>
+          <li><a href="/articles/understanding-grow-light-schedules.html">Understanding Grow Light Schedules</a></li>
+          <li><a href="/articles/led-vs-hps-grow-lights.html">LED vs. HPS Grow Lights, Compared</a></li>
+          <li><a href="/tools/vpd-calculator/">VPD Calculator</a> &mdash; light this bright changes your humidity</li>
+          <li><a href="/articles/best-vegetables-to-grow-indoors-year-round.html">Best Vegetables to Grow Indoors Year-Round</a></li>
+        </ul>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="/about.html">About</a>
+      <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/sitemap.xml">Sitemap</a>
+    </div>
+    <p class="fine-print">
+      &copy; 2026 Growing MJ. Growing MJ is a participant in the Amazon
+      Services LLC Associates Program, an affiliate advertising program
+      designed to provide a means for sites to earn advertising fees by
+      advertising and linking to Amazon.com. As an Amazon Associate we earn
+      from qualifying purchases. Content on this site is for general
+      informational purposes only and is not professional horticultural,
+      electrical, or safety advice.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* One conversion constant, used in all three directions:
+     3600 seconds per hour / 1e6 micromoles per mole. */
+  var K = 3600 / 1e6;   /* = 0.0036 */
+
+  var CROPS = {
+    houseplant: { label: "houseplants",        lo: 2,  hi: 6 },
+    seedling:   { label: "seedlings",          lo: 6,  hi: 12 },
+    microgreen: { label: "microgreens",        lo: 6,  hi: 12 },
+    lettuce:    { label: "lettuce and greens", lo: 12, hi: 17 },
+    herb:       { label: "herbs",              lo: 12, hi: 20 },
+    fruiting:   { label: "fruiting crops",     lo: 20, hi: 30 },
+    highlight:  { label: "high-light crops",   lo: 30, hi: 45 }
+  };
+
+  var el = {
+    solve: document.getElementById("solve"),
+    ppfd: document.getElementById("ppfd"),
+    hours: document.getElementById("hours"),
+    target: document.getElementById("target-dli"),
+    crop: document.getElementById("crop"),
+    fPpfd: document.getElementById("f-ppfd"),
+    fHours: document.getElementById("f-hours"),
+    fTarget: document.getElementById("f-target"),
+    main: document.getElementById("out-main"),
+    mainUnit: document.getElementById("out-main-unit"),
+    verdict: document.getElementById("out-verdict"),
+    oPpfd: document.getElementById("out-ppfd"),
+    oHours: document.getElementById("out-hours"),
+    oDli: document.getElementById("out-dli"),
+    oPerHour: document.getElementById("out-per-hour"),
+    oTarget: document.getElementById("out-target"),
+    advice: document.getElementById("out-advice"),
+    table: document.getElementById("crop-table")
+  };
+
+  function num(input, fallback) {
+    var v = parseFloat(input.value);
+    return isFinite(v) && v > 0 ? v : fallback;
+  }
+
+  function render() {
+    var mode = el.solve.value;
+    var crop = CROPS[el.crop.value] || CROPS.lettuce;
+
+    /* Only the two inputs the chosen mode needs stay on screen; the third is
+       the thing being solved for and would be a contradiction if editable. */
+    el.fPpfd.hidden = (mode === "ppfd");
+    el.fHours.hidden = (mode === "hours");
+    el.fTarget.hidden = (mode === "dli");
+
+    var ppfd, hours, dli;
+
+    if (mode === "dli") {
+      ppfd = num(el.ppfd, 400);
+      hours = Math.min(24, num(el.hours, 16));
+      dli = ppfd * hours * K;
+      el.main.textContent = dli.toFixed(1);
+      el.mainUnit.innerHTML = "mol/m&sup2;/day";
+    } else if (mode === "hours") {
+      ppfd = num(el.ppfd, 400);
+      dli = num(el.target, 17);
+      hours = dli / (ppfd * K);
+      el.main.textContent = hours.toFixed(1);
+      el.mainUnit.textContent = "hours per day";
+    } else {
+      hours = Math.min(24, num(el.hours, 16));
+      dli = num(el.target, 17);
+      ppfd = dli / (hours * K);
+      el.main.textContent = Math.round(ppfd);
+      el.mainUnit.innerHTML = "&micro;mol/m&sup2;/s";
+    }
+
+    el.oPpfd.innerHTML = Math.round(ppfd) + " &micro;mol/m&sup2;/s";
+    el.oHours.textContent = hours.toFixed(1) + " h";
+    el.oDli.innerHTML = dli.toFixed(1) + " mol/m&sup2;/day";
+    el.oPerHour.textContent = (ppfd * K).toFixed(2) + " mol/m²/h";
+    el.oTarget.innerHTML = crop.lo + "&ndash;" + crop.hi + " mol/m&sup2;/day";
+
+    var v = el.verdict;
+    v.classList.remove("is-good", "is-warn");
+
+    if (mode === "hours" && hours > 24) {
+      v.textContent = "Impossible — that would need more than 24 hours of light";
+      v.classList.add("is-warn");
+      el.advice.textContent = "Even running the light continuously, this PPFD cannot reach that DLI. You need a brighter fixture or a lower target.";
+    } else if (mode === "hours" && hours > 18) {
+      v.textContent = "Possible, but that is a very long day";
+      v.classList.add("is-warn");
+      el.advice.textContent = "Most crops want a real dark period, and photoperiod-sensitive plants read day length as a flowering signal. Consider raising PPFD instead.";
+    } else if (dli < crop.lo) {
+      v.textContent = "Below the target band for " + crop.label;
+      v.classList.add("is-warn");
+      el.advice.textContent = "Short by " + (crop.lo - dli).toFixed(1) +
+        " mol/m²/day. Adding " + Math.ceil((crop.lo - dli) / (ppfd * K) * 10) / 10 +
+        " hours would close the gap, or raising PPFD to about " +
+        Math.round(crop.lo / (hours * K)) + " µmol/m²/s.";
+    } else if (dli > crop.hi) {
+      v.textContent = "Above the target band for " + crop.label;
+      v.classList.add("is-warn");
+      el.advice.textContent = "Over by " + (dli - crop.hi).toFixed(1) +
+        " mol/m²/day. Past a crop's saturation point extra light stops becoming growth and starts becoming bleaching and heat — and you are paying for every photon.";
+    } else {
+      v.textContent = "In the target band for " + crop.label;
+      v.classList.add("is-good");
+      el.advice.textContent = "Hold this and change something else. Light is no longer your limiting factor.";
+    }
+
+    var rows = el.table.querySelectorAll("tbody tr");
+    for (var i = 0; i < rows.length; i++) {
+      rows[i].classList.toggle("is-current", rows[i].getAttribute("data-crop") === el.crop.value);
+    }
+  }
+
+  var live = [el.solve, el.ppfd, el.hours, el.target, el.crop];
+  for (var i = 0; i < live.length; i++) {
+    live[i].addEventListener("input", render);
+    live[i].addEventListener("change", render);
+  }
+  render();
+})();
+</script>
+
+</body>
+</html>

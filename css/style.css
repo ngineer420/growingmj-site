@@ -346,3 +346,214 @@ th { background: var(--wash-2); }
   .hero h1 { font-size: 1.7rem; }
   article.post { padding: 1.25rem; }
 }
+
+/* ---------------------------------------------------------------------------
+   Calculators (/tools/)
+   The site's first interactive pages. They deliberately reuse the article
+   shell — same wrap, same card, same table — so a calculator reads as another
+   page of this site rather than as a utility bolted onto the side of it.
+   Every colour below is a token, so the dark theme moves with everything else.
+   --------------------------------------------------------------------------- */
+:root {
+  /* VPD chart bands. Five steps that stay distinguishable in both themes; the
+     cells also carry their own kPa number, so the colour is never the only
+     thing saying which band a cell is in. */
+  --band-humid: #cfe0f0;
+  --band-prop: #dcecd7;
+  --band-veg: #b6dfb4;
+  --band-flower: #f0e3b8;
+  --band-dry: #efd3c8;
+  --band-edge: #b9b49f;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --band-humid: #1d3446;
+    --band-prop: #1f3a26;
+    --band-veg: #2a5c34;
+    --band-flower: #4b4321;
+    --band-dry: #4c2c22;
+    --band-edge: #3a4038;
+  }
+}
+
+.calc {
+  background: var(--wash);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin: 1.5rem 0 2rem;
+}
+.calc h2 { margin-top: 0; }
+.calc-fields {
+  display: grid;
+  gap: 1rem;
+  /* minmax(0, 1fr), not 1fr: a bare 1fr refuses to shrink below its widest
+     child, and a <select> of crop names will happily be 400px wide. */
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 540px) {
+  .calc-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .calc-field.is-wide { grid-column: 1 / -1; }
+}
+.calc-field label { display: block; font-weight: 600; font-size: 0.92rem; margin-bottom: 0.3rem; }
+.calc-field input[type="number"],
+.calc-field input[type="text"],
+.calc-field select {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+}
+.calc-hint { font-size: 0.8rem; color: var(--ink-soft); margin: 0.35rem 0 0; }
+.calc-inline { display: flex; gap: 0.5rem; align-items: center; }
+.calc-inline input { flex: 1 1 auto; min-width: 0; }
+
+/* Unit toggles and size presets: real buttons, so they work on a phone and
+   from a keyboard without a library. */
+.calc-toggle { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.calc-toggle button,
+.calc-presets button {
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--ink);
+  cursor: pointer;
+}
+.calc-toggle button:hover,
+.calc-presets button:hover { border-color: var(--green); }
+.calc-toggle button[aria-pressed="true"] {
+  background: var(--green);
+  border-color: var(--green);
+  color: #ffffff;
+  font-weight: 600;
+}
+.calc-presets { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0 0; }
+
+.calc-out {
+  margin-top: 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+.calc-figure {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+.calc-figure .calc-unit { font-size: 1rem; font-weight: 400; color: var(--ink-soft); margin-left: 0.35rem; }
+.calc-verdict { margin: 0.5rem 0 0; font-weight: 600; }
+/* The verdict always names the band in words; the colour only reinforces it. */
+.calc-verdict.is-good { color: var(--green); }
+.calc-verdict.is-warn { color: #a3611b; }
+@media (prefers-color-scheme: dark) { .calc-verdict.is-warn { color: #e0a95f; } }
+.calc-lines { list-style: none; padding: 0; margin: 1rem 0 0; }
+.calc-lines li {
+  display: flex;
+  /* wrap, not space-between-and-hope: at 390px a long label plus a nowrap
+     value is wider than the row, and without wrapping the value is pushed
+     clean out of the card. */
+  flex-wrap: wrap;
+  gap: 0.15rem 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.92rem;
+}
+.calc-lines li > :first-child { flex: 1 1 12rem; min-width: 0; }
+.calc-lines li:last-child { border-bottom: 0; }
+.calc-lines .calc-line-value { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; margin-left: auto; }
+.calc-lines li.is-total { border-top: 2px solid var(--border); margin-top: 0.3rem; padding-top: 0.6rem; }
+
+/* Wide content tables. The site's own article tables predate this and still
+   overflow on a phone; the calculators at least do not add to the pile. */
+.table-scroll { overflow-x: auto; margin: 1.5rem 0; }
+.table-scroll table { margin: 0; min-width: 30rem; }
+
+/* VPD chart: temperature rows x humidity columns, painted by band. */
+.chart-wrap { overflow-x: auto; margin: 1rem 0 0; }
+table.vpd-chart { width: 100%; min-width: 560px; margin: 0; font-variant-numeric: tabular-nums; }
+table.vpd-chart th,
+table.vpd-chart td {
+  padding: 0.2rem 0.15rem;
+  text-align: center;
+  font-size: 0.72rem;
+  border: 1px solid var(--band-edge);
+}
+table.vpd-chart th { background: var(--wash-2); font-weight: 600; }
+table.vpd-chart td.b-humid { background: var(--band-humid); }
+table.vpd-chart td.b-prop { background: var(--band-prop); }
+table.vpd-chart td.b-veg { background: var(--band-veg); }
+table.vpd-chart td.b-flower { background: var(--band-flower); }
+table.vpd-chart td.b-dry { background: var(--band-dry); }
+table.vpd-chart td.is-current {
+  outline: 3px solid var(--accent-ink);
+  outline-offset: -3px;
+  font-weight: 700;
+}
+.chart-legend { list-style: none; padding: 0; margin: 0.9rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; font-size: 0.85rem; }
+.chart-legend li { display: flex; align-items: center; gap: 0.45rem; }
+.chart-legend .swatch { width: 1.1rem; height: 1.1rem; border: 1px solid var(--band-edge); border-radius: 3px; flex: none; }
+
+/* Target tables that highlight the row you are currently in. */
+tr.is-current > * { background: var(--wash-2); font-weight: 600; }
+
+.tool-lede { font-size: 1.05rem; color: var(--ink-soft); }
+.calc-source { font-size: 0.85rem; color: var(--ink-soft); }
+.noscript-note {
+  background: var(--notice-bg);
+  border: 1px solid var(--notice-line);
+  color: var(--notice-ink);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  margin: 1.5rem 0;
+}
+
+/* The nav item for the page you are on. The site had no active state before
+   because every nav target was a single page; with a tools section that has
+   four children, "where am I" needs saying. */
+nav.main-nav a[aria-current] {
+  color: var(--green-light);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 600;
+}
+
+/* Checkbox rows inside the calculator grid: the label sits beside the box, so
+   the block-level label rule above would strand it on its own line. */
+.calc-field.is-check { display: flex; align-items: center; gap: 0.5rem; align-self: end; padding-bottom: 0.4rem; }
+.calc-field.is-check label { margin: 0; font-weight: 400; }
+.calc-field.is-check input[type="checkbox"] { width: 1.05rem; height: 1.05rem; margin: 0; flex: none; accent-color: var(--green); }
+
+/* Breadcrumb back to the hub. */
+.tool-crumb { font-size: 0.85rem; color: var(--ink-soft); margin: 0 0 0.75rem; }
+
+/* Four tool cards in a three-up grid leaves one orphan on its own row, so the
+   tool grids get a wider minimum and land as a tidy 2x2 at desktop width. */
+.article-grid.tool-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+/* Cards on the hub get a one-line "what it answers" tag under the title. */
+.tool-card-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 0.35rem;
+}
+
+/* The line in the converter output that the reading was actually typed into,
+   as opposed to the lines derived from it. */
+.calc-lines .active-mark { font-weight: 600; color: var(--accent-ink); }
