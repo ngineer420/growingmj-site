@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EC to PPM Converter — 500, 640 and 700 Scales — Growing MJ</title>
+<meta name="description" content="Convert EC to PPM and back on all three conversion scales at once — 500 (NaCl/Hanna), 640 (Eutech) and 700 (KCl/Truncheon) — so you can tell which scale your meter is actually using.">
+<link rel="canonical" href="https://growingmj.com/tools/ppm-ec-converter/">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f7f5ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161a15" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="EC to PPM Converter &mdash; 500, 640 and 700 Scales">
+<meta property="og:description" content="Convert EC to PPM and back on all three conversion scales at once — 500 (NaCl/Hanna), 640 (Eutech) and 700 (KCl/Truncheon) — so you can tell which scale your meter is actually using.">
+<meta property="og:image" content="https://growingmj.com/images/photos/hydroponic-system-osu.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://growingmj.com/tools/ppm-ec-converter/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between the 500, 640 and 700 PPM scales?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They are three different conversion factors between electrical conductivity and parts per million, each calibrated against a different reference salt. PPM = EC in mS/cm multiplied by the factor. The 500 scale (also called the NaCl or TDS scale) is used by Hanna and most US meters, the 700 scale (the KCl scale) by Bluelab and the Truncheon, and 640 by some European and Eutech meters. The same nutrient solution reads 1000, 1280 or 1400 PPM depending only on which scale the meter uses."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I know which PPM scale my meter uses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Check the manual, or test it: measure a solution, then read its EC. If PPM divided by EC is about 500 you are on the 500 scale, about 700 means the KCl scale, about 640 the Eutech scale. If your meter only shows PPM and cannot show EC, the brand is the strongest clue — Hanna and most inexpensive US pens are 500, Bluelab is 700."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use EC or PPM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EC, whenever you have the choice. EC in mS/cm is the actual measurement the meter makes and it is unambiguous. PPM is EC multiplied by a conversion factor that nobody agrees on, which is why a feed chart quoted in PPM is useless unless it also names the scale."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does an EC meter tell me which nutrients are in my reservoir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. EC measures how well the solution conducts electricity, which depends on the total quantity of dissolved salts and not on what they are. A reservoir that has run out of nitrogen but accumulated calcium can read exactly the same EC as a perfectly balanced one. EC tells you how strong the solution is, never how correct it is."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to subtract my tap water EC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, if you are following a feed chart. Hard tap water can start at 0.3-0.6 mS/cm before any nutrient is added, and that background is mostly calcium and magnesium carbonates rather than the fertiliser you are dosing. Measure your source water first and treat the feed chart figure as the amount you add on top."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does temperature affect an EC reading?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Strongly — conductivity rises roughly 2% per degree Celsius. Any meter worth using has automatic temperature compensation and reports EC normalised to 25 C. If yours does not, a cold reservoir will read low and you will over-feed trying to correct it."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Growing<span>MJ</span></a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/index.html#articles">Articles</a></li>
+        <li><a href="/tools/" aria-current="true">Tools</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <article class="post">
+
+      <p class="tool-crumb"><a href="/tools/">Calculators</a> &rsaquo; EC to PPM Converter</p>
+
+      <div class="article-icon"><img src="/images/icons/ec-ppm.svg" alt="" width="34" height="34"></div>
+      <h1>EC to PPM Converter</h1>
+      <p class="tool-lede">The same reservoir reads 1000, 1280 or 1400&thinsp;PPM
+      depending purely on which meter you own. This converts between all three
+      scales at once, so you can stop arguing with someone who agrees with you.</p>
+
+      <noscript>
+        <p class="noscript-note">This converter needs JavaScript. The arithmetic
+        is one multiplication: PPM = EC in mS/cm &times; 500, 640 or 700, depending on
+        your meter&rsquo;s scale.</p>
+      </noscript>
+
+      <div class="calc" id="ec-calc">
+        <h2>Your reading</h2>
+
+        <div class="calc-fields">
+          <div class="calc-field">
+            <label for="value">Meter reading</label>
+            <input type="number" id="value" value="1.4" step="0.1" min="0" max="20000" inputmode="decimal">
+          </div>
+
+          <div class="calc-field">
+            <label for="scale">What your meter is showing</label>
+            <select id="scale">
+              <option value="ec" selected>EC in mS/cm (or dS/m)</option>
+              <option value="us">EC in &micro;S/cm</option>
+              <option value="500">PPM, 500 scale (NaCl &mdash; Hanna, most US pens)</option>
+              <option value="640">PPM, 640 scale (Eutech, some EU meters)</option>
+              <option value="700">PPM, 700 scale (KCl &mdash; Bluelab, Truncheon)</option>
+            </select>
+            <p class="calc-hint" id="scale-note">EC is the raw measurement. Every PPM figure below is derived from it.</p>
+          </div>
+        </div>
+
+        <div class="calc-out" aria-live="polite">
+          <p class="calc-figure"><span id="out-ec">&mdash;</span><span class="calc-unit">mS/cm EC</span></p>
+          <p class="calc-verdict" id="out-verdict">&mdash;</p>
+          <ul class="calc-lines">
+            <li id="row-us"><span>EC in microsiemens<b class="active-mark" hidden> &mdash; your reading</b></span><span class="calc-line-value" id="out-us">&mdash;</span></li>
+            <li id="row-500"><span>PPM &mdash; 500 scale (NaCl, Hanna)<b class="active-mark" hidden> &mdash; your reading</b></span><span class="calc-line-value" id="out-500">&mdash;</span></li>
+            <li id="row-640"><span>PPM &mdash; 640 scale (Eutech)<b class="active-mark" hidden> &mdash; your reading</b></span><span class="calc-line-value" id="out-640">&mdash;</span></li>
+            <li id="row-700"><span>PPM &mdash; 700 scale (KCl, Truncheon)<b class="active-mark" hidden> &mdash; your reading</b></span><span class="calc-line-value" id="out-700">&mdash;</span></li>
+            <li class="is-total"><span>Spread between the 500 and 700 scales</span><span class="calc-line-value" id="out-spread">&mdash;</span></li>
+          </ul>
+          <p class="calc-hint" id="out-advice"></p>
+        </div>
+      </div>
+
+      <h2>Why Three Scales Exist</h2>
+      <p>A TDS or PPM meter does not measure parts per million. It cannot &mdash;
+      measuring dissolved solids properly means evaporating a known volume and
+      weighing what is left. What the pen actually measures is
+      <strong>electrical conductivity</strong>, in millisiemens per centimetre,
+      and then multiplies by a factor to <em>estimate</em> PPM.</p>
+      <p>That factor depends on which salt you assume the solution is made of,
+      because different salts conduct differently per unit mass. Three
+      assumptions became conventions:</p>
+      <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th scope="col">Scale</th><th scope="col">Reference</th><th scope="col">Typical meters</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>500 (sometimes written &times;0.5, or "TDS")</td><td>Sodium chloride</td><td>Hanna, most inexpensive US pens, many aquarium meters</td></tr>
+          <tr><td>640</td><td>A mixed-salt reference</td><td>Eutech and some European instruments</td></tr>
+          <tr><td>700 (sometimes written &times;0.7)</td><td>Potassium chloride</td><td>Bluelab, the Bluelab Truncheon, much Australian and NZ equipment</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>So a solution at 2.0&thinsp;mS/cm is 1000&thinsp;PPM, 1280&thinsp;PPM or 1400&thinsp;PPM, and all
+      three readings are correct. The 40% spread between the ends is why a feed
+      chart quoted only in PPM is close to useless, and why two growers can have
+      a long argument about nutrient strength while running identical
+      reservoirs.</p>
+      <p><strong>The practical fix: use EC.</strong> It is the number the meter
+      actually measured, it needs no conversion factor, and it is what every
+      serious nutrient manufacturer publishes alongside their PPM figures. If a
+      chart gives you PPM without naming a scale, assume 500 if it is American
+      and 700 if it is Australian, then confirm by converting to EC and checking
+      the result is sane for the growth stage.</p>
+
+      <h2>Typical EC Ranges by Growth Stage</h2>
+      <p>Hydroponics and coco, using clean starting water. The row matching your
+      reading is highlighted above the fold as you type.</p>
+      <div class="table-scroll">
+      <table id="stage-table">
+        <thead>
+          <tr>
+            <th scope="col">Stage</th>
+            <th scope="col">EC (mS/cm)</th>
+            <th scope="col">PPM 500</th>
+            <th scope="col">PPM 700</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-lo="0" data-hi="0.4"><td>Plain / RO water, or a flush</td><td>0.0&ndash;0.4</td><td>0&ndash;200</td><td>0&ndash;280</td></tr>
+          <tr data-lo="0.4" data-hi="0.8"><td>Clones, seedlings, fresh transplants</td><td>0.4&ndash;0.8</td><td>200&ndash;400</td><td>280&ndash;560</td></tr>
+          <tr data-lo="0.8" data-hi="1.4"><td>Early vegetative</td><td>0.8&ndash;1.4</td><td>400&ndash;700</td><td>560&ndash;980</td></tr>
+          <tr data-lo="1.4" data-hi="1.8"><td>Late vegetative</td><td>1.4&ndash;1.8</td><td>700&ndash;900</td><td>980&ndash;1260</td></tr>
+          <tr data-lo="1.8" data-hi="2.2"><td>Early flower / fruiting</td><td>1.8&ndash;2.2</td><td>900&ndash;1100</td><td>1260&ndash;1540</td></tr>
+          <tr data-lo="2.2" data-hi="2.6"><td>Peak flower / heavy feeders</td><td>2.2&ndash;2.6</td><td>1100&ndash;1300</td><td>1540&ndash;1820</td></tr>
+          <tr data-lo="2.6" data-hi="99"><td>Above 2.6</td><td>2.6+</td><td>1300+</td><td>1820+</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="calc-source">Lettuce and leafy greens sit at the low end of these
+      bands (0.8&ndash;1.4 through the whole crop); tomatoes and other fruiting crops
+      run at the high end. Sources are listed at the bottom of the page.</p>
+
+      <h2>Three Things EC Will Not Tell You</h2>
+      <ul>
+        <li><strong>Which nutrients are in there.</strong> EC is a measure of
+        total dissolved salt, blind to composition. A reservoir that has been
+        stripped of nitrogen while accumulating calcium reads the same as a
+        balanced one at the same strength. This is the single most important
+        limitation and the one that catches people out: EC tells you
+        <em>how strong</em>, never <em>how correct</em>.</li>
+        <li><strong>What your source water was already carrying.</strong> Hard
+        tap water can start at 0.3&ndash;0.6&thinsp;mS/cm of calcium and magnesium
+        carbonate before you add anything. Measure it, and treat feed-chart
+        numbers as what you add on top. This is the main argument for RO water:
+        not purity for its own sake, but knowing what is in the tank.</li>
+        <li><strong>Anything, if the solution is cold.</strong> Conductivity
+        rises about 2% per &deg;C, so a meter without automatic temperature
+        compensation will read a chilly reservoir low and tempt you into
+        overfeeding. Meters with ATC normalise to 25&thinsp;&deg;C.</li>
+      </ul>
+      <p>The related trap is <em>rising</em> EC in a running reservoir. Plants
+      drink water faster than they eat salt, so the EC of a topped-up reservoir
+      climbs over a week even though the plants are being underfed. Rising EC
+      usually means top up with plain water, not with more nutrient &mdash; the
+      opposite of what the number seems to be asking for.</p>
+
+      <h2>How This Converter Works</h2>
+      <div class="callout">
+        <p style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:0.9rem; margin:0;">
+        PPM = EC (mS/cm) &times; factor&nbsp;&nbsp;&nbsp;&nbsp;factor &isin; { 500, 640, 700 }<br>
+        EC (mS/cm) = PPM &divide; factor<br>
+        1 mS/cm = 1 dS/m = 1000 &micro;S/cm</p>
+      </div>
+      <p>Everything you enter is converted to EC in mS/cm first, and every other
+      figure is derived from that single value &mdash; which is also the honest way to
+      convert between two PPM scales: 1200&thinsp;PPM on the 500 scale is
+      1200&thinsp;&divide;&thinsp;500&thinsp;=&thinsp;2.4&thinsp;mS/cm, which is 2.4&thinsp;&times;&thinsp;700&thinsp;=&thinsp;1680&thinsp;PPM on the 700
+      scale. There is no direct PPM-to-PPM shortcut that does not pass through
+      EC.</p>
+      <p class="calc-source"><strong>References.</strong> The three conversion
+      factors are the manufacturers&rsquo; own: the 500 (NaCl) scale as published by
+      Hanna Instruments for its TDS meters, the 700 (KCl) scale as published by
+      Bluelab for the Truncheon and its conductivity pens, and the 640 factor as
+      used by Eutech and several European instruments. The 2%-per-&deg;C
+      temperature coefficient and the 25&thinsp;&deg;C reference are the standard
+      conductivity conventions those same manufacturers calibrate to. Stage EC
+      bands follow published hydroponic nutrient-solution guidance for
+      greenhouse and controlled-environment crops.</p>
+
+      <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h3>What is the difference between the 500, 640 and 700 PPM scales?</h3>
+          <p>They are three different conversion factors between electrical conductivity and parts per million, each calibrated against a different reference salt. PPM = EC in mS/cm multiplied by the factor. The 500 scale (also called the NaCl or TDS scale) is used by Hanna and most US meters, the 700 scale (the KCl scale) by Bluelab and the Truncheon, and 640 by some European and Eutech meters. The same nutrient solution reads 1000, 1280 or 1400&thinsp;PPM depending only on which scale the meter uses.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I know which PPM scale my meter uses?</h3>
+          <p>Check the manual, or test it: measure a solution, then read its EC. If PPM divided by EC is about 500 you are on the 500 scale, about 700 means the KCl scale, about 640 the Eutech scale. If your meter only shows PPM and cannot show EC, the brand is the strongest clue &mdash; Hanna and most inexpensive US pens are 500, Bluelab is 700.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Should I use EC or PPM?</h3>
+          <p>EC, whenever you have the choice. EC in mS/cm is the actual measurement the meter makes and it is unambiguous. PPM is EC multiplied by a conversion factor that nobody agrees on, which is why a feed chart quoted in PPM is useless unless it also names the scale.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Does an EC meter tell me which nutrients are in my reservoir?</h3>
+          <p>No. EC measures how well the solution conducts electricity, which depends on the total quantity of dissolved salts and not on what they are. A reservoir that has run out of nitrogen but accumulated calcium can read exactly the same EC as a perfectly balanced one. EC tells you how strong the solution is, never how correct it is.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do I need to subtract my tap water EC?</h3>
+          <p>Yes, if you are following a feed chart. Hard tap water can start at 0.3&ndash;0.6&thinsp;mS/cm before any nutrient is added, and that background is mostly calcium and magnesium carbonates rather than the fertiliser you are dosing. Measure your source water first and treat the feed chart figure as the amount you add on top.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Does temperature affect an EC reading?</h3>
+          <p>Strongly &mdash; conductivity rises roughly 2% per degree Celsius. Any meter worth using has automatic temperature compensation and reports EC normalised to 25&thinsp;&deg;C. If yours does not, a cold reservoir will read low and you will over-feed trying to correct it.</p>
+        </div>
+      </div>
+
+      <div class="related-articles">
+        <h2>Keep Going</h2>
+        <ul>
+          <li><a href="/articles/setting-up-a-basic-hydroponic-system.html">Setting Up a Basic Hydroponic System</a></li>
+          <li><a href="/articles/nutrient-deficiency-identification-chart.html">Nutrient Deficiency Identification Chart</a></li>
+          <li><a href="/articles/choosing-a-grow-medium-soil-vs-coco-vs-rockwool.html">Choosing a Grow Medium: Soil vs. Coco vs. Rockwool</a></li>
+          <li><a href="/tools/dli-calculator/">DLI Calculator</a> &mdash; light drives how fast that solution gets used</li>
+        </ul>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="/about.html">About</a>
+      <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/sitemap.xml">Sitemap</a>
+    </div>
+    <p class="fine-print">
+      &copy; 2026 Growing MJ. Growing MJ is a participant in the Amazon
+      Services LLC Associates Program, an affiliate advertising program
+      designed to provide a means for sites to earn advertising fees by
+      advertising and linking to Amazon.com. As an Amazon Associate we earn
+      from qualifying purchases. Content on this site is for general
+      informational purposes only and is not professional horticultural,
+      electrical, or safety advice.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* Everything routes through EC in mS/cm. There is no PPM-to-PPM shortcut
+     that does not pass through the conductivity the meter actually measured. */
+  var FACTORS = { "500": 500, "640": 640, "700": 700 };
+
+  var SCALE_NOTES = {
+    ec:   "EC is the raw measurement. Every PPM figure below is derived from it.",
+    us:   "Microsiemens per centimetre — 1000 µS/cm = 1 mS/cm. Common on cheap aquarium meters.",
+    "500": "The NaCl or “TDS” scale. Hanna and most inexpensive US pens use this one.",
+    "640": "A mixed-salt reference used by Eutech and several European instruments.",
+    "700": "The KCl scale. Bluelab, the Truncheon, and most Australian and NZ gear."
+  };
+
+  var el = {
+    value: document.getElementById("value"),
+    scale: document.getElementById("scale"),
+    note: document.getElementById("scale-note"),
+    ec: document.getElementById("out-ec"),
+    verdict: document.getElementById("out-verdict"),
+    us: document.getElementById("out-us"),
+    p500: document.getElementById("out-500"),
+    p640: document.getElementById("out-640"),
+    p700: document.getElementById("out-700"),
+    spread: document.getElementById("out-spread"),
+    advice: document.getElementById("out-advice"),
+    table: document.getElementById("stage-table"),
+    rows: {
+      us: document.getElementById("row-us"),
+      "500": document.getElementById("row-500"),
+      "640": document.getElementById("row-640"),
+      "700": document.getElementById("row-700")
+    }
+  };
+
+  function render() {
+    var raw = parseFloat(el.value.value);
+    if (!isFinite(raw) || raw < 0) { raw = 0; }
+    var scale = el.scale.value;
+
+    var ec;
+    if (scale === "ec") { ec = raw; }
+    else if (scale === "us") { ec = raw / 1000; }
+    else { ec = raw / FACTORS[scale]; }
+
+    el.ec.textContent = ec.toFixed(2);
+    el.us.textContent = Math.round(ec * 1000) + " µS/cm";
+    el.p500.textContent = Math.round(ec * 500) + " ppm";
+    el.p640.textContent = Math.round(ec * 640) + " ppm";
+    el.p700.textContent = Math.round(ec * 700) + " ppm";
+    el.spread.textContent = Math.round(ec * 200) + " ppm (40%)";
+    el.note.textContent = SCALE_NOTES[scale];
+
+    /* Mark the line the reading came from, so it is always obvious which
+       number is measured and which are conversions. */
+    var key;
+    for (key in el.rows) {
+      if (Object.prototype.hasOwnProperty.call(el.rows, key)) {
+        el.rows[key].querySelector(".active-mark").hidden = (key !== scale);
+      }
+    }
+
+    var v = el.verdict;
+    v.classList.remove("is-good", "is-warn");
+    if (ec <= 0) {
+      v.textContent = "Enter a reading";
+      el.advice.textContent = "";
+    } else if (ec > 3.5) {
+      v.textContent = "Very high — check the scale before acting on this";
+      v.classList.add("is-warn");
+      el.advice.textContent = "Above about 3.5 mS/cm is stronger than almost any crop wants. The usual cause is a PPM figure being read as if it were on the wrong scale, or a reservoir that has concentrated through evaporation.";
+    } else if (ec < 0.3) {
+      v.textContent = "Very dilute — close to plain water";
+      v.classList.add("is-warn");
+      el.advice.textContent = "This is roughly tap-water territory. Fine for a flush or for rooting clones, too weak for anything that is actively growing.";
+    } else {
+      v.textContent = "In the normal working range";
+      v.classList.add("is-good");
+      el.advice.textContent = "Compare against the stage table below, and remember to subtract whatever your source water was already carrying.";
+    }
+
+    var rows = el.table.querySelectorAll("tbody tr");
+    for (var i = 0; i < rows.length; i++) {
+      var lo = parseFloat(rows[i].getAttribute("data-lo"));
+      var hi = parseFloat(rows[i].getAttribute("data-hi"));
+      rows[i].classList.toggle("is-current", ec > 0 && ec >= lo && ec < hi);
+    }
+  }
+
+  el.value.addEventListener("input", render);
+  el.scale.addEventListener("input", render);
+  el.scale.addEventListener("change", render);
+  render();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grow Tent Fan Calculator — CFM With Filter and Ducting Derates — Growing MJ</title>
+<meta name="description" content="Work out the exhaust fan CFM to actually buy for your grow tent. Tent volume plus a heat-removal check, then the carbon filter, ducting, silencer and speed-headroom derates shown as separate lines.">
+<link rel="canonical" href="https://growingmj.com/tools/grow-tent-fan-calculator/">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f7f5ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161a15" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Grow Tent Fan Calculator &mdash; CFM With Filter and Ducting Derates">
+<meta property="og:description" content="Work out the exhaust fan CFM to actually buy for your grow tent. Tent volume plus a heat-removal check, then the carbon filter, ducting, silencer and speed-headroom derates shown as separate lines.">
+<meta property="og:image" content="https://growingmj.com/images/photos/grow-tent-ventilation.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://growingmj.com/tools/grow-tent-fan-calculator/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What size fan do I need for a 4x4 grow tent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 4x4x6.5 ft tent is about 104 cubic feet, so exchanging the air once a minute needs 104 CFM at the tent. Once you account for a carbon filter, a couple of ducting bends and the headroom to run the fan below full speed, the fan you buy should be rated around 250-300 CFM — which in practice means a 6-inch inline fan rather than a 4-inch one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much CFM does a carbon filter cost me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Roughly 25-30% of the fan's rated airflow for a clean filter matched to the fan's duct size. An undersized filter, or one that has loaded up with dust because it was run without a pre-filter, costs considerably more. The rating on the box is measured with nothing attached to the fan at all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I buy a bigger fan and run it slower?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Almost always yes. A larger fan loafing at 40-60% is quieter, lasts longer, draws less power and leaves you headroom for summer. A small fan screaming at 100% is loud, has no reserve, and has nowhere to go when the room warms up. This is why the calculator divides by a target speed rather than sizing the fan to run flat out."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an intake fan as well?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually not. Passive intakes are simpler and produce the slight negative pressure that stops odour leaking out of the tent seams. What matters is that the passive intake openings total roughly three to four times the cross-sectional area of the exhaust duct, otherwise the fan is fighting for air and its real-world output drops well below anything this calculator predicts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should the air in a grow tent be exchanged?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Once every one to three minutes is the standard range. Once a minute is the usual starting point and is what this calculator defaults to; a cool room with modest lighting can stretch to two or three minutes, while a hot room or a high-wattage fixture needs the faster end plus the heat-removal check."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Growing<span>MJ</span></a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/index.html#articles">Articles</a></li>
+        <li><a href="/tools/" aria-current="true">Tools</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <article class="post">
+
+      <div class="disclosure-banner">
+        This page contains affiliate links, including links to Amazon.
+        As an Amazon Associate, we earn from qualifying purchases at no
+        extra cost to you. See our <a href="/affiliate-disclosure.html">Affiliate Disclosure</a> for details.
+      </div>
+
+      <p class="tool-crumb"><a href="/tools/">Calculators</a> &rsaquo; Grow Tent Fan Calculator</p>
+
+      <div class="article-icon"><img src="/images/icons/grow-tent-ventilation.svg" alt="" width="34" height="34"></div>
+      <h1>Grow Tent Fan (CFM) Calculator</h1>
+      <p class="tool-lede">The number on the fan&rsquo;s box is measured with nothing
+      attached to it. This works out what you need <em>at the tent</em>, then
+      adds back every deduction between there and the box &mdash; each one visible
+      and adjustable, because a calculator that hides its fudge factors is just
+      an opinion with a number attached.</p>
+
+      <noscript>
+        <p class="noscript-note">This calculator needs JavaScript. By hand:
+        multiply length &times; width &times; height in feet to get cubic feet, which is
+        your base CFM for a one-minute air exchange, then divide by about 0.45
+        to cover a carbon filter, ducting and speed headroom.</p>
+      </noscript>
+
+      <div class="calc" id="cfm-calc">
+        <h2>Your tent</h2>
+
+        <div class="calc-fields">
+          <div class="calc-field is-wide">
+            <label id="unit-label">Dimensions in</label>
+            <div class="calc-toggle" role="group" aria-labelledby="unit-label">
+              <button type="button" id="unit-ft" aria-pressed="true">Feet</button>
+              <button type="button" id="unit-m" aria-pressed="false">Metres</button>
+            </div>
+            <div class="calc-presets" id="presets"></div>
+          </div>
+
+          <div class="calc-field">
+            <label for="len">Length (<span class="u-len">ft</span>)</label>
+            <input type="number" id="len" value="4" step="0.1" min="0.5" max="60" inputmode="decimal">
+          </div>
+
+          <div class="calc-field">
+            <label for="wid">Width (<span class="u-len">ft</span>)</label>
+            <input type="number" id="wid" value="4" step="0.1" min="0.5" max="60" inputmode="decimal">
+          </div>
+
+          <div class="calc-field">
+            <label for="hgt">Height (<span class="u-len">ft</span>)</label>
+            <input type="number" id="hgt" value="6.5" step="0.1" min="0.5" max="20" inputmode="decimal">
+          </div>
+
+          <div class="calc-field">
+            <label for="interval">Air exchange every (minutes)</label>
+            <input type="number" id="interval" value="1" step="0.5" min="0.5" max="5" inputmode="decimal">
+            <p class="calc-hint">One to three minutes is the standard range. One is the safe default.</p>
+          </div>
+
+          <div class="calc-field">
+            <label for="watts">Light &amp; equipment load (watts at the wall)</label>
+            <input type="number" id="watts" value="400" step="10" min="0" max="5000" inputmode="decimal">
+            <p class="calc-hint">Used for the heat-removal cross-check. Add dehumidifiers and pumps inside the tent.</p>
+          </div>
+
+          <div class="calc-field">
+            <label for="rise">Allowable temperature rise over the room (<span class="u-deg">&deg;F</span>)</label>
+            <input type="number" id="rise" value="10" step="0.5" min="1" max="40" inputmode="decimal">
+            <p class="calc-hint">How much warmer the tent may run than the air you are pulling in.</p>
+          </div>
+        </div>
+
+        <h2 style="margin-top:1.75rem;">The deductions</h2>
+        <p class="calc-hint" style="margin-top:-0.5rem;">Every one of these is a
+        rule of thumb from fan and filter manufacturers rather than a physical
+        constant, which is exactly why they are editable.</p>
+
+        <div class="calc-fields">
+          <div class="calc-field">
+            <label for="filter-loss">Carbon filter loss (%)</label>
+            <input type="number" id="filter-loss" value="25" step="1" min="0" max="60" inputmode="decimal">
+            <p class="calc-hint">25&ndash;30% for a clean, correctly sized filter. Set to 0 if you are not running one.</p>
+          </div>
+
+          <div class="calc-field">
+            <label for="bends">90&deg; bends in the ducting</label>
+            <input type="number" id="bends" value="2" step="1" min="0" max="12" inputmode="numeric">
+            <p class="calc-hint">Counted at 5% each.</p>
+          </div>
+
+          <div class="calc-field">
+            <label for="duct">Duct run (<span class="u-len">ft</span>)</label>
+            <input type="number" id="duct" value="8" step="1" min="0" max="100" inputmode="decimal">
+            <p class="calc-hint">Flexible duct, counted at 1% per foot. Rigid smooth duct costs roughly half that.</p>
+          </div>
+
+          <div class="calc-field is-check">
+            <input type="checkbox" id="silencer">
+            <label for="silencer">Inline silencer / muffler fitted (&minus;10%)</label>
+          </div>
+
+          <div class="calc-field">
+            <label for="headroom">Run the fan at no more than (%)</label>
+            <input type="number" id="headroom" value="70" step="5" min="20" max="100" inputmode="decimal">
+            <p class="calc-hint">Buying headroom. 60&ndash;75% is the quiet, long-lived, summer-proof choice.</p>
+          </div>
+        </div>
+
+        <div class="calc-out" aria-live="polite">
+          <p class="calc-figure">Buy at least <span id="out-final">&mdash;</span><span class="calc-unit">CFM rated</span></p>
+          <p class="calc-verdict" id="out-verdict">&mdash;</p>
+          <ul class="calc-lines">
+            <li><span>Tent volume</span><span class="calc-line-value" id="out-vol">&mdash;</span></li>
+            <li><span>Air exchange requirement</span><span class="calc-line-value" id="out-base">&mdash;</span></li>
+            <li><span>Heat removal requirement (cross-check)</span><span class="calc-line-value" id="out-heat">&mdash;</span></li>
+            <li><span>Needed at the tent (the larger of the two)</span><span class="calc-line-value" id="out-need">&mdash;</span></li>
+            <li><span>&divide; carbon filter</span><span class="calc-line-value" id="out-d-filter">&mdash;</span></li>
+            <li><span>&divide; ducting bends</span><span class="calc-line-value" id="out-d-bends">&mdash;</span></li>
+            <li><span>&divide; duct run</span><span class="calc-line-value" id="out-d-duct">&mdash;</span></li>
+            <li><span>&divide; silencer</span><span class="calc-line-value" id="out-d-sil">&mdash;</span></li>
+            <li><span>&divide; speed headroom</span><span class="calc-line-value" id="out-d-head">&mdash;</span></li>
+            <li class="is-total"><span>Fan rating to shop for</span><span class="calc-line-value" id="out-total">&mdash;</span></li>
+          </ul>
+          <p class="calc-hint" id="out-advice"></p>
+        </div>
+      </div>
+
+      <h2>What Fan Size That Means</h2>
+      <p>Inline fans are sold by duct diameter, and the sensible reading of your
+      result is "which size, run gently" rather than a precise CFM shopping
+      target. These are the typical ranges for common consumer inline fans:</p>
+      <div class="table-scroll">
+      <table id="size-table">
+        <thead>
+          <tr><th scope="col">Duct size</th><th scope="col">Typical rated CFM</th><th scope="col">Suits</th></tr>
+        </thead>
+        <tbody>
+          <tr data-lo="0" data-hi="200"><td>4 inch</td><td>150&ndash;200</td><td>2&times;2 and 2&times;4 tents, low-wattage lighting</td></tr>
+          <tr data-lo="200" data-hi="420"><td>6 inch</td><td>350&ndash;450</td><td>3&times;3, 4&times;4, most single-tent grows</td></tr>
+          <tr data-lo="420" data-hi="800"><td>8 inch</td><td>700&ndash;800</td><td>4&times;8, 5&times;5, or a 4&times;4 with a lot of wattage in it</td></tr>
+          <tr data-lo="800" data-hi="99999"><td>10 inch or two fans</td><td>1000+</td><td>Multi-tent rooms and small commercial spaces</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="calc-source">The row your result lands in is highlighted. Ratings
+      vary by brand; check the manufacturer&rsquo;s own figure rather than the
+      category.</p>
+
+      <div class="product-box">
+        <p><strong>What to actually buy.</strong> The standard answer for a 4&times;4
+        is a 6-inch
+        <a class="affiliate-link" href="https://www.amazon.com/s?k=AC+Infinity+Cloudline+inline+fan+carbon+filter+kit&amp;tag=ngineer420-20">inline fan and carbon filter kit</a>,
+        because a 6-inch fan at 40% is quieter than a 4-inch at 100% and costs
+        maybe twenty dollars more. Buy the filter matched to the fan&rsquo;s duct size
+        &mdash; a 4-inch filter bolted to a 6-inch fan re-creates the restriction you
+        paid to avoid. If you are near the top of a size band, go up rather than
+        buying the biggest fan in the smaller size.</p>
+      </div>
+
+      <h2>Two Requirements, Not One</h2>
+      <p>Most fan calculators do one sum: tent volume divided by an exchange
+      interval. That is the right starting point and it is wrong on its own,
+      because it is blind to how much heat you are putting into the box. A 2&times;4
+      tent with 600&thinsp;W in it needs far more air than its 40-odd cubic feet
+      suggest. So this calculator does both sums and takes the larger.</p>
+      <h3>1. Air exchange</h3>
+      <p>Tent volume in cubic feet divided by how many minutes you will allow
+      per full air change. At a one-minute exchange the arithmetic is pleasingly
+      circular: cubic feet <em>is</em> your CFM. This is the requirement that
+      handles CO&#8322; replenishment and humidity removal.</p>
+      <h3>2. Heat removal</h3>
+      <p>The standard sensible-heat airflow equation from HVAC:</p>
+      <div class="callout">
+        <p style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:0.9rem; margin:0;">
+        CFM = BTU/hr &divide; (1.08 &times; &Delta;T&deg;F)<br>
+        where BTU/hr = watts &times; 3.412</p>
+      </div>
+      <p>The 1.08 is not arbitrary: it is 60 minutes/hour &times; 0.075&thinsp;lb/ft&sup3; air
+      density &times; 0.24&thinsp;BTU/lb&middot;&deg;F specific heat, for standard air. Every watt
+      you put into a sealed tent comes back out as heat, so wall wattage is a
+      good proxy for the heat load &mdash; slightly conservative, since a little
+      energy leaves as light through the tent walls and a lot of it leaves as
+      latent heat in evaporated water, which this equation does not count.</p>
+      <p>The two requirements answer different questions and the honest thing is
+      to satisfy both. If the heat number is the larger one, no amount of
+      "exchange every three minutes" advice will keep your tent cool.</p>
+
+      <h2>Where the Airflow Actually Goes</h2>
+      <p>A fan rated 400&thinsp;CFM is rated at <em>zero static pressure</em> &mdash;
+      free air, nothing attached. Everything you connect to it takes a cut:</p>
+      <ul>
+        <li><strong>The carbon filter: 25&ndash;30%.</strong> The single biggest
+        deduction, and the one most people forget entirely. A loaded or
+        undersized filter costs more than this. Run a pre-filter sleeve and it
+        stays near the low end for longer.</li>
+        <li><strong>Every 90&deg; bend: about 5%.</strong> Sharp bends in flexible
+        duct are worse than gentle sweeps in rigid duct. Two bends is normal;
+        six means you should rethink the routing before buying a bigger fan.</li>
+        <li><strong>Duct length: about 1% per foot of flexible duct.</strong>
+        The corrugations are the problem &mdash; smooth rigid duct is roughly half as
+        costly per foot. Also: pull the flexible duct taut. A concertina&rsquo;d run
+        left half-compressed behind the tent can cost more than the filter.</li>
+        <li><strong>An inline silencer: about 10%.</strong> Usually worth it.
+        Quiet gear gets run at the speed it should be run at, rather than the
+        speed you can stand.</li>
+        <li><strong>Speed headroom: whatever you choose.</strong> Not a loss at
+        all &mdash; a deliberate purchase of reserve. Sizing so the fan sits at 60&ndash;75%
+        buys you a quieter tent, a longer-lived motor, and somewhere to go when
+        July arrives.</li>
+      </ul>
+      <p>One deduction this calculator cannot model is a starved intake. If your
+      passive intake openings do not total roughly three to four times the
+      cross-sectional area of the exhaust duct, the fan spends its life pulling
+      against a vacuum and delivers far less than any of the numbers above. A
+      6-inch duct is about 28&thinsp;in&sup2;, so it wants somewhere near 100&thinsp;in&sup2; of open
+      intake &mdash; which is more than the little mesh window on the front of most
+      tents, and the reason experienced growers unzip a lower flap.</p>
+
+      <h2>How This Calculator Works</h2>
+      <p>The derates are applied as efficiency multipliers, not subtracted
+      percentages, which matters once you stack several of them:</p>
+      <div class="callout">
+        <p style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:0.9rem; margin:0;">
+        needed = max( volume &divide; interval , watts &times; 3.412 &divide; (1.08 &times; &Delta;T) )<br>
+        rated&nbsp;&nbsp;= needed &divide; (filter &times; bends &times; duct &times; silencer &times; speed)</p>
+      </div>
+      <p>Stacking a 25% filter loss and a 10% duct loss does not give 65% of
+      rated flow, it gives 0.75 &times; 0.90 = 67.5%. Small difference here, larger
+      once four or five factors pile up, and multiplying is the correct way
+      round.</p>
+      <p class="calc-source"><strong>References.</strong> The one-to-three-minute
+      air exchange interval is the standard horticultural ventilation rule of
+      thumb, and matches the guidance in our own
+      <a href="/articles/grow-tent-odor-control-and-ventilation.html">ventilation guide</a>.
+      The heat-removal equation CFM = BTU/hr &divide; (1.08 &times; &Delta;T) is the standard
+      sensible-heat airflow relationship used throughout HVAC practice, with the
+      1.08 constant derived from standard-air properties (60 &times; 0.075 &times; 0.24);
+      1&thinsp;W = 3.412&thinsp;BTU/hr. The carbon filter (25&ndash;30%), per-bend (5%), per-foot
+      flexible duct (1%) and silencer (10%) figures are manufacturers&rsquo; rules of
+      thumb from inline fan and filter documentation, <em>not</em> measured
+      constants for your specific setup &mdash; they are presented as editable inputs
+      for exactly that reason. Fan ratings are quoted at zero static pressure by
+      convention.</p>
+
+      <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h3>What size fan do I need for a 4x4 grow tent?</h3>
+          <p>A 4&times;4&times;6.5&thinsp;ft tent is about 104 cubic feet, so exchanging the air once a minute needs 104&thinsp;CFM at the tent. Once you account for a carbon filter, a couple of ducting bends and the headroom to run the fan below full speed, the fan you buy should be rated around 250&ndash;300&thinsp;CFM &mdash; which in practice means a 6-inch inline fan rather than a 4-inch one.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How much CFM does a carbon filter cost me?</h3>
+          <p>Roughly 25&ndash;30% of the fan&rsquo;s rated airflow for a clean filter matched to the fan&rsquo;s duct size. An undersized filter, or one that has loaded up with dust because it was run without a pre-filter, costs considerably more. The rating on the box is measured with nothing attached to the fan at all.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Should I buy a bigger fan and run it slower?</h3>
+          <p>Almost always yes. A larger fan loafing at 40&ndash;60% is quieter, lasts longer, draws less power and leaves you headroom for summer. A small fan screaming at 100% is loud, has no reserve, and has nowhere to go when the room warms up. This is why the calculator divides by a target speed rather than sizing the fan to run flat out.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do I need an intake fan as well?</h3>
+          <p>Usually not. Passive intakes are simpler and produce the slight negative pressure that stops odour leaking out of the tent seams. What matters is that the passive intake openings total roughly three to four times the cross-sectional area of the exhaust duct, otherwise the fan is fighting for air and its real-world output drops well below anything this calculator predicts.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How often should the air in a grow tent be exchanged?</h3>
+          <p>Once every one to three minutes is the standard range. Once a minute is the usual starting point and is what this calculator defaults to; a cool room with modest lighting can stretch to two or three minutes, while a hot room or a high-wattage fixture needs the faster end plus the heat-removal check.</p>
+        </div>
+      </div>
+
+      <div class="related-articles">
+        <h2>Keep Going</h2>
+        <ul>
+          <li><a href="/articles/grow-tent-odor-control-and-ventilation.html">Grow Tent Odor Control and Ventilation</a> &mdash; the full guide behind this calculator</li>
+          <li><a href="/articles/choosing-a-grow-tent-for-beginners.html">Choosing a Grow Tent for Beginners</a></li>
+          <li><a href="/tools/vpd-calculator/">VPD Calculator</a> &mdash; your exhaust fan is also your humidity control</li>
+          <li><a href="/articles/led-vs-hps-grow-lights.html">LED vs. HPS Grow Lights, Compared</a></li>
+        </ul>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="/about.html">About</a>
+      <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/sitemap.xml">Sitemap</a>
+    </div>
+    <p class="fine-print">
+      &copy; 2026 Growing MJ. Growing MJ is a participant in the Amazon
+      Services LLC Associates Program, an affiliate advertising program
+      designed to provide a means for sites to earn advertising fees by
+      advertising and linking to Amazon.com. As an Amazon Associate we earn
+      from qualifying purchases. Content on this site is for general
+      informational purposes only and is not professional horticultural,
+      electrical, or safety advice.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var FT_PER_M = 3.28084;
+  var CFM_TO_M3H = 1.699011;
+  var BTU_PER_W = 3.412142;
+  /* 60 min/h x 0.075 lb/ft3 x 0.24 BTU/lb·°F — the standard-air constant. */
+  var SENSIBLE_K = 1.08;
+
+  var PER_BEND = 0.05;
+  var PER_FOOT = 0.01;
+  var SILENCER = 0.10;
+
+  var PRESETS = [
+    { label: "2×2", l: 2, w: 2, h: 4 },
+    { label: "2×4", l: 4, w: 2, h: 5 },
+    { label: "3×3", l: 3, w: 3, h: 6 },
+    { label: "4×4", l: 4, w: 4, h: 6.5 },
+    { label: "4×8", l: 8, w: 4, h: 6.5 },
+    { label: "5×5", l: 5, w: 5, h: 6.5 }
+  ];
+
+  var el = {
+    unitFt: document.getElementById("unit-ft"),
+    unitM: document.getElementById("unit-m"),
+    presets: document.getElementById("presets"),
+    len: document.getElementById("len"),
+    wid: document.getElementById("wid"),
+    hgt: document.getElementById("hgt"),
+    interval: document.getElementById("interval"),
+    watts: document.getElementById("watts"),
+    rise: document.getElementById("rise"),
+    filterLoss: document.getElementById("filter-loss"),
+    bends: document.getElementById("bends"),
+    duct: document.getElementById("duct"),
+    silencer: document.getElementById("silencer"),
+    headroom: document.getElementById("headroom"),
+    final: document.getElementById("out-final"),
+    verdict: document.getElementById("out-verdict"),
+    vol: document.getElementById("out-vol"),
+    base: document.getElementById("out-base"),
+    heat: document.getElementById("out-heat"),
+    need: document.getElementById("out-need"),
+    dFilter: document.getElementById("out-d-filter"),
+    dBends: document.getElementById("out-d-bends"),
+    dDuct: document.getElementById("out-d-duct"),
+    dSil: document.getElementById("out-d-sil"),
+    dHead: document.getElementById("out-d-head"),
+    total: document.getElementById("out-total"),
+    advice: document.getElementById("out-advice"),
+    sizeTable: document.getElementById("size-table")
+  };
+
+  var unit = "ft";
+
+  function num(input, fallback) {
+    var v = parseFloat(input.value);
+    return isFinite(v) && v >= 0 ? v : fallback;
+  }
+  function toFt(v) { return unit === "m" ? v * FT_PER_M : v; }
+  /* A temperature *rise* is a difference, so it scales by 9/5 with no offset. */
+  function riseToF(v) { return unit === "m" ? v * 9 / 5 : v; }
+
+  function buildPresets() {
+    el.presets.innerHTML = "";
+    for (var i = 0; i < PRESETS.length; i++) {
+      (function (p) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = p.label;
+        b.addEventListener("click", function () {
+          if (unit === "m") {
+            el.len.value = Math.round(p.l / FT_PER_M * 100) / 100;
+            el.wid.value = Math.round(p.w / FT_PER_M * 100) / 100;
+            el.hgt.value = Math.round(p.h / FT_PER_M * 100) / 100;
+          } else {
+            el.len.value = p.l;
+            el.wid.value = p.w;
+            el.hgt.value = p.h;
+          }
+          render();
+        });
+        el.presets.appendChild(b);
+      })(PRESETS[i]);
+    }
+  }
+
+  function setUnit(next) {
+    if (next === unit) { return; }
+    var fields = [el.len, el.wid, el.hgt, el.duct];
+    var i;
+    for (i = 0; i < fields.length; i++) {
+      var v = parseFloat(fields[i].value);
+      if (isFinite(v)) {
+        fields[i].value = next === "m" ? Math.round(v / FT_PER_M * 100) / 100
+                                       : Math.round(v * FT_PER_M * 10) / 10;
+      }
+    }
+    var r = parseFloat(el.rise.value);
+    if (isFinite(r)) {
+      el.rise.value = next === "m" ? Math.round(r * 5 / 9 * 10) / 10
+                                   : Math.round(r * 9 / 5 * 10) / 10;
+    }
+    unit = next;
+    el.unitFt.setAttribute("aria-pressed", String(unit === "ft"));
+    el.unitM.setAttribute("aria-pressed", String(unit === "m"));
+    var lens = document.querySelectorAll(".u-len");
+    for (i = 0; i < lens.length; i++) { lens[i].textContent = unit === "m" ? "m" : "ft"; }
+    var degs = document.querySelectorAll(".u-deg");
+    for (i = 0; i < degs.length; i++) { degs[i].innerHTML = unit === "m" ? "&deg;C" : "&deg;F"; }
+    buildPresets();
+    render();
+  }
+
+  function pct(mult) { return "×" + mult.toFixed(2); }
+
+  function render() {
+    var lFt = toFt(num(el.len, 4));
+    var wFt = toFt(num(el.wid, 4));
+    var hFt = toFt(num(el.hgt, 6.5));
+    var volume = lFt * wFt * hFt;
+
+    var interval = Math.max(0.25, num(el.interval, 1));
+    var baseCfm = volume / interval;
+
+    var watts = num(el.watts, 0);
+    var riseF = Math.max(0.5, riseToF(num(el.rise, 10)));
+    var heatCfm = watts > 0 ? (watts * BTU_PER_W) / (SENSIBLE_K * riseF) : 0;
+
+    var needed = Math.max(baseCfm, heatCfm);
+
+    /* Efficiency multipliers, floored so a silly input cannot divide by zero
+       and hand back an infinite fan. */
+    var mFilter = Math.max(0.2, 1 - Math.min(90, num(el.filterLoss, 25)) / 100);
+    var mBends = Math.max(0.2, 1 - Math.min(12, num(el.bends, 2)) * PER_BEND);
+    var ductFt = toFt(num(el.duct, 8));
+    var mDuct = Math.max(0.2, 1 - ductFt * PER_FOOT);
+    var mSil = el.silencer.checked ? 1 - SILENCER : 1;
+    var mHead = Math.min(1, Math.max(0.2, num(el.headroom, 70) / 100));
+
+    var rated = needed / (mFilter * mBends * mDuct * mSil * mHead);
+    var shopFor = Math.ceil(rated / 10) * 10;
+
+    el.final.textContent = shopFor;
+    el.vol.textContent = unit === "m"
+      ? (volume / Math.pow(FT_PER_M, 3)).toFixed(2) + " m³ (" + Math.round(volume) + " ft³)"
+      : Math.round(volume) + " ft³";
+    el.base.textContent = Math.round(baseCfm) + " CFM";
+    el.heat.textContent = watts > 0 ? Math.round(heatCfm) + " CFM" : "not calculated";
+    el.need.textContent = Math.round(needed) + " CFM" +
+      (watts > 0 ? (heatCfm > baseCfm ? " (heat-driven)" : " (exchange-driven)") : "");
+    el.dFilter.textContent = pct(mFilter);
+    el.dBends.textContent = pct(mBends);
+    el.dDuct.textContent = pct(mDuct);
+    el.dSil.textContent = el.silencer.checked ? pct(mSil) : "none fitted";
+    el.dHead.textContent = pct(mHead);
+    el.total.textContent = shopFor + " CFM (" + Math.round(shopFor * CFM_TO_M3H) + " m³/h)";
+
+    var v = el.verdict;
+    v.classList.remove("is-good", "is-warn");
+    var overall = mFilter * mBends * mDuct * mSil * mHead;
+
+    if (watts > 0 && heatCfm > baseCfm * 1.5) {
+      v.textContent = "Heat is your limiting factor, not air exchange";
+      v.classList.add("is-warn");
+      el.advice.textContent = "Your lighting load needs " + Math.round(heatCfm) +
+        " CFM to hold a " + num(el.rise, 10) + "° rise, well above the " + Math.round(baseCfm) +
+        " CFM the tent volume asks for. Sizing this tent on volume alone would leave you with a hot box. Consider a cooler intake source as well as a bigger fan.";
+    } else if (overall < 0.35) {
+      v.textContent = "Your deductions are eating most of the fan";
+      v.classList.add("is-warn");
+      el.advice.textContent = "Only " + Math.round(overall * 100) +
+        "% of the rated airflow survives to the tent. Shortening the duct run or removing a bend is cheaper than buying a bigger fan.";
+    } else {
+      v.textContent = "Shop for a fan rated " + shopFor + " CFM or more";
+      v.classList.add("is-good");
+      el.advice.textContent = "That is the number on the box. About " +
+        Math.round(overall * 100) + "% of it survives the filter, the ducting and your speed headroom, which leaves " +
+        Math.round(needed) + " CFM at the tent.";
+    }
+
+    var rows = el.sizeTable.querySelectorAll("tbody tr");
+    for (var i = 0; i < rows.length; i++) {
+      var lo = parseFloat(rows[i].getAttribute("data-lo"));
+      var hi = parseFloat(rows[i].getAttribute("data-hi"));
+      rows[i].classList.toggle("is-current", shopFor >= lo && shopFor < hi);
+    }
+  }
+
+  el.unitFt.addEventListener("click", function () { setUnit("ft"); });
+  el.unitM.addEventListener("click", function () { setUnit("m"); });
+  var live = [el.len, el.wid, el.hgt, el.interval, el.watts, el.rise,
+              el.filterLoss, el.bends, el.duct, el.silencer, el.headroom];
+  for (var i = 0; i < live.length; i++) {
+    live[i].addEventListener("input", render);
+    live[i].addEventListener("change", render);
+  }
+  buildPresets();
+  render();
+})();
+</script>
+
+</body>
+</html>
