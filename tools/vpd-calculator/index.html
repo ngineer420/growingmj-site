@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VPD Calculator with Leaf Temperature Offset (kPa) — Growing MJ</title>
-<meta name="description" content="Free VPD calculator that uses leaf temperature, not just air temperature. Enter temp, humidity and a leaf-temp offset to get VPD in kPa, a stage verdict, and a colour-coded VPD chart.">
+<meta name="description" content="Free VPD calculator with the leaf-temperature offset as an input you control, defaulting to 0 to match published charts. Get VPD in kPa, a stage verdict, and a live colour-coded VPD chart.">
 <link rel="canonical" href="https://growingmj.com/tools/vpd-calculator/">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#f7f5ee" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#161a15" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="VPD Calculator with Leaf Temperature Offset (kPa)">
-<meta property="og:description" content="Free VPD calculator that uses leaf temperature, not just air temperature. Enter temp, humidity and a leaf-temp offset to get VPD in kPa, a stage verdict, and a colour-coded VPD chart.">
+<meta property="og:description" content="Free VPD calculator with the leaf-temperature offset as an input you control, defaulting to 0 to match published charts. Get VPD in kPa, a stage verdict, and a live colour-coded VPD chart.">
 <meta property="og:image" content="https://growingmj.com/images/photos/grow-tent-setup.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://growingmj.com/tools/vpd-calculator/">
@@ -26,7 +26,7 @@
       "name": "What is a good VPD for growing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Roughly 0.4-0.8 kPa for clones and seedlings, 0.8-1.2 kPa through vegetative growth, and 1.2-1.6 kPa in flower. Those are leaf-based figures using a leaf temperature about 2 C below air. Below about 0.4 kPa transpiration nearly stops and disease risk climbs; above about 1.6 kPa plants close stomata and growth slows."
+        "text": "Roughly 0.4-0.8 kPa for clones and seedlings, 0.8-1.2 kPa through vegetative growth, and 1.2-1.4 kPa in flower. Those are air-VPD figures, which is how the published sources they come from define them. Below about 0.4 kPa transpiration nearly stops and disease risk climbs; above about 1.4 kPa plants start closing stomata and growth slows. The 1.5-1.6 kPa flowering figure common on grow forums exceeds every published greenhouse source."
       }
     },
     {
@@ -34,7 +34,7 @@
       "name": "Why does a VPD calculator ask for a leaf temperature offset?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Because VPD is the difference between the vapour pressure inside the leaf and the vapour pressure of the air, and the inside of the leaf is at leaf temperature, not air temperature. A transpiring leaf is evaporatively cooled and typically runs about 2 C (3.6 F) below air temperature under LEDs. Using air temperature for both halves overstates VPD, often by 0.2-0.3 kPa, which is enough to move you a whole band."
+        "text": "Because VPD is the difference between the vapour pressure inside the leaf and the vapour pressure of the air, and the inside of the leaf is at leaf temperature, not air temperature. What is worth knowing is that the 2 C offset repeated on almost every grow site is not sourced: measurements by Nelson and Bugbee (2015) put leaf-to-air differences under 2 C in every ordinary scenario, with indoor leaves often running warmer than the air rather than cooler. The offset here therefore defaults to 0, matching the published charts and target bands, and exists as a field so you can enter a leaf temperature you have actually measured."
       }
     },
     {
@@ -66,7 +66,7 @@
       "name": "Which saturation vapour pressure equation does this calculator use?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The Buck (1996) equation for saturation vapour pressure over liquid water. Over the 10-40 C range that matters indoors it agrees with the older Tetens equation to within about 0.1%, which is far smaller than the error in your hygrometer."
+        "text": "The Buck (1996) equation for saturation vapour pressure over liquid water. Over the 10-30 C range that matters indoors it agrees with the FAO-56 Tetens equation to better than 0.05%, which is far smaller than the error in your hygrometer, so the choice is effectively arbitrary."
       }
     }
   ]
@@ -98,10 +98,10 @@
 
       <div class="article-icon"><img src="/images/icons/vpd.svg" alt="" width="34" height="34"></div>
       <h1>VPD Calculator</h1>
-      <p class="tool-lede">Vapour pressure deficit in kPa, calculated from
-      <strong>leaf</strong> temperature rather than air temperature &mdash; which is
-      the difference between a number that means something and a number that
-      looks right.</p>
+      <p class="tool-lede">Vapour pressure deficit in kPa, with the
+      leaf-temperature assumption pulled out into a field you control instead of
+      buried in the code &mdash; because the 2&thinsp;&deg;C offset every grow site repeats
+      turns out not to be in the literature at all.</p>
 
       <noscript>
         <p class="noscript-note">This calculator needs JavaScript. With it
@@ -129,15 +129,16 @@
 
           <div class="calc-field">
             <label for="rh">Relative humidity (%)</label>
-            <input type="number" id="rh" value="60" step="1" min="1" max="100" inputmode="decimal">
+            <input type="number" id="rh" value="65" step="1" min="1" max="100" inputmode="decimal">
             <p class="calc-hint">The tent&rsquo;s hygrometer, not the room&rsquo;s.</p>
           </div>
 
           <div class="calc-field">
             <label for="leaf-offset">Leaf temperature offset (<span class="u-temp">&deg;F</span> below air)</label>
-            <input type="number" id="leaf-offset" value="3.6" step="0.1" min="-10" max="20" inputmode="decimal">
-            <p class="calc-hint">Default 3.6&thinsp;&deg;F (2&thinsp;&deg;C), the usual assumption for a
-            transpiring leaf under LEDs. Set it to 0 to get air-only VPD.</p>
+            <input type="number" id="leaf-offset" value="0" step="0.1" min="-10" max="20" inputmode="decimal">
+            <p class="calc-hint">Defaults to 0, which is what every published VPD
+            chart actually uses. Put your own measured leaf-to-air difference here
+            &mdash; see below, because the 2&thinsp;&deg;C everyone repeats is not supported.</p>
           </div>
 
           <div class="calc-field">
@@ -183,14 +184,15 @@
         <li><span class="swatch" style="background:var(--band-humid)"></span> Under 0.4 &mdash; too humid</li>
         <li><span class="swatch" style="background:var(--band-prop)"></span> 0.4&ndash;0.8 &mdash; propagation</li>
         <li><span class="swatch" style="background:var(--band-veg)"></span> 0.8&ndash;1.2 &mdash; vegetative</li>
-        <li><span class="swatch" style="background:var(--band-flower)"></span> 1.2&ndash;1.6 &mdash; flowering</li>
-        <li><span class="swatch" style="background:var(--band-dry)"></span> Over 1.6 &mdash; too dry</li>
+        <li><span class="swatch" style="background:var(--band-flower)"></span> 1.2&ndash;1.4 &mdash; flowering</li>
+        <li><span class="swatch" style="background:var(--band-dry)"></span> Over 1.4 &mdash; too dry</li>
       </ul>
-      <p class="calc-hint">The top-right corner goes slightly negative, and that
-      is not a rounding error: with a leaf 2&thinsp;&deg;C cooler than the air, at 90%
-      humidity the leaf is at or below the dew point and water condenses
-      <em>onto</em> it rather than evaporating off. That corner of the chart is
-      where bud rot lives.</p>
+      <p class="calc-hint">Enter a positive offset and the top-right corner of
+      the chart turns slightly negative. That is not a rounding error: a leaf
+      cooler than the air at 90% humidity is at or below the dew point, so water
+      condenses <em>onto</em> it rather than evaporating off. That corner is
+      where bud rot lives, and it is the one case where the offset genuinely
+      changes what the chart is telling you.</p>
 
       <h2>What VPD Actually Is</h2>
       <p>Vapour pressure deficit is the gap between how much water vapour the
@@ -199,11 +201,11 @@
       through the roots, through the stem and out of the stomata, carrying
       calcium and every other immobile nutrient along for the ride.</p>
       <p>That is why VPD does a job that temperature and humidity cannot do
-      separately. 75&thinsp;&deg;F at 70% humidity and 82&thinsp;&deg;F at 70% humidity look like
-      the same humidity problem on a hygrometer and are completely different
-      environments for a plant: the first is a stalled 0.7&thinsp;kPa, the second a
-      healthy 1.0&thinsp;kPa. Two numbers you can control, one number that decides
-      what happens.</p>
+      separately. 75&thinsp;&deg;F at 80% humidity and 85&thinsp;&deg;F at 80% humidity read as the
+      same humidity problem on a hygrometer and are different environments for a
+      plant: the first is a sluggish 0.59&thinsp;kPa, the second a working
+      0.82&thinsp;kPa. Two numbers you can control, one number that decides what
+      happens.</p>
       <p>When VPD is too low, transpiration slows to a crawl. The plant stops
       pulling, calcium stops arriving at new growth, leaves stay wet longer, and
       you get the classic humid-tent trio of soft growth, powdery mildew and
@@ -223,38 +225,57 @@
       temperature multiplied by relative humidity. If you use air temperature
       for both halves you get "air VPD" or "atmospheric VPD" &mdash; a real quantity,
       but not the one the plant experiences.</p>
-      <p>A transpiring leaf is evaporatively cooled. Under LEDs, with reasonable
-      airflow, a healthy leaf typically sits about 2&thinsp;&deg;C (3.6&thinsp;&deg;F) below air
-      temperature, which is the default this calculator ships with and the
-      convention most commercial VPD charts assume. Under HPS the radiant heat
-      load can push leaves closer to air temperature or even above it, and a
-      plant that has already closed its stomata is not cooling itself at all.
-      Both of those are reasons the offset is a field you can edit rather than a
-      constant baked into the code.</p>
-      <p>The direction of the error is always the same. Assuming leaf and air
-      temperature are equal <em>overstates</em> VPD &mdash; by about 0.25&thinsp;kPa at
-      70&thinsp;&deg;F and about 0.37&thinsp;kPa at 78&thinsp;&deg;F, and the gap widens as the tent gets
-      warmer, because saturation vapour pressure climbs exponentially with
-      temperature. A calculator that says you
-      are at a comfortable 1.2&thinsp;kPa when the leaf is really at 0.95&thinsp;kPa has told
-      you to leave a flowering tent alone that actually needed drying out.</p>
+      <p>So far, so standard. Here is the part almost every grow site gets
+      wrong, this one included until we went and checked.</p>
+      <p>The number repeated everywhere is that a transpiring leaf under LEDs
+      sits about 2&thinsp;&deg;C below air temperature, and that published VPD charts assume
+      it. <strong>Neither half of that is true.</strong> We could not find a
+      single published source prescribing a &minus;2&thinsp;&deg;C offset, and the best
+      measurements available point the other way: Nelson and Bugbee (2015)
+      measured leaf-to-air differences under a range of light sources and found
+      them <em>under</em> 2&thinsp;&deg;C in every scenario short of the extremes, ordered
+      HPS &gt; greenhouse sun &gt; LED &gt; clear sky, with indoor leaves frequently
+      running <em>warmer</em> than the air rather than cooler, because a leaf
+      indoors has no cold sky to radiate to. Their conclusion is blunt: the
+      effect of LED technology on leaf temperature is smaller than is often
+      assumed.</p>
+      <p>And the charts do not assume an offset either. We reproduced the whole
+      of the widely-circulated Argus VPD table to within 0.08&thinsp;mb using air
+      temperature and no leaf offset at all &mdash; so a chart printed off a forum and
+      a calculator applying &minus;2&thinsp;&deg;C are not describing the same quantity, and
+      the bands printed on that chart belong to the first one.</p>
+      <p>This matters because the correction is not small. A &minus;2&thinsp;&deg;C offset moves
+      VPD by 0.34&ndash;0.42&thinsp;kPa at ordinary tent conditions &mdash; a third to a half of
+      an entire target band, in the direction of telling you a dry tent is fine.
+      So the offset here defaults to <strong>0</strong>, which is what the
+      published bands were built on, and the field is there for the case that
+      actually justifies it: you pointed a thermometer at a leaf and know your
+      real number.</p>
 
       <div class="product-box">
-        <p><strong>Measuring it yourself.</strong> If you want your real offset
-        rather than the 2&thinsp;&deg;C assumption, point an
+        <p><strong>Measuring it yourself.</strong> A measured offset is worth
+        having precisely because the assumed one is not. Point an
         <a class="affiliate-link" href="https://www.amazon.com/s?k=infrared+thermometer+plant+leaf+temperature&amp;tag=ngineer420-20">infrared thermometer</a>
         at a big healthy fan leaf from about six inches away, lights on, and
         subtract the reading from your air temperature. Average three leaves.
-        The number you get is usually somewhere between 1 and 4&thinsp;&deg;C, and it is
-        worth re-checking once per grow, because a canopy that has filled out
-        moves air differently than one that has not.</p>
+        Expect something small, and do not be surprised by a negative result
+        &mdash; a leaf running warmer than the air is a normal indoor outcome, and
+        entering a negative offset here is a perfectly valid thing to do. Worth
+        re-checking once per grow, because a canopy that has filled out moves air
+        differently than one that has not.</p>
       </div>
 
       <h2>Target VPD by Growth Stage</h2>
-      <p>These are the leaf-based bands, assuming the roughly 2&thinsp;&deg;C offset. They
-      are broad on purpose: VPD is a range to stay inside, not a set point to
-      chase, and chasing 0.05&thinsp;kPa with a humidifier that cycles every ten
-      minutes causes more problems than it solves.</p>
+      <p>These are <em>air</em>-VPD bands, matching the published sources they
+      come from &mdash; which is also why the offset above defaults to 0. They are
+      broad on purpose: VPD is a range to stay inside, not a set point to chase,
+      and chasing 0.05&thinsp;kPa with a humidifier that cycles every ten minutes
+      causes more problems than it solves.</p>
+      <p>Note that the top of this table stops at 1.4&thinsp;kPa. You will see
+      1.5&ndash;1.6&thinsp;kPa quoted for late flower all over grow forums, and it exceeds
+      every published greenhouse source we could find &mdash; the widely-cited Argus
+      application note puts the optimal band at 0.5&ndash;1.2&thinsp;kPa and calls
+      1.37 the edge of marginal.</p>
       <div class="table-scroll">
       <table id="stage-table">
         <thead>
@@ -263,8 +284,8 @@
         <tbody>
           <tr data-stage="clone"><td>Clones, seedlings, propagation</td><td>0.4&ndash;0.8&thinsp;kPa</td><td>No root system yet, so the plant cannot replace water it loses. Keep the pull gentle.</td></tr>
           <tr data-stage="veg"><td>Vegetative growth</td><td>0.8&ndash;1.2&thinsp;kPa</td><td>Roots can supply the leaves. Push transpiration to move nutrients and build structure.</td></tr>
-          <tr data-stage="early"><td>Early flower / transition</td><td>1.0&ndash;1.4&thinsp;kPa</td><td>Stretch phase. Raise the pull gradually rather than in one jump.</td></tr>
-          <tr data-stage="late"><td>Mid to late flower</td><td>1.2&ndash;1.6&thinsp;kPa</td><td>Dense flowers hold moisture. Drier air keeps rot out of the middle of a bud.</td></tr>
+          <tr data-stage="early"><td>Early flower / transition</td><td>1.0&ndash;1.3&thinsp;kPa</td><td>Stretch phase. Raise the pull gradually rather than in one jump.</td></tr>
+          <tr data-stage="late"><td>Mid to late flower</td><td>1.2&ndash;1.4&thinsp;kPa</td><td>Dense flowers hold moisture. Drier air keeps rot out of the middle of a bud.</td></tr>
         </tbody>
       </table>
       </div>
@@ -314,33 +335,56 @@
         VPD = SVP(T<sub>leaf</sub>) &minus; SVP(T<sub>air</sub>) &times; RH/100<br>
         where T<sub>leaf</sub> = T<sub>air</sub> &minus; offset</p>
       </div>
-      <p>Buck rather than the older Tetens equation because it is the more
-      accurate of the two, though honesty compels the note that over the
-      10&ndash;40&thinsp;&deg;C range that matters indoors the two agree to about 0.1%
-      &mdash; roughly a hundred times better than the &plusmn;3% accuracy of a typical
-      tent hygrometer. Your sensor, not the equation, is the limit on this
-      number. Setting the leaf offset to 0 reduces the formula to air VPD, which
-      is what a calculator that never mentions leaf temperature is giving you.</p>
+      <p>Buck rather than the older Tetens equation simply because it is the
+      more recent formulation. It is not a meaningful accuracy improvement here:
+      across 10&ndash;30&thinsp;&deg;C the two agree to better than 0.05%, which is roughly a
+      hundred times finer than the &plusmn;3% accuracy of a typical tent hygrometer.
+      Your sensor, not the equation, is the limit on this number &mdash; and the
+      Buck manual itself quotes no accuracy figure for water, so claims you may
+      have read about its precision are not from the primary document.</p>
+      <p>With the offset at its default of 0 this reduces to air VPD, which is
+      the quantity the published target bands were derived from. Enter a nonzero
+      offset and you get leaf-to-air VPD, which is the physically correct
+      quantity but has to be compared against bands derived the same way.</p>
       <p class="calc-source"><strong>References.</strong>
-      Buck, A. L. (1981), <em>New equations for computing vapor pressure and enhancement factor</em>,
-      Journal of Applied Meteorology 20:1527&ndash;1532, with the 1996 revised
-      coefficients published in the Buck Research CR-1A manual, for saturation
-      vapour pressure. Stage target bands follow published controlled-environment
-      horticulture guidance on leaf-based VPD, cross-checked against the
-      propagation / vegetative / flowering ranges used in commercial greenhouse
-      climate control. Leaf temperature is treated as roughly 2&thinsp;&deg;C below air for
-      a transpiring canopy under LED lighting, the standard assumption behind
-      published VPD charts.</p>
+      <strong>SVP:</strong> Buck Research Instruments, <em>Model CR-1A Hygrometer
+      Operating Manual</em>, Appendix 1 (rev. 7/96), which is where the constants
+      used here are published; the earlier Buck, A. L. (1981),
+      <em>New equations for computing vapor pressure and enhancement factor</em>,
+      Journal of Applied Meteorology 20:1527&ndash;1532, uses different coefficients.
+      Cross-checked against the Tetens form as published by Allen et al. (1998),
+      <em>FAO Irrigation and Drainage Paper 56</em>, ch.&thinsp;3 eq.&thinsp;11, and against
+      standard SVP tables from 0&ndash;40&thinsp;&deg;C (maximum deviation 0.03%).
+      <strong>Leaf-to-air definition:</strong> Grossiord et al. (2020),
+      <em>Plant responses to rising vapor pressure deficit</em>, New Phytologist
+      226:1550&ndash;1566, doi:10.1111/nph.16485, Box&nbsp;1.
+      <strong>Leaf temperature:</strong> Nelson &amp; Bugbee (2015),
+      <em>Analysis of environmental effects on leaf temperature under sunlight,
+      high pressure sodium and light emitting diodes</em>, PLOS ONE
+      10(10):e0138930 &mdash; the source for this page defaulting the offset to 0
+      rather than to &minus;2&thinsp;&deg;C.
+      <strong>Target bands:</strong> Argus Control Systems (2009),
+      <em>Understanding and Using VPD</em> (optimal 0.50&ndash;1.20&thinsp;kPa, marginal to
+      1.37; its published table reproduces to &plusmn;0.08&thinsp;mb from air temperature
+      with no leaf offset, which is how we know which convention it uses);
+      Shamshiri et al. (2018), <em>International Agrophysics</em> 32(2):287&ndash;302,
+      doi:10.1515/intag-2017-0005, tables 3 and 4; and for cannabis
+      specifically Bilodeau et al. (2019), <em>Frontiers in Plant Science</em>
+      10:296, as converted to VPD by Vernon et al. (2023), <em>IEEE Access</em>,
+      doi:10.1109/ACCESS.2023.3285242 (propagation ~0.8&thinsp;kPa, vegetative and
+      flowering 1.3&ndash;1.4&thinsp;kPa). Argus notes its own band was
+      "arbitrarily selected&hellip; for an imaginary crop", which is a useful
+      reminder of how firm any of this is.</p>
 
       <div class="faq-section">
         <h2>Frequently Asked Questions</h2>
         <div class="faq-item">
           <h3>What is a good VPD for growing?</h3>
-          <p>Roughly 0.4&ndash;0.8&thinsp;kPa for clones and seedlings, 0.8&ndash;1.2&thinsp;kPa through vegetative growth, and 1.2&ndash;1.6&thinsp;kPa in flower. Those are leaf-based figures using a leaf temperature about 2&thinsp;&deg;C below air. Below about 0.4&thinsp;kPa transpiration nearly stops and disease risk climbs; above about 1.6&thinsp;kPa plants close stomata and growth slows.</p>
+          <p>Roughly 0.4&ndash;0.8&thinsp;kPa for clones and seedlings, 0.8&ndash;1.2&thinsp;kPa through vegetative growth, and 1.2&ndash;1.4&thinsp;kPa in flower. Those are air-VPD figures, which is how the published sources they come from define them. Below about 0.4&thinsp;kPa transpiration nearly stops and disease risk climbs; above about 1.4&thinsp;kPa plants start closing stomata and growth slows. The 1.5&ndash;1.6&thinsp;kPa flowering figure common on grow forums exceeds every published greenhouse source.</p>
         </div>
         <div class="faq-item">
           <h3>Why does a VPD calculator ask for a leaf temperature offset?</h3>
-          <p>Because VPD is the difference between the vapour pressure inside the leaf and the vapour pressure of the air, and the inside of the leaf is at leaf temperature, not air temperature. A transpiring leaf is evaporatively cooled and typically runs about 2&thinsp;&deg;C (3.6&thinsp;&deg;F) below air temperature under LEDs. Using air temperature for both halves overstates VPD, often by 0.2&ndash;0.3&thinsp;kPa, which is enough to move you a whole band.</p>
+          <p>Because VPD is the difference between the vapour pressure inside the leaf and the vapour pressure of the air, and the inside of the leaf is at leaf temperature, not air temperature. What is worth knowing is that the 2&thinsp;&deg;C offset repeated on almost every grow site is not sourced: measurements by Nelson and Bugbee (2015) put leaf-to-air differences under 2&thinsp;&deg;C in every ordinary scenario, with indoor leaves often running warmer than the air rather than cooler. The offset here therefore defaults to 0, matching the published charts and target bands, and exists as a field so you can enter a leaf temperature you have actually measured.</p>
         </div>
         <div class="faq-item">
           <h3>How do I measure leaf temperature?</h3>
@@ -356,7 +400,7 @@
         </div>
         <div class="faq-item">
           <h3>Which saturation vapour pressure equation does this calculator use?</h3>
-          <p>The Buck (1996) equation for saturation vapour pressure over liquid water. Over the 10&ndash;40&thinsp;&deg;C range that matters indoors it agrees with the older Tetens equation to within about 0.1%, which is far smaller than the error in your hygrometer.</p>
+          <p>The Buck (1996) equation for saturation vapour pressure over liquid water. Over the 10&ndash;30&thinsp;&deg;C range that matters indoors it agrees with the FAO-56 Tetens equation to better than 0.05%, which is far smaller than the error in your hygrometer, so the choice is effectively arbitrary.</p>
         </div>
       </div>
 
@@ -420,8 +464,8 @@
   var STAGES = {
     clone: { label: "clones and propagation", lo: 0.4, hi: 0.8 },
     veg:   { label: "vegetative growth",      lo: 0.8, hi: 1.2 },
-    early: { label: "early flower",           lo: 1.0, hi: 1.4 },
-    late:  { label: "mid to late flower",     lo: 1.2, hi: 1.6 }
+    early: { label: "early flower",           lo: 1.0, hi: 1.3 },
+    late:  { label: "mid to late flower",     lo: 1.2, hi: 1.4 }
   };
 
   /* Band boundaries shared by the chart colours and the legend. */
@@ -429,7 +473,7 @@
     if (vpd < 0.4) { return "b-humid"; }
     if (vpd < 0.8) { return "b-prop"; }
     if (vpd < 1.2) { return "b-veg"; }
-    if (vpd < 1.6) { return "b-flower"; }
+    if (vpd < 1.4) { return "b-flower"; }
     return "b-dry";
   }
 
