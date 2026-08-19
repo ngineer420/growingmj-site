@@ -158,20 +158,21 @@
 
         <h2 style="margin-top:1.75rem;">The deductions</h2>
         <p class="calc-hint" style="margin-top:-0.5rem;">Every one of these is a
-        rule of thumb from fan and filter manufacturers rather than a physical
-        constant, which is exactly why they are editable.</p>
+        vendor rule of thumb rather than a physical constant &mdash; and the vendors
+        disagree with each other by more than an order of magnitude, which is
+        exactly why they are editable rather than baked in.</p>
 
         <div class="calc-fields">
           <div class="calc-field">
             <label for="filter-loss">Carbon filter loss (%)</label>
             <input type="number" id="filter-loss" value="25" step="1" min="0" max="60" inputmode="decimal">
-            <p class="calc-hint">25&ndash;30% for a clean, correctly sized filter. Set to 0 if you are not running one.</p>
+            <p class="calc-hint">25% default. One filter maker publishes 10&ndash;25%; one fan maker says 60%. Set to 0 if you are not running one.</p>
           </div>
 
           <div class="calc-field">
             <label for="bends">90&deg; bends in the ducting</label>
             <input type="number" id="bends" value="2" step="1" min="0" max="12" inputmode="numeric">
-            <p class="calc-hint">Counted at 5% each.</p>
+            <p class="calc-hint">Counted at 5% each &mdash; a middle-of-the-road figure. Published vendor claims for this run from 1% to 60% per bend.</p>
           </div>
 
           <div class="calc-field">
@@ -275,25 +276,43 @@
       <p>A fan rated 400&thinsp;CFM is rated at <em>zero static pressure</em> &mdash;
       free air, nothing attached. Everything you connect to it takes a cut:</p>
       <ul>
-        <li><strong>The carbon filter: 25&ndash;30%.</strong> The single biggest
-        deduction, and the one most people forget entirely. A loaded or
-        undersized filter costs more than this. Run a pre-filter sleeve and it
-        stays near the low end for longer.</li>
-        <li><strong>Every 90&deg; bend: about 5%.</strong> Sharp bends in flexible
-        duct are worse than gentle sweeps in rigid duct. Two bends is normal;
-        six means you should rethink the routing before buying a bigger fan.</li>
+        <li><strong>The carbon filter: 25% here.</strong> The single biggest
+        deduction, and the one most people forget entirely. Worth knowing how
+        soft this figure is: Can-Filters publishes a 10&ndash;25% airflow drop and a
+        pressure drop of about 0.7&thinsp;in. w.g. at rated flow, while AC Infinity
+        publishes 60% for the filter. The default here sits between them. A
+        loaded or undersized filter costs more either way, and a pre-filter
+        sleeve keeps it near the low end for longer.</li>
+        <li><strong>Every 90&deg; bend: about 5%, and nobody really knows.</strong>
+        This is the softest number on the page. Can-Filters puts a 90&deg; bend at
+        1&ndash;4%; AC Infinity puts it at 60%. Those differ by a factor of fifteen to
+        sixty, which is the tell that neither is a measurement. The actual
+        engineering method is equivalent length rather than a percentage &mdash; a
+        6-inch smooth 90&deg; elbow is worth about 1&thinsp;ft 9&thinsp;in of straight duct, while
+        a 4-inch mitered one is worth 5&thinsp;ft &mdash; so a typical tent elbow costs you
+        a couple of equivalent feet, not a fixed share of your airflow. Two bends
+        is normal; six means rethink the routing before buying a bigger fan.</li>
         <li><strong>Duct length: about 1% per foot of flexible duct.</strong>
         The corrugations are the problem &mdash; smooth rigid duct is roughly half as
         costly per foot. Also: pull the flexible duct taut. A concertina&rsquo;d run
         left half-compressed behind the tent can cost more than the filter.</li>
-        <li><strong>An inline silencer: about 10%.</strong> Usually worth it.
-        Quiet gear gets run at the speed it should be run at, rather than the
-        speed you can stand.</li>
+        <li><strong>An inline silencer: about 10%.</strong> Also vendor lore &mdash;
+        AC Infinity says 20% and publishes no pressure drop for its own
+        silencers, and nothing in this market is rated to the standard that
+        would settle it. Usually worth fitting anyway: quiet gear gets run at the
+        speed it should be run at, rather than the speed you can stand.</li>
         <li><strong>Speed headroom: whatever you choose.</strong> Not a loss at
         all &mdash; a deliberate purchase of reserve. Sizing so the fan sits at 60&ndash;75%
         buys you a quieter tent, a longer-lived motor, and somewhere to go when
         July arrives.</li>
       </ul>
+      <p>One thing you will see on other calculators and will not see here is a
+      derate for a hot or humid room. That one is simply backwards. A fan is a
+      constant-volume machine: air density changes the pressure it develops and
+      the power it draws, but not the volume of air it moves. What actually
+      degrades in a hot room is how much heat each cubic foot can carry away,
+      which is why the heat-removal cross-check above takes the room temperature
+      into account through &Delta;T rather than by pretending the fan got weaker.</p>
       <p>One deduction this calculator cannot model is a starved intake. If your
       passive intake openings do not total roughly three to four times the
       cross-sectional area of the exhaust duct, the fan spends its life pulling
@@ -314,19 +333,35 @@
       rated flow, it gives 0.75 &times; 0.90 = 67.5%. Small difference here, larger
       once four or five factors pile up, and multiplying is the correct way
       round.</p>
-      <p class="calc-source"><strong>References.</strong> The one-to-three-minute
-      air exchange interval is the standard horticultural ventilation rule of
-      thumb, and matches the guidance in our own
-      <a href="/articles/grow-tent-odor-control-and-ventilation.html">ventilation guide</a>.
-      The heat-removal equation CFM = BTU/hr &divide; (1.08 &times; &Delta;T) is the standard
-      sensible-heat airflow relationship used throughout HVAC practice, with the
-      1.08 constant derived from standard-air properties (60 &times; 0.075 &times; 0.24);
-      1&thinsp;W = 3.412&thinsp;BTU/hr. The carbon filter (25&ndash;30%), per-bend (5%), per-foot
-      flexible duct (1%) and silencer (10%) figures are manufacturers&rsquo; rules of
-      thumb from inline fan and filter documentation, <em>not</em> measured
-      constants for your specific setup &mdash; they are presented as editable inputs
-      for exactly that reason. Fan ratings are quoted at zero static pressure by
-      convention.</p>
+      <p class="calc-source"><strong>References.</strong>
+      <strong>Air exchange rate:</strong> Bartok, J., <em>Ventilation for
+      Greenhouses</em>, UMass Extension &mdash; "one volume air exchange per minute to
+      a height of 8 feet for summer ventilation", dropping to about a quarter of
+      that in winter. This is the basis for the one-minute default, and matches
+      our own <a href="/articles/grow-tent-odor-control-and-ventilation.html">ventilation guide</a>.
+      <strong>Heat removal:</strong> the sensible-heat airflow relationship
+      q = 1.08 &times; CFM &times; &Delta;T, rearranged; 1.08 = 60&thinsp;min/h &times; 0.075&thinsp;lb/ft&sup3; &times;
+      0.24&thinsp;BTU/lb&middot;&deg;F for standard air, and 1&thinsp;W = 3.412&thinsp;BTU/hr. Worth noting
+      that the current standard covering sealed indoor plant environments,
+      ANSI/ASABE/ASHRAE EP653 (2021), sizes ventilation by heat and moisture load
+      rather than by volume exchange &mdash; which is the same approach as the
+      cross-check on this page, and the reason the cross-check exists.
+      ANSI/ASAE EP406.4, still widely quoted for greenhouse airflow, has been
+      <em>withdrawn</em>; its own &sect;7.1.10 recommends specifying airflow at a
+      stated static pressure (0.060&thinsp;in. w.g.) rather than subtracting
+      percentages, which is the technically correct approach and one that
+      consumer inline fans make impossible because they publish single-point
+      specs and no pressure curves.
+      <strong>Derates:</strong> carbon filter from Can-Filters (10&ndash;25% airflow
+      drop, ~0.7&thinsp;in. w.g.) and AC Infinity (60%, self-disclaimed as "not fixed
+      and may vary"); per-bend from the same two sources, which disagree by a
+      factor of fifteen to sixty; equivalent-length figures for elbows from IRC
+      Table M1502.4.5.1. These are <strong>vendor rules of thumb, not measured
+      constants</strong>, which is why every one of them is an editable input.
+      <strong>Constant volume:</strong> Twin City Fan engineering letter FE-1600
+      &mdash; "fan air volume (CFM) is not affected by the air density", the reason
+      this calculator has no temperature derate. Fan ratings are quoted at zero
+      static pressure by convention.</p>
 
       <div class="faq-section">
         <h2>Frequently Asked Questions</h2>

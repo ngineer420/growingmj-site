@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EC to PPM Converter — 500, 640 and 700 Scales — Growing MJ</title>
-<meta name="description" content="Convert EC to PPM and back on all three conversion scales at once — 500 (NaCl/Hanna), 640 (Eutech) and 700 (KCl/Truncheon) — so you can tell which scale your meter is actually using.">
+<meta name="description" content="Convert EC to PPM and back on all three conversion scales at once — 500 (NaCl/Hanna), 640 (FAO irrigation) and 700 (Bluelab/Truncheon) — so you can tell which scale your meter is actually using.">
 <link rel="canonical" href="https://growingmj.com/tools/ppm-ec-converter/">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#f7f5ee" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#161a15" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="EC to PPM Converter &mdash; 500, 640 and 700 Scales">
-<meta property="og:description" content="Convert EC to PPM and back on all three conversion scales at once — 500 (NaCl/Hanna), 640 (Eutech) and 700 (KCl/Truncheon) — so you can tell which scale your meter is actually using.">
+<meta property="og:description" content="Convert EC to PPM and back on all three conversion scales at once — 500 (NaCl/Hanna), 640 (FAO irrigation) and 700 (Bluelab/Truncheon) — so you can tell which scale your meter is actually using.">
 <meta property="og:image" content="https://growingmj.com/images/photos/hydroponic-system-osu.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://growingmj.com/tools/ppm-ec-converter/">
@@ -26,7 +26,7 @@
       "name": "What is the difference between the 500, 640 and 700 PPM scales?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "They are three different conversion factors between electrical conductivity and parts per million, each calibrated against a different reference salt. PPM = EC in mS/cm multiplied by the factor. The 500 scale (also called the NaCl or TDS scale) is used by Hanna and most US meters, the 700 scale (the KCl scale) by Bluelab and the Truncheon, and 640 by some European and Eutech meters. The same nutrient solution reads 1000, 1280 or 1400 PPM depending only on which scale the meter uses."
+        "text": "They are three different conversion factors between electrical conductivity and parts per million, each based on a different assumption about what is dissolved. PPM = EC in mS/cm multiplied by the factor. The 500 scale (the NaCl or TDS scale) is used by Hanna and most US meters and really is calibrated to sodium chloride. The 700 scale is used by Bluelab and the Truncheon, and despite being universally called the KCl scale it is not one — real potassium chloride is about 0.5. The 640 factor comes from irrigation agronomy, where the FAO publishes it, rather than from any meter brand. The same nutrient solution reads 1000, 1280 or 1400 PPM depending only on which scale the meter uses."
       }
     },
     {
@@ -34,7 +34,7 @@
       "name": "How do I know which PPM scale my meter uses?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Check the manual, or test it: measure a solution, then read its EC. If PPM divided by EC is about 500 you are on the 500 scale, about 700 means the KCl scale, about 640 the Eutech scale. If your meter only shows PPM and cannot show EC, the brand is the strongest clue — Hanna and most inexpensive US pens are 500, Bluelab is 700."
+        "text": "Check the manual, or test it: measure a solution, then read its EC. If PPM divided by EC is about 500 you are on the 500 scale, about 700 the hydroponic one, about 640 the irrigation one. If your meter only shows PPM and cannot show EC, the brand is the strongest clue — Hanna and most inexpensive US pens are 500, Bluelab is 700."
       }
     },
     {
@@ -123,8 +123,8 @@
               <option value="ec" selected>EC in mS/cm (or dS/m)</option>
               <option value="us">EC in &micro;S/cm</option>
               <option value="500">PPM, 500 scale (NaCl &mdash; Hanna, most US pens)</option>
-              <option value="640">PPM, 640 scale (Eutech, some EU meters)</option>
-              <option value="700">PPM, 700 scale (KCl &mdash; Bluelab, Truncheon)</option>
+              <option value="640">PPM, 640 scale (irrigation / agronomy convention)</option>
+              <option value="700">PPM, 700 scale (Bluelab, Truncheon, hydroponics)</option>
             </select>
             <p class="calc-hint" id="scale-note">EC is the raw measurement. Every PPM figure below is derived from it.</p>
           </div>
@@ -136,8 +136,8 @@
           <ul class="calc-lines">
             <li id="row-us"><span>EC in microsiemens<b class="active-mark" hidden> &mdash; your reading</b></span><span class="calc-line-value" id="out-us">&mdash;</span></li>
             <li id="row-500"><span>PPM &mdash; 500 scale (NaCl, Hanna)<b class="active-mark" hidden> &mdash; your reading</b></span><span class="calc-line-value" id="out-500">&mdash;</span></li>
-            <li id="row-640"><span>PPM &mdash; 640 scale (Eutech)<b class="active-mark" hidden> &mdash; your reading</b></span><span class="calc-line-value" id="out-640">&mdash;</span></li>
-            <li id="row-700"><span>PPM &mdash; 700 scale (KCl, Truncheon)<b class="active-mark" hidden> &mdash; your reading</b></span><span class="calc-line-value" id="out-700">&mdash;</span></li>
+            <li id="row-640"><span>PPM &mdash; 640 scale (irrigation)<b class="active-mark" hidden> &mdash; your reading</b></span><span class="calc-line-value" id="out-640">&mdash;</span></li>
+            <li id="row-700"><span>PPM &mdash; 700 scale (Bluelab Truncheon)<b class="active-mark" hidden> &mdash; your reading</b></span><span class="calc-line-value" id="out-700">&mdash;</span></li>
             <li class="is-total"><span>Spread between the 500 and 700 scales</span><span class="calc-line-value" id="out-spread">&mdash;</span></li>
           </ul>
           <p class="calc-hint" id="out-advice"></p>
@@ -150,23 +150,39 @@
       weighing what is left. What the pen actually measures is
       <strong>electrical conductivity</strong>, in millisiemens per centimetre,
       and then multiplies by a factor to <em>estimate</em> PPM.</p>
-      <p>That factor depends on which salt you assume the solution is made of,
-      because different salts conduct differently per unit mass. Three
-      assumptions became conventions:</p>
+      <p>That factor depends on what you assume the solution is made of, because
+      different salts conduct differently per unit mass. Three assumptions became
+      conventions &mdash; and two of the three are routinely misdescribed, including
+      by the shops that sell the meters:</p>
       <div class="table-scroll">
       <table>
         <thead>
           <tr><th scope="col">Scale</th><th scope="col">Reference</th><th scope="col">Typical meters</th></tr>
         </thead>
         <tbody>
-          <tr><td>500 (sometimes written &times;0.5, or "TDS")</td><td>Sodium chloride</td><td>Hanna, most inexpensive US pens, many aquarium meters</td></tr>
-          <tr><td>640</td><td>A mixed-salt reference</td><td>Eutech and some European instruments</td></tr>
-          <tr><td>700 (sometimes written &times;0.7)</td><td>Potassium chloride</td><td>Bluelab, the Bluelab Truncheon, much Australian and NZ equipment</td></tr>
+          <tr><td>500 (sometimes written &times;0.5, or "TDS")</td><td>Sodium chloride &mdash; genuinely</td><td>Hanna, most inexpensive US pens, many aquarium meters</td></tr>
+          <tr><td>640</td><td>Irrigation agronomy. Published by the FAO for agricultural water quality, not by a meter maker</td><td>Agricultural and irrigation work; a few meters offer it</td></tr>
+          <tr><td>700 (sometimes written &times;0.7)</td><td>A proprietary mixed-salt standard &mdash; <em>not</em> potassium chloride</td><td>Bluelab, the Bluelab Truncheon, most hydroponic equipment</td></tr>
         </tbody>
       </table>
       </div>
+      <p>Two corrections worth making, because the wrong version is repeated
+      almost everywhere: <strong>the 700 scale is not the KCl scale.</strong> A
+      genuine potassium chloride factor is about 0.50&ndash;0.53, which is nearly the
+      500 scale. The 0.7 traces instead to a proprietary mixed-salt reference
+      standard &mdash; Myron L&rsquo;s "442 Natural Water", which reads 1000&thinsp;ppm at
+      1417&thinsp;&micro;S/cm, giving 0.706. And <strong>the 640 scale is not a meter
+      brand&rsquo;s house factor.</strong> It comes from irrigation agronomy, where the
+      FAO publishes it for agricultural water quality; the meters usually blamed
+      for it ship defaulted to 0.5.</p>
+      <p>None of the three is a standard in the sense that ASTM or ISO issues
+      standards. The standards bodies specify how to measure conductivity and
+      stop there &mdash; the conversion to PPM is left alone precisely because no
+      single number is right. The USGS puts the real-world ratio for natural
+      waters at 0.55 to 0.75, which brackets all three of these and is a fair
+      summary of how much anyone actually knows.</p>
       <p>So a solution at 2.0&thinsp;mS/cm is 1000&thinsp;PPM, 1280&thinsp;PPM or 1400&thinsp;PPM, and all
-      three readings are correct. The 40% spread between the ends is why a feed
+      three readings are equally defensible. The 40% spread between the ends is why a feed
       chart quoted only in PPM is close to useless, and why two growers can have
       a long argument about nutrient strength while running identical
       reservoirs.</p>
@@ -242,25 +258,33 @@
       1200&thinsp;&divide;&thinsp;500&thinsp;=&thinsp;2.4&thinsp;mS/cm, which is 2.4&thinsp;&times;&thinsp;700&thinsp;=&thinsp;1680&thinsp;PPM on the 700
       scale. There is no direct PPM-to-PPM shortcut that does not pass through
       EC.</p>
-      <p class="calc-source"><strong>References.</strong> The three conversion
-      factors are the manufacturers&rsquo; own: the 500 (NaCl) scale as published by
-      Hanna Instruments for its TDS meters, the 700 (KCl) scale as published by
-      Bluelab for the Truncheon and its conductivity pens, and the 640 factor as
-      used by Eutech and several European instruments. The 2%-per-&deg;C
-      temperature coefficient and the 25&thinsp;&deg;C reference are the standard
-      conductivity conventions those same manufacturers calibrate to. Stage EC
-      bands follow published hydroponic nutrient-solution guidance for
-      greenhouse and controlled-environment crops.</p>
+      <p class="calc-source"><strong>References.</strong>
+      <strong>500 scale:</strong> Hanna Instruments HI5321 manual &mdash; "TDS = Factor &times; EC&#8322;&#8325;&hellip;
+      The default value is 0.50", genuinely an NaCl reference.
+      <strong>700 scale:</strong> <a href="https://bluelab.com/pages/conductivity-ec-nutrient-strength">Bluelab&rsquo;s own conductivity page</a>
+      ("PPM = EC &times; 700"); the 0.7 originates with Myron L&rsquo;s proprietary "442
+      Natural Water" standard (1000&thinsp;ppm at 1417&thinsp;&micro;S/cm), and Myron L themselves
+      state that no single multiplier can be used. It is <em>not</em> a potassium
+      chloride factor, and this page previously said it was.
+      <strong>640 scale:</strong> FAO <em>Plant Production and Protection Paper 217</em>
+      (2013), p.&thinsp;176 &mdash; "EC in mS/cm is multiplied by 640"; the unit identity
+      1&thinsp;dS/m = 1&thinsp;mS/cm = 1000&thinsp;&micro;S/cm is from p.&thinsp;175 of the same paper.
+      <strong>Ratio range 0.55&ndash;0.75:</strong> USGS Water-Supply Paper 2254 (Hem), p.&thinsp;164.
+      ASTM D1125 and D5391 standardise the conductivity <em>measurement</em> only
+      and endorse no conversion factor, which is why the PPM figure on any meter
+      is a derived estimate rather than a measurement &mdash; Hanna&rsquo;s own position as
+      well. Stage EC bands follow FAO Paper 217 ch.&thinsp;12 and the Cornell CEA
+      lettuce handbook (1150&ndash;1250&thinsp;&micro;S/cm above source water, pH 5.6&ndash;6.0).</p>
 
       <div class="faq-section">
         <h2>Frequently Asked Questions</h2>
         <div class="faq-item">
           <h3>What is the difference between the 500, 640 and 700 PPM scales?</h3>
-          <p>They are three different conversion factors between electrical conductivity and parts per million, each calibrated against a different reference salt. PPM = EC in mS/cm multiplied by the factor. The 500 scale (also called the NaCl or TDS scale) is used by Hanna and most US meters, the 700 scale (the KCl scale) by Bluelab and the Truncheon, and 640 by some European and Eutech meters. The same nutrient solution reads 1000, 1280 or 1400&thinsp;PPM depending only on which scale the meter uses.</p>
+          <p>They are three different conversion factors between electrical conductivity and parts per million, each based on a different assumption about what is dissolved. PPM = EC in mS/cm multiplied by the factor. The 500 scale (the NaCl or TDS scale) is used by Hanna and most US meters and really is calibrated to sodium chloride. The 700 scale is used by Bluelab and the Truncheon, and despite being universally called the KCl scale it is not one — real potassium chloride is about 0.5. The 640 factor comes from irrigation agronomy, where the FAO publishes it, rather than from any meter brand. The same nutrient solution reads 1000, 1280 or 1400&thinsp;PPM depending only on which scale the meter uses.</p>
         </div>
         <div class="faq-item">
           <h3>How do I know which PPM scale my meter uses?</h3>
-          <p>Check the manual, or test it: measure a solution, then read its EC. If PPM divided by EC is about 500 you are on the 500 scale, about 700 means the KCl scale, about 640 the Eutech scale. If your meter only shows PPM and cannot show EC, the brand is the strongest clue &mdash; Hanna and most inexpensive US pens are 500, Bluelab is 700.</p>
+          <p>Check the manual, or test it: measure a solution, then read its EC. If PPM divided by EC is about 500 you are on the 500 scale, about 700 the hydroponic one, about 640 the irrigation one. If your meter only shows PPM and cannot show EC, the brand is the strongest clue &mdash; Hanna and most inexpensive US pens are 500, Bluelab is 700.</p>
         </div>
         <div class="faq-item">
           <h3>Should I use EC or PPM?</h3>
@@ -326,8 +350,8 @@
     ec:   "EC is the raw measurement. Every PPM figure below is derived from it.",
     us:   "Microsiemens per centimetre — 1000 µS/cm = 1 mS/cm. Common on cheap aquarium meters.",
     "500": "The NaCl or “TDS” scale. Hanna and most inexpensive US pens use this one.",
-    "640": "A mixed-salt reference used by Eutech and several European instruments.",
-    "700": "The KCl scale. Bluelab, the Truncheon, and most Australian and NZ gear."
+    "640": "The irrigation-agronomy factor, published by the FAO for agricultural water quality.",
+    "700": "Bluelab, the Truncheon, and most hydroponic gear. Not a KCl factor, despite the folklore."
   };
 
   var el = {

@@ -34,7 +34,7 @@
       "name": "What DLI does lettuce need?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Lettuce and most leafy greens do well between about 12 and 17 mol/m2/day. Below roughly 10 the heads stay loose and light; much above 17 you start risking tipburn rather than gaining yield, especially without good airflow."
+        "text": "Lettuce and most leafy greens do well between about 12 and 17 mol/m2/day, with 17 the usual target where there is good vertical airflow. Below roughly 10 the heads stay loose and light. Tipburn risk starts climbing around 15, and without airflow to move air through the canopy the practical ceiling drops to about 12."
       }
     },
     {
@@ -42,7 +42,7 @@
       "name": "Is more DLI always better?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Every crop has a saturation point past which extra light produces no extra growth, and beyond that it produces damage — bleaching, tipburn and heat stress — while you pay full price for the electricity. DLI is a target range, not a score to maximise."
+        "text": "For most crops, no: they reach a saturation point past which extra light produces no extra growth and then starts producing damage — bleaching, tipburn and heat stress — while you pay full price for the electricity. Lettuce is the clearest example. But it is not universal. The largest published cannabis trial pushed DLI from 5 to 78 mol/m2/day and yield was still rising linearly at the top, with no saturation reached, so for that crop the limit found so far is economic rather than biological."
       }
     },
     {
@@ -114,13 +114,13 @@
 
           <div class="calc-field" id="f-ppfd">
             <label for="ppfd">PPFD (&micro;mol/m&sup2;/s)</label>
-            <input type="number" id="ppfd" value="400" step="10" min="1" max="3000" inputmode="decimal">
+            <input type="number" id="ppfd" value="300" step="10" min="1" max="3000" inputmode="decimal">
             <p class="calc-hint">Average across the canopy, not the brightest spot.</p>
           </div>
 
           <div class="calc-field" id="f-hours">
             <label for="hours">Photoperiod (hours per day)</label>
-            <input type="number" id="hours" value="16" step="0.5" min="0.5" max="24" inputmode="decimal">
+            <input type="number" id="hours" value="14" step="0.5" min="0.5" max="24" inputmode="decimal">
             <p class="calc-hint">Lights-on time, not counting ramp-up.</p>
           </div>
 
@@ -168,18 +168,27 @@
           <tr><th scope="col">Crop</th><th scope="col">Target DLI (mol/m&sup2;/day)</th><th scope="col">Notes</th></tr>
         </thead>
         <tbody>
-          <tr data-crop="houseplant"><td>Houseplants, low-light foliage</td><td>2&ndash;6</td><td>Pothos, philodendron, snake plant. A bright windowsill often already does this.</td></tr>
-          <tr data-crop="seedling"><td>Seedlings, plugs &amp; transplants</td><td>6&ndash;12</td><td>Enough to stop stretch without cooking a plant that has almost no roots.</td></tr>
-          <tr data-crop="microgreen"><td>Microgreens</td><td>6&ndash;12</td><td>Harvested before they need much. Most of the crop is stored seed energy.</td></tr>
-          <tr data-crop="lettuce"><td>Lettuce &amp; leafy greens</td><td>12&ndash;17</td><td>The classic hydroponic target. Above roughly 17 you buy tipburn, not yield.</td></tr>
-          <tr data-crop="herb"><td>Herbs (basil, mint, parsley)</td><td>12&ndash;20</td><td>Basil sits at the top of this band and rewards the extra light with oil content.</td></tr>
+          <tr data-crop="houseplant"><td>Houseplants, low-light foliage</td><td>2&ndash;6</td><td>Pothos, philodendron, snake plant. A bright windowsill often already does this. The one row here with no strong published source.</td></tr>
+          <tr data-crop="seedling"><td>Seedlings, plugs &amp; transplants</td><td>5&ndash;10</td><td>Enough to stop stretch without cooking a plant that has almost no roots. Rooted cuttings want the same.</td></tr>
+          <tr data-crop="microgreen"><td>Microgreens</td><td>9&ndash;12</td><td>Harvested before they need much. Most of the crop is stored seed energy.</td></tr>
+          <tr data-crop="lettuce"><td>Lettuce &amp; leafy greens</td><td>12&ndash;17</td><td>17 is the target with good airflow; drop to about 12 without it, since tipburn risk starts climbing around 15. Spinach 14&ndash;20.</td></tr>
+          <tr data-crop="herb"><td>Herbs (basil, mint, parsley)</td><td>13&ndash;25</td><td>An unusually wide band because the sources disagree: extension guidance says 15&ndash;25 for basil, while the indoor trial it cites recommends about 13. Start low.</td></tr>
           <tr data-crop="fruiting"><td>Fruiting crops (tomato, pepper, cucumber)</td><td>20&ndash;30</td><td>Fruit is expensive to build. Under about 15 they flower and then drop it.</td></tr>
-          <tr data-crop="highlight"><td>High-light flowering crops</td><td>30&ndash;45</td><td>Only worth chasing with CO&#8322; supplementation and the cooling to match.</td></tr>
+          <tr data-crop="highlight"><td>High-light flowering crops</td><td>30&ndash;45</td><td>An economic figure, not a biological one &mdash; see the note below. Only worth chasing with CO&#8322; and the cooling to match.</td></tr>
         </tbody>
       </table>
       </div>
       <p class="calc-source">Ranges follow published horticultural lighting
       guidance; sources are listed at the bottom of the page.</p>
+      <p><strong>A caveat on that last row.</strong> There is no published
+      biological optimum for cannabis DLI. The largest controlled trial to date
+      tested a range from 5 to 78&thinsp;mol/m&sup2;/day and found yield still rising
+      linearly at the top of it, with no saturation point reached &mdash; the authors
+      explicitly hand the decision to economics rather than physiology. So
+      30&ndash;45 here is "where the electricity, the heat load and the yield curve
+      usually cross", not "where the plant stops responding". If you have the
+      cooling and the CO&#8322;, more appears to keep working; whether it pays is a
+      different question from whether it grows.</p>
 
       <h2>What DLI Is, and Why Watts Are Not It</h2>
       <p>PPFD tells you how bright it is right now. DLI tells you how much light
@@ -236,9 +245,10 @@
       intensity, so you cannot extend hours on a short-day crop in flower without
       consequences &mdash; that is the whole subject of
       <a href="/articles/understanding-grow-light-schedules.html">grow light schedules</a>.
-      And every crop has a saturation point where extra instantaneous intensity
-      simply stops converting into growth, which is why 45&thinsp;mol/m&sup2;/day into a
-      lettuce crop buys tipburn rather than lettuce.</p>
+      And most crops have a saturation point where extra intensity simply stops
+      converting into growth, which is why 45&thinsp;mol/m&sup2;/day into a lettuce crop
+      buys tipburn rather than lettuce. "Most", not "all" &mdash; see the caveat under
+      the crop table.</p>
 
       <h2>How This Calculator Works</h2>
       <div class="callout">
@@ -254,13 +264,27 @@
       <p>The reverse modes rearrange the same equation:
       hours = DLI &divide; (PPFD &times; 0.0036), and
       PPFD = DLI &divide; (hours &times; 0.0036).</p>
-      <p class="calc-source"><strong>References.</strong> The DLI definition and
-      the PPFD &times; photoperiod &times; 3600 / 10&#8310; conversion follow standard
-      horticultural lighting metrology as published by university extension
-      programmes on measuring daily light integral. Crop target ranges follow
-      published greenhouse and controlled-environment DLI recommendations for
-      each crop group; treat them as bands to sit inside rather than exact
-      thresholds, since cultivar, temperature and CO&#8322; all shift them.</p>
+      <p class="calc-source"><strong>References.</strong>
+      <strong>Formula and crop targets:</strong> Stallknecht, E. (2025),
+      <em>Daily Light Integral (DLI) and Supplemental Lighting</em>, Virginia
+      Cooperative Extension publication SPES-720NP &mdash;
+      <a href="https://www.pubs.ext.vt.edu/SPES/spes-720/spes-720.html">pubs.ext.vt.edu/SPES/spes-720</a>,
+      which gives the conversion as DLI = (PPFD &times; 3600 &times; hours) / 1,000,000 and
+      supplies the crop table used here. Corroborated by Cornell CEA greenhouse
+      lighting guidance, which is also the source for the lettuce airflow and
+      tipburn figures. Note that Purdue HO-238-W states the same relationship in
+      its 24-hour-average form (PPFD &times; 0.0864) &mdash; same physics, different
+      convention.
+      <strong>Basil:</strong> SPES-720 lists 15&ndash;25 citing Dou et al. (2018),
+      <em>HortScience</em> 53(4):496&ndash;503, but Dou themselves recommend about
+      12.9 for indoor production; the band here spans both rather than picking a
+      winner.
+      <strong>Cannabis:</strong> Rodriguez-Morrison et al. (2021),
+      <em>Frontiers in Plant Science</em> 12:646020, which tested DLI from 5.2 to
+      78 and found no saturation point &mdash; there is no published biological
+      optimum to cite, and this page does not pretend otherwise.
+      The houseplant row is the one figure here without a strong published
+      source; treat it as orientation, not guidance.</p>
 
       <div class="faq-section">
         <h2>Frequently Asked Questions</h2>
@@ -270,11 +294,11 @@
         </div>
         <div class="faq-item">
           <h3>What DLI does lettuce need?</h3>
-          <p>Lettuce and most leafy greens do well between about 12 and 17&thinsp;mol/m&sup2;/day. Below roughly 10 the heads stay loose and light; much above 17 you start risking tipburn rather than gaining yield, especially without good airflow.</p>
+          <p>Lettuce and most leafy greens do well between about 12 and 17&thinsp;mol/m&sup2;/day, with 17 the usual target where there is good vertical airflow. Below roughly 10 the heads stay loose and light. Tipburn risk starts climbing around 15, and without airflow to move air through the canopy the practical ceiling drops to about 12.</p>
         </div>
         <div class="faq-item">
           <h3>Is more DLI always better?</h3>
-          <p>No. Every crop has a saturation point past which extra light produces no extra growth, and beyond that it produces damage &mdash; bleaching, tipburn and heat stress &mdash; while you pay full price for the electricity. DLI is a target range, not a score to maximise.</p>
+          <p>For most crops, no: they reach a saturation point past which extra light produces no extra growth and then starts producing damage &mdash; bleaching, tipburn and heat stress &mdash; while you pay full price for the electricity. Lettuce is the clearest example. But it is not universal. The largest published cannabis trial pushed DLI from 5 to 78&thinsp;mol/m&sup2;/day and yield was still rising linearly at the top, with no saturation reached, so for that crop the limit found so far is economic rather than biological.</p>
         </div>
         <div class="faq-item">
           <h3>Can I get the same DLI with fewer hours and a brighter light?</h3>
@@ -330,10 +354,10 @@
 
   var CROPS = {
     houseplant: { label: "houseplants",        lo: 2,  hi: 6 },
-    seedling:   { label: "seedlings",          lo: 6,  hi: 12 },
-    microgreen: { label: "microgreens",        lo: 6,  hi: 12 },
+    seedling:   { label: "seedlings",          lo: 5,  hi: 10 },
+    microgreen: { label: "microgreens",        lo: 9,  hi: 12 },
     lettuce:    { label: "lettuce and greens", lo: 12, hi: 17 },
-    herb:       { label: "herbs",              lo: 12, hi: 20 },
+    herb:       { label: "herbs",              lo: 13, hi: 25 },
     fruiting:   { label: "fruiting crops",     lo: 20, hi: 30 },
     highlight:  { label: "high-light crops",   lo: 30, hi: 45 }
   };
