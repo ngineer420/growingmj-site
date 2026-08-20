@@ -1,8 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A leaf with a pest bug being warded off">
-  <path d="M18 46 C18 30 26 18 34 14 C34 26 40 32 36 44 C32 52 22 52 18 46 Z" fill="#6fbf73" stroke="#1f4d2c" stroke-width="3" stroke-linejoin="round"/>
-  <ellipse cx="46" cy="24" rx="6" ry="4.5" fill="#f7f5ee" stroke="#1f4d2c" stroke-width="2.5" transform="rotate(30 46 24)"/>
-  <line x1="41" y1="19" x2="36" y2="14" stroke="#1f4d2c" stroke-width="2" stroke-linecap="round"/>
-  <line x1="51" y1="19" x2="56" y2="15" stroke="#1f4d2c" stroke-width="2" stroke-linecap="round"/>
-  <line x1="38" y1="30" x2="30" y2="30" stroke="#1f4d2c" stroke-width="2" stroke-linecap="round"/>
-  <line x1="34" y1="34" x2="26" y2="38" stroke="#1f4d2c" stroke-width="2" stroke-linecap="round"/>
+  <style>
+    /* Themed inside the file rather than by the page stylesheet, because an
+       icon loaded as an image is its own document and cannot see the page.
+       Light values stay as the literal fallbacks in the attributes below, so
+       light output is unchanged; only the dark branch declares anything. */
+    svg { color: #1f4d2c; }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        color: #8fd493;
+        --i-mid: #57b06e;
+        --i-hi: #a9dcae;
+        --i-bg: #12160f;
+        --i-warm: #e6c56e;
+        --i-warm-line: #c9a35a;
+        --i-warm-ink: #ddcb90;
+        --i-warm-bg: #2a2413;
+        --i-alarm: #d9755c;
+        --i-cool: #78bde4;
+      }
+    }
+  </style>
+  <path d="M18 46 C18 30 26 18 34 14 C34 26 40 32 36 44 C32 52 22 52 18 46 Z" fill="var(--i-hi, #6fbf73)" stroke="var(--i-ink, currentColor)" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="46" cy="24" rx="6" ry="4.5" fill="var(--i-bg, #f7f5ee)" stroke="var(--i-ink, currentColor)" stroke-width="2.5" transform="rotate(30 46 24)"/>
+  <line x1="41" y1="19" x2="36" y2="14" stroke="var(--i-ink, currentColor)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="51" y1="19" x2="56" y2="15" stroke="var(--i-ink, currentColor)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="38" y1="30" x2="30" y2="30" stroke="var(--i-ink, currentColor)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="34" y1="34" x2="26" y2="38" stroke="var(--i-ink, currentColor)" stroke-width="2" stroke-linecap="round"/>
 </svg>

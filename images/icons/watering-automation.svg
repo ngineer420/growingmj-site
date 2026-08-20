@@ -1,8 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A water drop dripping from a line into a potted plant">
-  <path d="M18 40 L46 40 L42 56 L22 56 Z" fill="#fff" stroke="#1f4d2c" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M32 40 C32 32 28 30 26 24 C31 25 34 29 33 35" fill="#2e7d42"/>
-  <path d="M33 40 C34 33 38 31 40 26 C41 32 38 36 34 38" fill="#6fbf73"/>
-  <path d="M10 10 L54 10" stroke="#1f4d2c" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="48" cy="10" r="4" fill="#c99a4a" stroke="#1f4d2c" stroke-width="2"/>
-  <path d="M48 20 C45 24 44 26 44 28 A4 4 0 0 0 52 28 C52 26 51 24 48 20 Z" fill="#5aa9d6" stroke="#1f4d2c" stroke-width="2" stroke-linejoin="round"/>
+  <style>
+    /* Themed inside the file rather than by the page stylesheet, because an
+       icon loaded as an image is its own document and cannot see the page.
+       Light values stay as the literal fallbacks in the attributes below, so
+       light output is unchanged; only the dark branch declares anything. */
+    svg { color: #1f4d2c; }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        color: #8fd493;
+        --i-mid: #57b06e;
+        --i-hi: #a9dcae;
+        --i-bg: #12160f;
+        --i-warm: #e6c56e;
+        --i-warm-line: #c9a35a;
+        --i-warm-ink: #ddcb90;
+        --i-warm-bg: #2a2413;
+        --i-alarm: #d9755c;
+        --i-cool: #78bde4;
+      }
+    }
+  </style>
+  <path d="M18 40 L46 40 L42 56 L22 56 Z" fill="var(--i-bg, #f7f5ee)" stroke="var(--i-ink, currentColor)" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M32 40 C32 32 28 30 26 24 C31 25 34 29 33 35" fill="var(--i-mid, #2e7d42)"/>
+  <path d="M33 40 C34 33 38 31 40 26 C41 32 38 36 34 38" fill="var(--i-hi, #6fbf73)"/>
+  <path d="M10 10 L54 10" stroke="var(--i-ink, currentColor)" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="48" cy="10" r="4" fill="var(--i-warm-line, #c99a4a)" stroke="var(--i-ink, currentColor)" stroke-width="2"/>
+  <path d="M48 20 C45 24 44 26 44 28 A4 4 0 0 0 52 28 C52 26 51 24 48 20 Z" fill="var(--i-cool, #5aa9d6)" stroke="var(--i-ink, currentColor)" stroke-width="2" stroke-linejoin="round"/>
 </svg>

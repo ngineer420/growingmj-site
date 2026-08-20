@@ -1,8 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A plant cutting rooting in a glass of water">
-  <path d="M22 26 L42 26 L40 54 L24 54 Z" fill="#fff" stroke="#1f4d2c" stroke-width="3" stroke-linejoin="round"/>
-  <line x1="23" y1="38" x2="41" y2="38" stroke="#1f4d2c" stroke-width="2"/>
-  <line x1="32" y1="38" x2="32" y2="16" stroke="#2e7d42" stroke-width="3"/>
-  <path d="M32 22 C28 18 24 18 20 14 C26 12 31 15 32 20" fill="#6fbf73"/>
-  <path d="M32 16 C34 12 38 11 42 8 C42 14 38 17 33 17" fill="#2e7d42"/>
-  <path d="M32 38 C30 42 28 44 26 48 M32 38 C33 43 35 45 37 50" fill="none" stroke="#c99a4a" stroke-width="2" stroke-linecap="round"/>
+  <style>
+    /* Themed inside the file rather than by the page stylesheet, because an
+       icon loaded as an image is its own document and cannot see the page.
+       Light values stay as the literal fallbacks in the attributes below, so
+       light output is unchanged; only the dark branch declares anything. */
+    svg { color: #1f4d2c; }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        color: #8fd493;
+        --i-mid: #57b06e;
+        --i-hi: #a9dcae;
+        --i-bg: #12160f;
+        --i-warm: #e6c56e;
+        --i-warm-line: #c9a35a;
+        --i-warm-ink: #ddcb90;
+        --i-warm-bg: #2a2413;
+        --i-alarm: #d9755c;
+        --i-cool: #78bde4;
+      }
+    }
+  </style>
+  <path d="M22 26 L42 26 L40 54 L24 54 Z" fill="var(--i-bg, #f7f5ee)" stroke="var(--i-ink, currentColor)" stroke-width="3" stroke-linejoin="round"/>
+  <line x1="23" y1="38" x2="41" y2="38" stroke="var(--i-ink, currentColor)" stroke-width="2"/>
+  <line x1="32" y1="38" x2="32" y2="16" stroke="var(--i-mid, #2e7d42)" stroke-width="3"/>
+  <path d="M32 22 C28 18 24 18 20 14 C26 12 31 15 32 20" fill="var(--i-hi, #6fbf73)"/>
+  <path d="M32 16 C34 12 38 11 42 8 C42 14 38 17 33 17" fill="var(--i-mid, #2e7d42)"/>
+  <path d="M32 38 C30 42 28 44 26 48 M32 38 C33 43 35 45 37 50" fill="none" stroke="var(--i-warm-line, #c99a4a)" stroke-width="2" stroke-linecap="round"/>
 </svg>
