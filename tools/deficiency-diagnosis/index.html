@@ -110,8 +110,7 @@
         down the page &mdash; start with <a href="#position">the position
         rule</a> and <a href="#ph-first">why pH comes first</a>, and the
         <a href="/articles/nutrient-deficiency-identification-chart.html#quick-reference">printed
-        chart in our deficiency guide</a> covers the same ground, plus zinc, which
-        this tool leaves out.</p>
+        chart in our deficiency guide</a> covers the same ground in print.</p>
       </noscript>
 
       <div class="calc" id="dx-calc">
@@ -373,26 +372,43 @@
       pathogens before nutrition.</p>
 
       <h3 id="not-covered">What this tool deliberately leaves out</h3>
-      <p>Six nutrients, not the full set. Nitrogen, phosphorus, potassium and
-      magnesium on the mobile side; iron (with manganese) and calcium on the
-      immobile side. Everything else was cut, and for the same reason each
+      <p>Seven nutrients, not the full set. Nitrogen, phosphorus, potassium and
+      magnesium on the mobile side; iron (with manganese), calcium and zinc on
+      the immobile side. Everything else was cut, and for the same reason each
       time &mdash; a candidate that cannot be sourced properly does not become
       more accurate by being ranked, it just makes the ranking invented.</p>
       <ul>
-        <li><strong>Zinc</strong> appears in
-        <a href="/articles/nutrient-deficiency-identification-chart.html#quick-reference">our
-        own chart</a> and is not here. We could not find extension or
-        peer-reviewed sourcing for the symptom description that would let the
-        tool separate it from calcium and boron on new growth, and a seventh
-        candidate we cannot tell apart from the ones already listed adds noise,
-        not resolution. The chart still covers it; this tool will not guess at it.</li>
+        <li><strong>Zinc</strong> was left out of the first version of this
+        tool and has since been added, which is worth saying plainly. The
+        problem was never zinc; it was the description. The draft called it
+        &ldquo;small, thin, pale new leaves&rdquo;, and pale-new-growth is
+        iron&rsquo;s signature, so that card would have scored identically to
+        iron on every input and returned as a duplicate rather than a
+        candidate. Two sources place the real discriminator at the leaf
+        margin instead: Cockson et al. describe zinc in this crop as marginal
+        yellowing on new and expanding foliage, along the toothed edges of the
+        leaflets, going to tan marginal
+        necrosis,<sup class="dx-cite"><a href="#ref-30">[30]</a></sup> and NC
+        State lists &ldquo;distorted or puckered leaf
+        margins&rdquo;.<sup class="dx-cite"><a href="#ref-31">[31]</a></sup>
+        Marginal-on-new-growth does separate cleanly from
+        interveinal-on-new-growth, so zinc is ranked on that and is held one
+        band below iron whenever the report is interveinal colour alone.
+        &ldquo;Thin&rdquo; is still unsupported by either source and does not
+        appear anywhere in this tool.</li>
         <li><strong>Sulfur and boron</strong> were never in scope. Nothing on
         this site establishes a symptom mapping for either, so including them
         would have meant inventing one.</li>
         <li><strong>Manganese</strong> is not given its own card. It is grouped
         with iron because the two overlap where it counts &mdash; both are
         immobile, both give interveinal chlorosis on new growth, and both move
-        with the same cause: NC State names iron and manganese together as the
+        with the same cause. Manganese&rsquo;s leaf position used to be the
+        weakest-sourced claim in this set, inferred from symptom descriptions
+        rather than stated; Cockson et al. state it directly for this crop,
+        placing manganese deficiency on the &ldquo;upper and central
+        foliage&rdquo; with symptoms initiating at the midrib and spreading
+        outward.<sup class="dx-cite"><a href="#ref-30">[30]</a></sup> On pH,
+        NC State names iron and manganese together as the
         micronutrients whose availability shifts with
         pH,<sup class="dx-cite"><a href="#ref-23">[23]</a></sup> and Michigan
         State recommends holding 5.5&ndash;5.8 in young plants to prevent iron
@@ -618,6 +634,8 @@
         <li id="ref-27">Handreck, K.A. (1993). <em>Properties of coir dust, and its use in the formulation of soilless potting media.</em> Communications in Soil Science and Plant Analysis 24(3&ndash;4):349&ndash;363. <a href="https://doi.org/10.1080/00103629309368804">doi.org/10.1080/00103629309368804</a></li>
         <li id="ref-28">Catlin, N. (2024). <em>How to Deal with Diagnosis.</em> e-GRO Alert 13.18, Cornell Cooperative Extension. <a href="https://e-gro.org/pdf/2024-13-18.pdf">e-gro.org/pdf/2024-13-18.pdf</a></li>
         <li id="ref-29">Altland, J.E. (2021). <em>The Pour-Through Procedure for Monitoring Container Substrate Chemical Properties: A Review.</em> Horticulturae 7(12):536. <a href="https://doi.org/10.3390/horticulturae7120536">doi.org/10.3390/horticulturae7120536</a></li>
+        <li id="ref-30">Cockson, P., Landis, H., Smith, T., Hicks, K. &amp; Whipker, B.E. (2019). <em>Characterization of Nutrient Disorders of Cannabis sativa.</em> Applied Sciences 9(20):4432. <a href="https://doi.org/10.3390/app9204432">doi.org/10.3390/app9204432</a> &mdash; open access, CC&nbsp;BY. MDPI returns 403 to automated requests, so this was pulled by hand; a working digest of the passages quoted here is kept in the repository at <code>docs/references/cockson-2019-cannabis-nutrient-disorders.md</code>.</li>
+        <li id="ref-31"><em>Extension Gardener Handbook</em>, chapter 1: <em>Soils and Plant Nutrients</em>, Table 1&ndash;4. NC State Extension. <a href="https://content.ces.ncsu.edu/extension-gardener-handbook/1-soils-and-plant-nutrients">content.ces.ncsu.edu &mdash; Soils and Plant Nutrients</a></li>
       </ol>
 
       <div class="related-articles">
@@ -764,10 +782,21 @@
       id: "fe", name: "Iron (or manganese) deficiency", kind: "Nutrient", first: ["new"],
       pats: { interveinal: 2, uniform: 1 },
       ctx: {},
-      why: "Colorado State states the mechanism: “Because iron is not readily moved within plants once incorporated, symptoms appear on younger leaves and on new growth.”" + ref(6) + " Manganese is grouped with it here: the two overlap on position, pattern and pH behaviour, and identifying either by eye alone is unreliable — UMass calls for a soil or tissue test to confirm iron" + ref(10) + ", and the published first step is substrate pH and EC either way" + ref(1) + ".",
+      why: "Colorado State states the mechanism: “Because iron is not readily moved within plants once incorporated, symptoms appear on younger leaves and on new growth.”" + ref(6) + " Manganese belongs on this card for the same reason: Cockson and colleagues, characterising each disorder in this crop directly, put manganese deficiency as a \u201cbright yellow netted interveinal chlorosis on the upper and central foliage\u201d" + ref(30) + " \u2014 an explicit position statement rather than one inferred from a symptom list. The two overlap on position, pattern and pH behaviour, and identifying either by eye alone is unreliable — UMass calls for a soil or tissue test to confirm iron" + ref(10) + ", and the published first step is substrate pH and EC either way" + ref(1) + ".",
       checks: [
         "Check pH before buying iron. Iron chlorosis appears in plants “being fertilized correctly” when pH drifts high" + ref(5) + ", and soil applications of iron alone are then ineffective." + ref(7),
         "UMass warns that “in all but the most extreme cases, iron deficiency can be easily mistaken for nitrogen or magnesium deficiency.”" + ref(10)
+      ]
+    },
+    {
+      id: "zn", name: "Zinc deficiency", kind: "Nutrient", first: ["new"],
+      pats: { margin: 2, interveinal: 1, distort: 1 },
+      ctx: { stunt: 1 },
+      why: "Zinc is immobile, so it lands on new and expanding leaves \u2014 but unlike iron it goes for the <em>margin</em>. Cockson and colleagues, inducing each disorder in <em>Cannabis sativa</em> under controlled starvation, describe zinc deficiency appearing \u201cfirst as a marginal yellowing on the newer foliage and expanding leaves\u201d, \u201cconcentrated mostly in the margin of the leaf and along the toothed portions of the leaflets\u201d, later developing into \u201ctan irregularly shaped necrotic regions along the leaf margin.\u201d" + ref(30) + " NC State\u2019s nutrient table independently lists \u201cdistorted or puckered leaf margins\u201d for zinc, alongside young leaves that are \u201cvery small, sometimes missing leaf blades\u201d and short internodes." + ref(31) + " Marginal-on-new-growth is what separates zinc from iron at this resolution.",
+      checks: [
+        "If the pattern is interveinal rather than marginal, iron is the better first answer. NC State does also list interveinal chlorosis under zinc" + ref(31) + ", which is why zinc stays on the list at all \u2014 but it is ranked here on the margin, because that is the half two sources agree on and the half that tells the two apart.",
+        "Check pH before dosing. NC State groups zinc with manganese, copper and iron as the micronutrients acidic soils make more available" + ref(31) + ", so a high reading argues for correcting pH first \u2014 and it argues for iron at the same time, which is why the two tend to arrive together.",
+        "Zinc surfaced late in the one controlled study of this crop, only after nine weeks of deliberate starvation." + ref(30) + " That number is an artefact of when treatment began and is not a timeline to expect, but it does make zinc an unlikely explanation for something that appeared this week."
       ]
     },
     {
@@ -929,6 +958,10 @@
     }
     if (phState === "low" && (c.id === "ca" || c.id === "mg")) {
       w += 2; lifted = "Lifted because your pH is below the window, and low pH is what genuinely restricts calcium and magnesium.";
+    }
+    if (phState === "low" && c.id === "zn") {
+      w -= 2; lifted = "Pushed DOWN because your pH is low. Acidic conditions make zinc MORE available, not less" + ref(31) + " \u2014 below about 5.5 NC State warns of toxic levels of manganese and zinc being released, which is the opposite problem.";
+      if (w <= 0) { return { band: "out", reason: "Ruled out by your pH reading. Below the target window zinc availability rises rather than falls" + ref(31) + ", so a shortage is the wrong way round." }; }
     }
     if (phState === "low" && c.id === "fe") {
       w -= 2; lifted = "Pushed DOWN because your pH is low. Below the window iron becomes MORE available, not less" + ref(23) + " — an iron dose here risks toxicity rather than a cure.";
