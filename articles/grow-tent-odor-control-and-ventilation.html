@@ -59,7 +59,7 @@
       "name": "What size exhaust fan do I need for my tent?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "As a starting point, calculate your tent's volume in cubic feet and look for a fan rated to move that volume of air once every one to three minutes. Most 4x4 ft tents land in the 200-400 CFM range once a carbon filter is attached."
+        "text": "Size it against heat, not volume. Take the wattage of your light, multiply by 3.412 to get BTU/hr, and divide by (1.08 x the temperature rise you can live with). A 480 W fixture needs about 101 CFM to hold a 15 degree F rise and about 303 CFM to hold 5 degrees. Then add 10-25% back on for the carbon filter. Extension figures for a 4x4 land near 104-128 CFM, well under the 200-400 CFM commonly quoted."
       }
     },
     {
@@ -147,9 +147,10 @@
             <li><a href="#negative-pressure-the-free-diagnostic">Negative Pressure: The Free Diagnostic</a></li>
             <li><a href="#the-noise-problem-honestly">The Noise Problem, Honestly</a></li>
             <li><a href="#circulating-air-inside-the-tent">Circulating Air Inside the Tent</a></li>
-            <li><a href="#sealing-leaks-matters-more-than-people-expect">Sealing Leaks Matters More Than People Expect</a></li>
+            <li><a href="#where-unfiltered-air-gets-out">Where Unfiltered Air Gets Out</a></li>
             <li><a href="#a-simple-troubleshooting-checklist">A Simple Troubleshooting Checklist</a></li>
             <li><a href="#where-the-exhaust-air-should-go">Where the Exhaust Air Should Go</a></li>
+            <li><a href="#sources">Sources</a></li>
             <li><a href="#faq">Frequently Asked Questions</a></li>
           </ol>
         </details>
@@ -160,13 +161,17 @@
       </div>
       <p class="photo-credit">Photo by <a href="https://commons.wikimedia.org/w/index.php?curid=45633825">Plantlady223</a>, licensed under CC BY-SA 4.0</p>
 
-      <p>Ventilation is the part of a grow tent setup people plan for last
-      and regret not planning for first. A tent with no airflow plan turns
-      into a hot, stagnant, humid box within a day of the lights coming on
-      — and a hot, humid box is exactly the environment where mold, pests,
-      and strong plant smells all get worse. The fix isn't complicated, but
-      it does need to be set up correctly, since the pieces only work
-      together as a system.</p>
+      <p>A grow tent is a sealed box with a heater in it. That is not a
+      criticism of tents — the seal is the whole point, and the heater is
+      your light — but it does mean the air has to be given somewhere to
+      go, and given it deliberately. Left alone, a tent with the lights on
+      is hot and saturated within the hour, and mold, gnats and smell all
+      follow the humidity.</p>
+
+      <p>The parts list is short: a fan, a carbon filter, some duct, and a
+      hole at each end. Almost all of the difficulty is in sizing the fan,
+      and almost all of the sizing advice online is a rule of thumb with
+      its assumptions stripped off.</p>
 
       <h2 id="the-three-jobs-ventilation-has-to-do">The Three Jobs Ventilation Has to Do</h2>
       <ul>
@@ -204,10 +209,11 @@
         <em>through</em> the filter before it reaches the fan — not after.
         The reason is <strong>pressure sign, not filtration
         efficiency</strong>. A fan induces suction upstream of itself and
-        positive pressure downstream: in ventilation engineering terms it
-        works "by inducing a negative pressure or suction in the ducts
-        leading to the hoods and positive pressure in the system after the
-        fan." Put the filter after the fan and every joint, seam and
+        positive pressure downstream, working "by inducing a negative
+        pressure or suction in the ducts leading to the hoods and positive
+        pressure in the system after the
+        fan."<a class="cite" href="#src-1" title="Fundamentals of Industrial Hygiene, ch. 19">1</a>
+        Put the filter after the fan and every joint, seam and
         clamp between the fan and the filter is pressurised with
         unfiltered air and leaks it outward. Put it before the fan and
         that same run is under suction, so a leak pulls room air in rather
@@ -221,75 +227,166 @@
       <p class="disclosure-inline">Some links in this article are affiliate links, including links to Amazon. As an Amazon Associate we earn from qualifying purchases, at no extra cost to you. <a href="/affiliate-disclosure.html">Full affiliate disclosure</a>.</p>
 
       <h2 id="sizing-your-exhaust-fan">Sizing Your Exhaust Fan</h2>
-      <p>An undersized fan won't move enough air to control heat or odor;
-      an oversized fan wastes power and can dry a tent out too fast. As a
-      rough starting point, calculate your tent's volume in cubic feet
-      (length x width x height) and look for a fan rated to move that
-      volume of air once every one to three minutes, adjusting up if
-      you're running hot lights or down if your space runs cool. Most
-      4x4 ft tent setups land comfortably in the 200-400 CFM range once a
-      carbon filter is attached, since filters reduce a fan's effective
-      airflow compared to its unrestricted rating.</p>
+      <p>The usual rule &mdash; "one air change every one to three
+      minutes" &mdash; is a real number with its premise deleted. It comes
+      from greenhouse practice, where the figure is a
+      <strong>maximum</strong>: John Bartok's ventilation guidance sizes
+      summer fan capacity at one volume change per minute and says plainly
+      what that buys you, an <strong>8 to 10&thinsp;&deg;F rise</strong>
+      from the intake louver to the fan. Winter ventilation is sized at a
+      quarter of that.<a class="cite" href="#src-2" title="Bartok, Greenhouse Ventilation, eXtension/UConn">2</a>
+      So one-per-minute is not a target you aim at, it is the top of the
+      range, and it comes with a temperature promise attached. Quote the
+      air changes without the &Delta;T and you have quoted half a
+      specification.</p>
 
-      <p>Here's the arithmetic on a typical 4x4: a 4x4x6.5 ft tent is
-      about 104 cubic feet. Exchanging that volume once a minute needs
-      104 CFM in theory. Now the real-world deductions: hanging a carbon
-      filter on the fan costs roughly 25-30% of rated airflow, every 90°
-      bend in the ducting costs more, and you want headroom to run the
-      fan below full speed (see noise, below). So the "104 CFM tent"
-      sensibly gets a fan rated 200+ CFM — which is exactly how the
-      common advice to buy a 4- or 6-inch fan for a 4x4 shakes out. A
-      6-inch fan loafing at 40% is quieter, lasts longer, and leaves
-      room for summer; a 4-inch fan screaming at 100% is none of those
-      things.</p>
+      <p>There are two other ways to get a number for a 4x4, and it is
+      reassuring that they land in the same place. Purdue sizes greenhouse
+      ventilation by floor area at about <strong>8&nbsp;cfm per square
+      foot</strong>, which puts a 16&nbsp;ft&sup2; tent at roughly
+      128&nbsp;CFM.<a class="cite" href="#src-3" title="Purdue Extension HO-327-W">3</a>
+      A 4x4x6.5&nbsp;ft tent holds about 104&nbsp;ft&sup3;, so Bartok's
+      one-volume-per-minute comes out at about 104&nbsp;CFM. Both are a
+      long way below the 200-400&nbsp;CFM this page used to recommend.</p>
+
+      <p>The third method is the one worth actually learning, because it
+      is the only one that knows what light you own. Ventilation is there
+      to move heat, so size it against heat. The standard sensible-heat
+      relation is <strong>CFM = BTU/hr &divide; (1.08 &times;
+      &Delta;T)</strong>, where &Delta;T is the temperature rise you are
+      willing to run over the room outside the tent. Essentially all the
+      power your light draws ends up as heat inside a closed tent, and one
+      watt is 3.412&nbsp;BTU/hr, so a 480&nbsp;W fixture is shedding about
+      1,638&nbsp;BTU/hr:</p>
+
+      <ul>
+        <li>Hold a <strong>15&thinsp;&deg;F</strong> rise &rarr; 101&nbsp;CFM</li>
+        <li>Hold a <strong>10&thinsp;&deg;F</strong> rise &rarr; 152&nbsp;CFM</li>
+        <li>Hold a <strong>5&thinsp;&deg;F</strong> rise &rarr; 303&nbsp;CFM</li>
+      </ul>
+
+      <p>That one sum settles most of the arguments in this subject.
+      Whether 150&nbsp;CFM is "enough" depends entirely on how warm the
+      room outside the tent runs, which is why two people can give
+      opposite advice and both be right. It also explains where the
+      200-400&nbsp;CFM folklore came from: that is roughly what it takes
+      to hold a 5&thinsp;&deg;F rise under a big light &mdash; a real
+      requirement in a warm room and overkill in a cool basement.</p>
+
+      <p>Then subtract the losses. A carbon filter costs airflow, and the
+      manufacturer's own guidance is to allow a <strong>10-25%
+      drop</strong> for the resistance of pulling through the
+      carbon.<a class="cite" href="#src-4" title="Can-Filters, Filter Calculator">4</a>
+      Duct bends and length come off on top of that, and you want headroom
+      left to run the fan below full speed. A 4-inch fan will meet the
+      numbers above on paper with nothing to spare; a 6-inch fan meets
+      them at part speed, which is where you want to be for noise, for
+      motor life, and for the week in August when the room is
+      8&thinsp;&deg;F warmer than it was when you sized everything.</p>
 
       <p>You do not have to do that arithmetic by hand. Our
       <a href="/tools/grow-tent-fan-calculator/">grow tent fan calculator</a>
       takes your tent dimensions and wattage and shows every one of those
       deductions as a separate line you can adjust &mdash; the filter, the bends,
       the duct run, the silencer and the speed headroom &mdash; and gives you the
-      rated CFM to shop for. It also runs the heat-removal cross-check, which is
-      the sum that catches people out when a small tent has a big light in
-      it.</p>
+      rated CFM to shop for. It runs the heat-removal cross-check above at
+      the same time, which is the sum that catches people out when a small
+      tent has a big light in it.</p>
 
       <h2 id="negative-pressure-the-free-diagnostic">Negative Pressure: The Free Diagnostic</h2>
-      <p>When the exhaust is working properly, the tent walls bow gently
-      <em>inward</em>. That's negative pressure, and it's what you want:
-      air can only enter through the intakes and only leave through the
-      filter, so smells have exactly one exit and it's the scrubbed one.
-      Walls puffing outward mean air is being pushed out through every
-      zipper and seam unfiltered — usually an intake fan overpowering
-      the exhaust, or the exhaust fan mounted to blow in rather than
-      out (it happens more than anyone admits). The wall-bow check takes
-      two seconds every time you walk past, which makes it the cheapest
-      monitoring system in this hobby.</p>
+      <p>With the exhaust working, the tent walls draw slightly
+      <em>inward</em>. That is negative pressure, and it is what you want:
+      air can only enter through the intake and only leave through the
+      filter, so the smell has exactly one exit and it is the scrubbed
+      one. Walls puffing outward mean air is being pushed out through
+      every zip and seam unfiltered — usually an intake fan overpowering
+      the exhaust, or an exhaust fan mounted to blow in rather than out,
+      which happens more than anyone admits.</p>
+
+      <p>There is a second reading of the same wall, though, and it is
+      the one that gets missed. <em>Slightly</em> inward is right; hard
+      against the frame is not. Bartok's field test for greenhouses is
+      exactly this — if the covering is being pulled tight against the
+      frame when the fans run, or the door is difficult to open, the
+      intake area is not adequate — and his sizing rule is that the
+      intake opening should be <strong>at least 1.25 times the fan
+      area</strong>.<a class="cite" href="#src-2" title="Bartok, Greenhouse Ventilation, eXtension/UConn">2</a>
+      A tent sucked flat is a tent whose fan is fighting its own intake
+      port, moving less air than its rating for more noise than it should
+      make. Open the lower port fully, or open a second one. For scale,
+      greenhouse practice aims at a pressure difference of about
+      <strong>0.05 inches of water</strong> across the structure &mdash; a
+      very slight suction, not a
+      vacuum.<a class="cite" href="#src-5" title="Rutgers Cooperative Extension E277">5</a></p>
 
       <h2 id="the-noise-problem-honestly">The Noise Problem, Honestly</h2>
       <p>Nobody warns you that ventilation is the loud part of indoor
       growing. Lights are silent; a cheap inline fan at full speed is a
-      small vacuum cleaner, and it runs around the clock. My first fan
-      was audible two rooms away through a closed door. Fixes, in order
-      of bang for buck: run an oversized fan slowly instead of a small
-      fan flat-out (a fan at half speed is dramatically quieter than
-      half the fan at full speed); hang the fan from the tent's frame
-      on rubber or bungee isolators rather than bolting it to anything
-      rigid, so the motor hum doesn't become a soundboard; and use
-      insulated ducting, which muffles airflow noise noticeably compared
-      to bare aluminum. A speed controller — built into the better fans
-      already — is what makes all of this workable, letting the fan
-      idle at night and ramp up only under a hot midday light.</p>
+      small vacuum cleaner, and it runs around the clock. Mine was
+      audible two rooms away through a closed door.</p>
+
+      <p>The best single fix is to buy a bigger fan and run it slower,
+      and it is worth seeing why, because this page used to claim the
+      opposite — that an oversized fan "wastes power". It does not. The
+      fan laws put airflow in proportion to speed, static pressure to the
+      <em>square</em> of it, and shaft horsepower to the <em>cube</em>:
+      a 25% increase in rpm costs 95% more
+      horsepower.<a class="cite" href="#src-6" title="Greenheck, Fan Fundamentals">6</a>
+      Run that backwards and a fan loafing at 40% of its speed draws
+      something like 6% of the power it would at full tilt. Big and slow
+      is the cheap option as well as the quiet one.</p>
+
+      <p>Three more, from the fan engineers rather than from growers.
+      Sound output is proportional to fan static pressure, so anything
+      that lowers resistance in the system — a straighter duct run, a
+      bigger intake, a filter that is not clogged — makes the same fan
+      quieter without touching it. Structure-borne noise is a separate
+      problem with a separate fix: hang the fan on flexible connectors
+      and isolators rather than bolting it to anything rigid, because a
+      fan hard-coupled to a frame turns the frame into a speaker. And
+      where there is a choice, a lower-rpm fan is the safer buy; past
+      about 3,000&nbsp;rpm the noise tends to couple into the structure,
+      and people find high frequencies more annoying than low ones
+      anyway.<a class="cite" href="#src-7" title="Aerovent, Fan Sound and Sound Ratings FE-300">7</a></p>
+
+      <p>Insulated duct does genuinely absorb noise, and the measured
+      numbers are better than the marketing at the top end and worse at
+      the bottom. Insertion loss for a 10-foot run of 6-inch flexible
+      duct against bare sheet metal is about <strong>8&nbsp;dB at
+      125&nbsp;Hz, 35&nbsp;dB at 500&nbsp;Hz and 46&nbsp;dB at
+      2&nbsp;kHz</strong>.<a class="cite" href="#src-8" title="ATCO Rubber Products, acoustic data (ADC FD-72R1)">8</a>
+      That is a great deal of whoosh removed and very little hum — the low
+      rumble you hear through a wall is precisely the part duct lining
+      does least about, which is why isolating the motor matters more
+      than lagging the pipe. The figures are also for ten feet and do not
+      extrapolate: twenty feet is not twice the attenuation.</p>
+
+      <p>One thing to get right while you are hanging all of it: pull the
+      duct taut. Flexible duct left slack is the most expensive mistake in
+      the run. Testing at Lawrence Berkeley National Laboratory found that
+      the moderate compression typical of real installations raises
+      pressure drop by <strong>a factor of four</strong>, and heavier
+      compression by factors close to
+      ten.<a class="cite" href="#src-9" title="Lawrence Berkeley National Laboratory, LBNL-49293">9</a>
+      Every bend costs something as well, but no bend costs what a lazy
+      concertina of duct behind the tent costs.</p>
 
       <h2 id="circulating-air-inside-the-tent">Circulating Air Inside the Tent</h2>
       <p>Exhaust handles air leaving the tent, but you also want air moving
       <em>within</em> it. A <a
       href="https://www.amazon.com/s?k=6+inch+clip+fan+grow+tent&tag=ngineer420-20"
-      class="affiliate-link">small clip fan</a> pointed so it gently sways
-      your plants (not blasting them directly) strengthens stems,
-      discourages mold from settling on leaves, and helps prevent the
-      still, humid pockets where spider mites and fungal issues tend to
-      start. It's a fairly basic tool, and that's the point — for moving
-      air inside a tent this size you're paying for CFM and a clamp that
-      grips a pole, not for features.</p>
+      class="affiliate-link">small clip fan</a> pointed across the canopy
+      rather than at it strengthens stems, dries the leaf surface, and
+      breaks up the still, humid pockets where fungal problems start.
+      UMass gives the target as two numbers that are easy to hit and easy
+      to overshoot: total circulating capacity of about <strong>2&nbsp;cfm
+      per square foot of floor</strong>, moving air through the canopy at
+      <strong>50 to 100 feet per
+      minute</strong>.<a class="cite" href="#src-10" title="UMass Extension Greenhouse Crops and Floriculture">10</a>
+      For a 4x4 that is roughly 32&nbsp;CFM — genuinely one small clip
+      fan, which is the rare case where the cheap answer is also the
+      correct one. Two of them on opposite corners beats one big one
+      blasting a single unlucky plant.</p>
 
       <p><a
       href="https://www.amazon.com/s?k=insulated+ducting+clamps+grow+tent&tag=ngineer420-20"
@@ -303,23 +400,39 @@
       confirm the setup is holding a reasonable temperature and humidity
       range instead of guessing from how the tent "feels".</p>
 
-      <h2 id="sealing-leaks-matters-more-than-people-expect">Sealing Leaks Matters More Than People Expect</h2>
-      <p>Odor and hot air will always take the path of least resistance.
-      An unsealed duct joint, a zipper left cracked, or a cable pass-through
-      left open all let unfiltered air escape before it ever reaches your
-      carbon filter. Use the clamps on every duct connection, keep the
-      tent's flaps and zippers closed except when you're actively working
-      inside, and route cables through the dedicated cable ports rather
-      than propping the door open.</p>
+      <h2 id="where-unfiltered-air-gets-out">Where Unfiltered Air Gets Out</h2>
+      <p>Odor and hot air take the path of least resistance, and if the
+      tent is under proper suction there should not be one. In practice
+      there usually is: an unclamped duct joint, a zip left an inch open,
+      a cable pass-through with a cable in it and no cinch pulled. Clamp
+      every duct connection, keep the flaps shut except when you are
+      working inside, and run cables through the port that exists for
+      them rather than propping the door. If the smell persists with all
+      of that done, the leak is almost always downstream of the fan — the
+      pressurised side — which is the practical reason the filter belongs
+      before the fan rather than after it.</p>
 
       <h2 id="a-simple-troubleshooting-checklist">A Simple Troubleshooting Checklist</h2>
+      <p>One number before the table, because it is the one this page got
+      wrong by a factor of two. Carbon filters do not last "12 to 18
+      months" — that figure appeared here three times and we could not
+      source it anywhere. Denver's environmental best-practice guide for
+      cannabis facilities, which is the closest thing to a published
+      figure for this exact application, gives most carbon filters
+      <strong>6 to 12 months</strong> depending on load, notes that high
+      humidity hinders filter performance so a damp tent sits at the short
+      end, and uses a smell at the filter outlet rather than a date as the
+      replacement cue. A pre-filter extends the carbon's life and is
+      itself a consumable, swapped about every six to eight
+      months.<a class="cite" href="#src-11" title="Denver Department of Public Health and Environment, Cannabis Environmental BMP Guide — Air Quality">11</a></p>
       <div class="table-scroll">
         <table>
           <tr><th>Problem</th><th>Most likely cause</th></tr>
           <tr><td>Tent runs noticeably hot</td><td>Exhaust fan undersized for the wattage in the tent, exhausting into the same small room, restricted intake, or high ambient temperature. Filter position is not a heat variable &mdash; it changes where unfiltered air leaks, not how much heat leaves</td></tr>
           <tr><td>Smell still escaping the tent</td><td>Unsealed duct joints or an open zipper/flap</td></tr>
           <tr><td>Humidity climbing over time</td><td>Exhaust fan not running enough, or intake port blocked</td></tr>
-          <tr><td>Carbon filter smell fading fast</td><td>Filter is old — Denver's BMP guide gives most carbon filters 6-12 months by load, and high humidity shortens it. A smell at the filter outlet is the replace-it cue</td></tr>
+          <tr><td>Fan loud and moving less air than its rating</td><td>Intake too small (walls pulled hard against the frame), duct left slack, or a clogged filter — all three raise static pressure, and noise rises with it</td></tr>
+          <tr><td>Carbon filter smell fading fast</td><td>Filter is old, or the tent has been running humid. Replace on the smell, not on the date</td></tr>
         </table>
       </div>
 
@@ -336,11 +449,36 @@
       and attics and wall cavities grow mold on cheaper substrates than
       you do.</p>
 
-      <p>Ventilation is one of those systems that's invisible when it's
-      working and impossible to ignore when it isn't. Get the airflow
-      direction right, seal your joints, and size your fan for your actual
-      tent volume, and odor, heat, and humidity all stop being daily
-      problems.</p>
+      <p>If you take one thing from this page, take the heat sum. Air
+      changes per minute was never meant to travel without its temperature
+      rise, and losing that half is why so many first tents end up with a
+      fan that is either roaring or losing.</p>
+
+      <section class="article-sources" aria-labelledby="sources">
+        <h2 id="sources">Sources</h2>
+        <ol>
+          <li id="src-1">Plog, B. and Quinlan, P. (eds.), <a href="https://faculty.uml.edu/swoskie/recognition/fihchap19.pdf"><em>Fundamentals of Industrial Hygiene</em>, ch. 19, &ldquo;Industrial Ventilation&rdquo;</a> (PDF) &mdash; the pressure sign either side of the fan.</li>
+          <li id="src-2">Bartok, J. Jr., <a href="https://farm-energy.extension.org/greenhouse-ventilation/">&ldquo;Greenhouse Ventilation&rdquo;</a>, eXtension / University of Connecticut &mdash; one volume change per minute as the summer maximum and the 8-10&thinsp;&deg;F rise it produces, a quarter of that for winter, the 1.25&times; intake-area rule, and the pulled-tight-covering field test.</li>
+          <li id="src-3">Nemali, K. Purdue Extension, <a href="https://www.extension.purdue.edu/extmedia/HO/HO-327-W.pdf">&ldquo;Greenhouse Cooling&rdquo; (HO-327-W)</a> (PDF) &mdash; 8&nbsp;cfm per square foot of floor area.</li>
+          <li id="src-4">Can-Filters, <a href="https://canfilters.com/help/filter-calculator/">&ldquo;Filter Calculator&rdquo;</a> &mdash; &ldquo;factor in a 10%-25% drop in airflow due to the resistance of pulling through the carbon filter&rdquo;. A manufacturer, cited for its own product's behaviour.</li>
+          <li id="src-5">Wheeler, E. and Both, A.J., Rutgers Cooperative Extension, <a href="https://rucore.libraries.rutgers.edu/rutgers-lib/47188/PDF/1/">&ldquo;Evaluating Greenhouse Mechanical Ventilation Systems&rdquo; (E277)</a> (PDF) &mdash; a working static pressure difference of about 0.05 inches of water.</li>
+          <li id="src-6">Greenheck, <a href="https://content.greenheck.com/public/DAMProd/Original/10002/FanFundamentals.pdf">&ldquo;Fan Fundamentals&rdquo;</a> (PDF), &ldquo;Fan Laws&rdquo; &mdash; cfm proportional to rpm, static pressure to its square, horsepower to its cube; &ldquo;a 25% increase in rpm results in a 95% increase in horsepower&rdquo;.</li>
+          <li id="src-7">Aerovent, <a href="https://www.aerovent.com/wp-content/uploads/sites/2/2021/12/Fan-Sound-and-Sound-Ratings-FE-300.pdf">&ldquo;Fan Sound and Sound Ratings&rdquo; (FE-300)</a> (PDF) &mdash; sound output proportional to fan static pressure, isolation and flexible connectors for structure-borne noise, and the 3,000&nbsp;rpm note.</li>
+          <li id="src-8">ATCO Rubber Products, <a href="https://atcoflex.com/wp-content/uploads/2024/08/Acoustic-Data.pdf">&ldquo;Acoustic Data &mdash; Net Insertion Loss per 10&nbsp;ft&rdquo;</a> (PDF), tested to ADC FD-72R1. The figures quoted are the 6-inch straight-run, no-flow column; the sheet states that the data do not extrapolate beyond 10&nbsp;ft.</li>
+          <li id="src-9">Abushakra, B., Dickerhoff, D.J., Walker, I.S. and Sherman, M.H., Lawrence Berkeley National Laboratory, <a href="https://www.osti.gov/servlets/purl/836654">&ldquo;Compression Effects on Pressure Loss in Flexible HVAC Ducts&rdquo;</a> (PDF), LBNL-49293 &mdash; moderate compression raises pressure drop by a factor of four, further compression by factors close to ten.</li>
+          <li id="src-10">Bartok, J. Jr., UMass Extension Greenhouse Crops and Floriculture, <a href="https://www.umass.edu/agriculture-food-environment/greenhouse-floriculture/fact-sheets/horizontal-air-flow-is-best-for-greenhouse-air-circulation">&ldquo;Horizontal Air Flow is Best for Greenhouse Air Circulation&rdquo;</a> &mdash; total circulating capacity of about twice the floor area in cfm, at 50-100 feet per minute.</li>
+          <li id="src-11">Denver Department of Public Health and Environment, <a href="https://denvergov.org/content/dam/denvergov/Portals/771/documents/EQ/MJ%20Sustainability/6_Cannabis_BestPracticesManagementGuide_AirQuality.pdf">&ldquo;Cannabis Environmental Best Management Practices Guide &mdash; Air Quality&rdquo;</a> (PDF) &mdash; carbon filter life of 6-12 months by load, the humidity caveat, and pre-filter replacement.</li>
+        </ol>
+        <p class="sources-note">Every source above was fetched and read on
+        20 August 2026. The CFM figures in the heat-removal list are
+        arithmetic worked in front of you from a wattage and a &Delta;T
+        rather than measurements, which is why they carry no marker &mdash;
+        a number here without a marker is not a sourced claim. Three
+        figures this page used to give were replaced rather than updated
+        (a 25-30% filter derate, a 200-400&nbsp;CFM range and a 12-18 month
+        filter life), and a fourth &mdash; that an oversized fan wastes
+        power &mdash; was simply backwards.</p>
+      </section>
 
       <div class="faq-section">
         <h2 id="faq">Frequently Asked Questions</h2>
@@ -350,7 +488,7 @@
         </div>
         <div class="faq-item">
           <h3>What size exhaust fan do I need for my tent?</h3>
-          <p>As a starting point, calculate your tent's volume in cubic feet and look for a fan rated to move that volume of air once every one to three minutes. Most 4x4 ft tents land in the 200-400 CFM range once a carbon filter is attached.</p>
+          <p>Size it against heat, not volume. Take the wattage of your light, multiply by 3.412 to get BTU/hr, and divide by (1.08 &times; the temperature rise you can live with). A 480&nbsp;W fixture needs about 101&nbsp;CFM to hold a 15&thinsp;&deg;F rise and about 303&nbsp;CFM to hold 5&thinsp;&deg;F. Then add 10-25% back on for the carbon filter. Extension figures for a 4x4 land near 104-128&nbsp;CFM, well under the 200-400&nbsp;CFM commonly quoted.</p>
         </div>
         <div class="faq-item">
           <h3>How long does a carbon filter actually last?</h3>
