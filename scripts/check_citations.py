@@ -43,16 +43,16 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Pages that predate the standard and are scheduled for the batch rewrites.
+# Pages that predate the standard and were scheduled for the batch rewrites.
 # These grew a Sources block out of links that were already in their prose,
 # before there was a marker to tie a claim to an entry. Neither wrong nor
-# conforming. Delete a name from here when its article has been through the
-# standard — the point of the list is that it shrinks to nothing.
+# conforming. A name came off this list when its article went through the
+# standard, and the point of the list was that it shrank to nothing.
 #
-#   propagating-plants-from-cuttings.html -> issue #19 (voice/citation batch 2)
-EXEMPT = {
-    "propagating-plants-from-cuttings.html",
-}
+# It is now empty, and it should stay that way: every article on the site
+# conforms, so a new exemption here means something regressed rather than
+# something is pending.
+EXEMPT = set()
 
 MARKER_RE = re.compile(r'<a\b[^>]*class="cite"[^>]*>', re.I)
 HREF_RE = re.compile(r'href="#(src-[0-9]+)"', re.I)
