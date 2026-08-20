@@ -54,7 +54,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # something is pending.
 EXEMPT = set()
 
-MARKER_RE = re.compile(r'<a\b[^>]*class="cite"[^>]*>', re.I)
+# The class list may carry modifiers alongside `cite` (`.cite-pair` adds the
+# comma between two markers on one claim), so match `cite` as a whitespace-
+# delimited token rather than as the whole attribute. Matching the literal
+# `class="cite"` silently skipped every paired marker, which took the guard
+# from failing loudly to passing on five markers it could not see.
+MARKER_RE = re.compile(r'<a\b[^>]*class="(?:[^"]*\s)?cite(?:\s[^"]*)?"[^>]*>', re.I)
 HREF_RE = re.compile(r'href="#(src-[0-9]+)"', re.I)
 TITLE_RE = re.compile(r'\btitle="[^"]+"', re.I)
 ENTRY_RE = re.compile(r'<li\b[^>]*\bid="(src-[0-9]+)"', re.I)
