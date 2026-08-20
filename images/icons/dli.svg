@@ -1,6 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A sun over a seedling with a filling bar, representing daily light integral">
-  <circle cx="32" cy="20" r="9" fill="#e0b64e"/>
-  <g stroke="#e0b64e" stroke-width="3" stroke-linecap="round">
+  <style>
+    /* Themed inside the file rather than by the page stylesheet, because an
+       icon loaded as an image is its own document and cannot see the page.
+       Light values stay as the literal fallbacks in the attributes below, so
+       light output is unchanged; only the dark branch declares anything. */
+    svg { color: #1f4d2c; }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        color: #8fd493;
+        --i-mid: #57b06e;
+        --i-hi: #a9dcae;
+        --i-bg: #12160f;
+        --i-warm: #e6c56e;
+        --i-warm-line: #c9a35a;
+        --i-warm-ink: #ddcb90;
+        --i-warm-bg: #2a2413;
+        --i-alarm: #d9755c;
+        --i-cool: #78bde4;
+      }
+    }
+  </style>
+  <circle cx="32" cy="20" r="9" fill="var(--i-warm, #e0b64e)"/>
+  <g stroke="var(--i-warm, #e0b64e)" stroke-width="3" stroke-linecap="round">
     <line x1="32" y1="4" x2="32" y2="8"/>
     <line x1="32" y1="32" x2="32" y2="36"/>
     <line x1="16" y1="20" x2="20" y2="20"/>
@@ -10,9 +31,9 @@
     <line x1="43" y1="9" x2="40" y2="12"/>
     <line x1="24" y1="28" x2="21" y2="31"/>
   </g>
-  <rect x="8" y="42" width="48" height="9" rx="4.5" fill="#f7f5ee" stroke="#1f4d2c" stroke-width="2.5"/>
-  <rect x="10.5" y="44.5" width="28" height="4" rx="2" fill="#2e7d42"/>
-  <path d="M32 60 L32 54" stroke="#1f4d2c" stroke-width="3" stroke-linecap="round"/>
-  <path d="M32 56 C26 56 24 60 24 60 C30 61 32 58 32 56 Z" fill="#6fbf73"/>
-  <path d="M32 56 C38 56 40 60 40 60 C34 61 32 58 32 56 Z" fill="#2e7d42"/>
+  <rect x="8" y="42" width="48" height="9" rx="4.5" fill="var(--i-bg, #f7f5ee)" stroke="var(--i-ink, currentColor)" stroke-width="2.5"/>
+  <rect x="10.5" y="44.5" width="28" height="4" rx="2" fill="var(--i-mid, #2e7d42)"/>
+  <path d="M32 60 L32 54" stroke="var(--i-ink, currentColor)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M32 56 C26 56 24 60 24 60 C30 61 32 58 32 56 Z" fill="var(--i-hi, #6fbf73)"/>
+  <path d="M32 56 C38 56 40 60 40 60 C34 61 32 58 32 56 Z" fill="var(--i-mid, #2e7d42)"/>
 </svg>

@@ -1,5 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="An herb sprout in a small pot">
-  <path d="M18 40 L46 40 L42 56 L22 56 Z" fill="#fff" stroke="#1f4d2c" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M32 40 C32 28 24 26 20 18 C28 18 34 24 32 34" fill="#2e7d42"/>
-  <path d="M32 40 C32 26 40 24 44 16 C36 16 30 22 32 32" fill="#6fbf73"/>
+  <style>
+    /* Themed inside the file rather than by the page stylesheet, because an
+       icon loaded as an image is its own document and cannot see the page.
+       Light values stay as the literal fallbacks in the attributes below, so
+       light output is unchanged; only the dark branch declares anything. */
+    svg { color: #1f4d2c; }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        color: #8fd493;
+        --i-mid: #57b06e;
+        --i-hi: #a9dcae;
+        --i-bg: #12160f;
+        --i-warm: #e6c56e;
+        --i-warm-line: #c9a35a;
+        --i-warm-ink: #ddcb90;
+        --i-warm-bg: #2a2413;
+        --i-alarm: #d9755c;
+        --i-cool: #78bde4;
+      }
+    }
+  </style>
+  <path d="M18 40 L46 40 L42 56 L22 56 Z" fill="var(--i-bg, #f7f5ee)" stroke="var(--i-ink, currentColor)" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M32 40 C32 28 24 26 20 18 C28 18 34 24 32 34" fill="var(--i-mid, #2e7d42)"/>
+  <path d="M32 40 C32 26 40 24 44 16 C36 16 30 22 32 32" fill="var(--i-hi, #6fbf73)"/>
 </svg>

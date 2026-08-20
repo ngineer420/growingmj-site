@@ -33,6 +33,25 @@
   --notice-line: #e6d8a8;
   --notice-ink: #5c4a12;
 
+  /* Two families, separated by job. One sans was doing the wordmark, the nav,
+     35,000 words of body copy, every table and every calculator control, so
+     nothing on the page had a voice. --font-text is the reading voice;
+     --font-ui is the interface voice. Both are system stacks: this site makes
+     zero external requests, so there is no webfont to wait for. */
+  --font-text: "Iowan Old Style", Charter, "Bitstream Charter", "Sitka Text", Cambria, "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Heading colour is its own role now. It used to be --accent-ink, which meant
+     the header, the footer, the hero, all three heading levels, every link and
+     every call to action were the same green and nothing could be emphasised.
+     Headings take ink; the accent is left to the things you can click. */
+  --heading-ink: var(--ink);
+
+  /* The reading measure. article.post is wider than this on purpose — the
+     container holds full-width tables and photographs while the running text
+     stays at roughly 65-75 characters a line. */
+  --measure: 34rem;
+
   --max-width: 960px;
   font-size: 17px;
   color-scheme: light;
@@ -95,11 +114,42 @@ html, body {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-ui);
   color: var(--ink);
   background: var(--cream);
   line-height: 1.65;
 }
+
+/* Heading rhythm.
+   line-height: 1.65 was set on body and never overridden, so every heading on
+   the site was set at body leading and a two-line h1 looked like two
+   paragraphs. Headings get their own leading, their own family, and sizes that
+   scale with the viewport instead of stepping at one breakpoint. No colour is
+   declared here: the hero's h1 sits on the green ground and has to keep
+   inheriting --on-chrome. */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-text);
+  line-height: 1.16;
+  letter-spacing: -0.012em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(1.95rem, 1.42rem + 2.1vw, 2.75rem); }
+h2 { font-size: clamp(1.34rem, 1.16rem + 0.72vw, 1.68rem); }
+h3 { font-size: 1.14rem; line-height: 1.28; letter-spacing: -0.004em; }
+h4 { font-size: 1rem; line-height: 1.3; letter-spacing: 0; }
+
+/* The interface voice, for anything that is a control, a label or a card
+   rather than something you read a paragraph of. */
+.brand,
+.article-card h3,
+.calc-field label,
+.calc-figure,
+.dx-gate h3,
+.dx-card h4,
+.dx-band-title,
+.tool-card-tag { font-family: var(--font-ui); }
+.article-card h3 { letter-spacing: -0.005em; }
 
 img { max-width: 100%; display: block; }
 
@@ -147,6 +197,19 @@ nav.main-nav a {
   font-size: 0.95rem;
 }
 nav.main-nav a:hover { color: var(--green-light); text-decoration: underline; }
+
+/* At 390px the header was 165px tall before a word of content: the brand, then
+   a nav that wrapped to three lines with "Privacy Policy" orphaned on the last
+   one. Privacy Policy now lives only in the footer, where legal links belong,
+   and the four remaining items are given one row of their own. */
+@media (max-width: 640px) {
+  header.site-header { padding: 0.65rem 0; }
+  header.site-header .wrap { gap: 0.35rem; }
+  .brand { font-size: 1.28rem; }
+  nav.main-nav { flex: 1 0 100%; }
+  nav.main-nav ul { gap: 1.15rem; }
+  nav.main-nav a { font-size: 0.88rem; }
+}
 
 /* Hero */
 .hero {
@@ -202,8 +265,28 @@ nav.main-nav a:hover { color: var(--green-light); text-decoration: underline; }
 /* Main content */
 main { padding: 2.5rem 0 3rem; }
 
-.page-title { font-size: 2rem; margin-bottom: 0.25rem; color: var(--accent-ink); }
-.page-subtitle { color: var(--ink-soft); margin-top: 0; }
+.page-title { margin: 0 0 0.35rem; color: var(--heading-ink); }
+.page-subtitle {
+  color: var(--ink-soft);
+  margin-top: 0;
+  max-width: var(--measure);
+  font-family: var(--font-text);
+  font-size: 1.08rem;
+  text-wrap: pretty;
+}
+
+/* Standing copy on a hub page: same measure and same reading voice as an
+   article, without the card. Replaces the inline style="max-width:700px"
+   attributes that were on index.html and tools/index.html. */
+.lede {
+  max-width: var(--measure);
+  font-family: var(--font-text);
+  font-size: 1.06rem;
+  text-wrap: pretty;
+}
+.page-prose { max-width: var(--measure); margin-top: 3rem; }
+.page-prose p { font-family: var(--font-text); font-size: 1.03rem; text-wrap: pretty; }
+.section-head { margin-top: 2.75rem; }
 
 /* Article grid on homepage */
 .article-grid {
@@ -220,22 +303,88 @@ main { padding: 2.5rem 0 3rem; }
   display: flex;
   flex-direction: column;
 }
-.article-card h3 { margin-top: 0; font-size: 1.15rem; }
-.article-card p { color: var(--ink-soft); font-size: 0.95rem; flex-grow: 1; }
+.article-card h3 { margin-top: 0; margin-bottom: 0.4rem; font-size: 1.08rem; line-height: 1.3; }
+.article-card p { color: var(--ink-soft); font-size: 0.95rem; flex-grow: 1; margin-top: 0; }
 .article-card .read-more { font-weight: 600; font-size: 0.9rem; }
 
-/* Article body */
+/* Article body.
+   The card is wider than the text inside it. Running text is clamped to
+   --measure so a line lands at 65-75 characters; everything not in that list —
+   tables, photographs, calculator panels, charts — keeps the full width of the
+   card, which is the whole reason the card stays wide. The list is an
+   allowlist rather than a set of exceptions so a component added later is
+   full-width by default instead of silently squeezed. */
 article.post {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 2rem;
+  padding: 2rem 2.25rem 2.5rem;
   max-width: 760px;
   margin: 0 auto;
 }
-article.post h1 { color: var(--accent-ink); margin-top: 0; }
-article.post h2 { color: var(--accent-ink); margin-top: 2rem; }
-article.post h3 { color: var(--green); }
+article.post > h1,
+article.post > h2,
+article.post > h3,
+article.post > h4,
+article.post > p,
+article.post > ul,
+article.post > ol,
+article.post > blockquote,
+article.post > .callout,
+article.post > .product-box,
+article.post > .disclosure-banner,
+article.post > .faq-section,
+article.post > .related-articles { max-width: var(--measure); }
+
+article.post > p,
+article.post > ul,
+article.post > ol {
+  font-family: var(--font-text);
+  font-size: 1.06rem;
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+article.post > p { margin: 0 0 1.15em; }
+article.post > ul, article.post > ol { margin: 0 0 1.3em; }
+article.post > ul > li, article.post > ol > li { margin-bottom: 0.35em; }
+
+/* The byline furniture is interface, not prose, so it keeps the UI voice even
+   though it is made of <p> elements sitting directly in the article. */
+article.post > p.meta,
+article.post > p.updated,
+article.post > p.photo-credit,
+article.post > p.signature {
+  font-family: var(--font-ui);
+  line-height: 1.5;
+  text-wrap: initial;
+}
+article.post > p.meta { font-size: 0.9rem; }
+article.post > p.updated { font-size: 0.82rem; }
+article.post > p.photo-credit { font-size: 0.78rem; }
+article.post > p.signature { font-size: 0.95rem; }
+
+/* Child selectors, not descendant ones. `article.post h3` is (0,1,2) and beat
+   `.faq-item h3` at (0,1,1), so a rule meant for section headings was silently
+   pushing every FAQ question down by its own top margin. Section spacing now
+   only reaches the headings that actually start a section. */
+article.post > h1 { color: var(--heading-ink); margin: 0 0 0.55rem; }
+article.post > h2 { color: var(--heading-ink); margin: 2.75rem 0 0.7rem; }
+article.post > h3 { color: var(--heading-ink); margin: 1.9rem 0 0.45rem; }
+
+/* One level of heading keeps the accent, as a mark rather than as text colour.
+   On a 14-section article this is what makes the sections findable while the
+   headings themselves stay readable ink. */
+article.post > h2::before,
+.faq-section > h2::before,
+.related-articles > h2::before {
+  content: "";
+  display: block;
+  width: 2.1rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent-ink);
+  margin-bottom: 0.75rem;
+}
 article.post ul, article.post ol { padding-left: 1.3rem; }
 article.post .meta { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 0.25rem; }
 article.post .updated { color: var(--ink-soft); font-size: 0.82rem; font-style: italic; margin: 0 0 1.5rem; }
@@ -255,8 +404,9 @@ article.post .signature { color: var(--ink-soft); font-size: 0.95rem; font-style
   padding: 0.9rem 1.25rem;
   margin: 0 0 0.9rem;
 }
-.faq-item h3 { margin: 0 0 0.4rem; font-size: 1rem; color: var(--accent-ink); }
-.faq-item p { margin: 0; color: var(--ink-soft); }
+.faq-item h3 { margin: 0 0 0.4rem; font-size: 1.02rem; color: var(--heading-ink); }
+.faq-item p { margin: 0; color: var(--ink-soft); font-family: var(--font-text); text-wrap: pretty; }
+.faq-section.is-flush { margin-top: 1rem; padding-top: 0; border-top: 0; }
 
 /* Related articles */
 .related-articles {
@@ -335,16 +485,47 @@ footer.site-footer .fine-print {
   color: var(--on-chrome-faint);
   font-size: 0.8rem;
   line-height: 1.5;
+  max-width: 38rem;
 }
 
-/* Table */
-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
-th, td { border: 1px solid var(--border); padding: 0.6rem 0.75rem; text-align: left; font-size: 0.95rem; }
-th { background: var(--wash-2); }
+/* Table.
+   Tables are data, not prose: the interface voice, tabular numerals so columns
+   of figures line up, and a scroll container so a five-column chart on a 390px
+   phone scrolls inside its own box instead of dragging the whole document
+   sideways. */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-family: var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+th { background: var(--wash-2); font-weight: 600; letter-spacing: 0.005em; }
+/* Captions sit under the table they describe, left-aligned with it. */
+table > caption { caption-side: bottom; text-align: left; padding-top: 0.5rem; font-size: 0.8rem; }
+
+/* Declared once here rather than in the calculator section, because the
+   article tables need it far more than the calculators ever did. */
+.table-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  margin: 1.5rem 0;
+}
+.table-scroll table { margin: 0; min-width: 30rem; }
 
 @media (max-width: 600px) {
-  .hero h1 { font-size: 1.7rem; }
-  article.post { padding: 1.25rem; }
+  .hero { padding: 2.25rem 0; }
+  .hero h1 { font-size: clamp(1.65rem, 1.25rem + 2vw, 2rem); }
+  article.post { padding: 1.35rem 1.25rem 1.75rem; }
+  article.post > p, article.post > ul, article.post > ol { font-size: 1.02rem; }
+  article.post > h2 { margin-top: 2.25rem; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -473,11 +654,6 @@ th { background: var(--wash-2); }
 .calc-lines .calc-line-value { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; margin-left: auto; }
 .calc-lines li.is-total { border-top: 2px solid var(--border); margin-top: 0.3rem; padding-top: 0.6rem; }
 
-/* Wide content tables. The site's own article tables predate this and still
-   overflow on a phone; the calculators at least do not add to the pile. */
-.table-scroll { overflow-x: auto; margin: 1.5rem 0; }
-.table-scroll table { margin: 0; min-width: 30rem; }
-
 /* VPD chart: temperature rows x humidity columns, painted by band. */
 .chart-wrap { overflow-x: auto; margin: 1rem 0 0; }
 table.vpd-chart { width: 100%; min-width: 560px; margin: 0; font-variant-numeric: tabular-nums; }
@@ -506,7 +682,7 @@ table.vpd-chart td.is-current {
 /* Target tables that highlight the row you are currently in. */
 tr.is-current > * { background: var(--wash-2); font-weight: 600; }
 
-.tool-lede { font-size: 1.05rem; color: var(--ink-soft); }
+.tool-lede { font-size: 1.05rem; color: var(--ink-soft); font-family: var(--font-text); max-width: var(--measure); text-wrap: pretty; }
 .calc-source { font-size: 0.85rem; color: var(--ink-soft); }
 .noscript-note {
   background: var(--notice-bg);

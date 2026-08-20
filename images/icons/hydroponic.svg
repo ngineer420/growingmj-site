@@ -1,4 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A water droplet with roots, representing hydroponics">
-  <path d="M32 10 C40 24 48 34 48 42 c0 9 -7 16 -16 16 s-16 -7 -16 -16 c0 -8 8 -18 16 -32 z" fill="none" stroke="#2e7d42" stroke-width="3"/>
-  <path d="M32 34 L32 50 M32 40 L26 46 M32 40 L38 46" fill="none" stroke="#1f4d2c" stroke-width="2.5" stroke-linecap="round"/>
+  <style>
+    /* Themed inside the file rather than by the page stylesheet, because an
+       icon loaded as an image is its own document and cannot see the page.
+       Light values stay as the literal fallbacks in the attributes below, so
+       light output is unchanged; only the dark branch declares anything. */
+    svg { color: #1f4d2c; }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        color: #8fd493;
+        --i-mid: #57b06e;
+        --i-hi: #a9dcae;
+        --i-bg: #12160f;
+        --i-warm: #e6c56e;
+        --i-warm-line: #c9a35a;
+        --i-warm-ink: #ddcb90;
+        --i-warm-bg: #2a2413;
+        --i-alarm: #d9755c;
+        --i-cool: #78bde4;
+      }
+    }
+  </style>
+  <path d="M32 10 C40 24 48 34 48 42 c0 9 -7 16 -16 16 s-16 -7 -16 -16 c0 -8 8 -18 16 -32 z" fill="none" stroke="var(--i-mid, #2e7d42)" stroke-width="3"/>
+  <path d="M32 34 L32 50 M32 40 L26 46 M32 40 L38 46" fill="none" stroke="var(--i-ink, currentColor)" stroke-width="2.5" stroke-linecap="round"/>
 </svg>

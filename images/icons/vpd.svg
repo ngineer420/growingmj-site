@@ -1,8 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A leaf beside a thermometer and a water droplet, representing vapour pressure deficit">
-  <path d="M12 46 C12 26 30 14 48 14 C48 34 34 48 16 48 Z" fill="#2e7d42"/>
-  <path d="M16 48 C24 38 34 30 46 22" fill="none" stroke="#6fbf73" stroke-width="2.5" stroke-linecap="round"/>
-  <rect x="50" y="10" width="7" height="30" rx="3.5" fill="#f7f5ee" stroke="#1f4d2c" stroke-width="2.5"/>
-  <rect x="52.5" y="24" width="2" height="14" fill="#c0533a"/>
-  <circle cx="53.5" cy="46" r="6" fill="#c0533a" stroke="#1f4d2c" stroke-width="2.5"/>
-  <path d="M20 52 C20 52 15 57 15 60 A5 5 0 0 0 25 60 C25 57 20 52 20 52 Z" fill="#6fbf73" stroke="#1f4d2c" stroke-width="2"/>
+  <style>
+    /* Themed inside the file rather than by the page stylesheet, because an
+       icon loaded as an image is its own document and cannot see the page.
+       Light values stay as the literal fallbacks in the attributes below, so
+       light output is unchanged; only the dark branch declares anything. */
+    svg { color: #1f4d2c; }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        color: #8fd493;
+        --i-mid: #57b06e;
+        --i-hi: #a9dcae;
+        --i-bg: #12160f;
+        --i-warm: #e6c56e;
+        --i-warm-line: #c9a35a;
+        --i-warm-ink: #ddcb90;
+        --i-warm-bg: #2a2413;
+        --i-alarm: #d9755c;
+        --i-cool: #78bde4;
+      }
+    }
+  </style>
+  <path d="M12 46 C12 26 30 14 48 14 C48 34 34 48 16 48 Z" fill="var(--i-mid, #2e7d42)"/>
+  <path d="M16 48 C24 38 34 30 46 22" fill="none" stroke="var(--i-hi, #6fbf73)" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="50" y="10" width="7" height="30" rx="3.5" fill="var(--i-bg, #f7f5ee)" stroke="var(--i-ink, currentColor)" stroke-width="2.5"/>
+  <rect x="52.5" y="24" width="2" height="14" fill="var(--i-alarm, #c0533a)"/>
+  <circle cx="53.5" cy="46" r="6" fill="var(--i-alarm, #c0533a)" stroke="var(--i-ink, currentColor)" stroke-width="2.5"/>
+  <path d="M20 52 C20 52 15 57 15 60 A5 5 0 0 0 25 60 C25 57 20 52 20 52 Z" fill="var(--i-hi, #6fbf73)" stroke="var(--i-ink, currentColor)" stroke-width="2"/>
 </svg>

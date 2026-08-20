@@ -1,9 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Bundles of herbs hanging from a line to dry">
-  <line x1="8" y1="14" x2="56" y2="14" stroke="#1f4d2c" stroke-width="3" stroke-linecap="round"/>
-  <line x1="20" y1="14" x2="20" y2="22" stroke="#c99a4a" stroke-width="2"/>
-  <line x1="44" y1="14" x2="44" y2="22" stroke="#c99a4a" stroke-width="2"/>
-  <path d="M20 22 C14 30 14 40 20 48 C26 40 26 30 20 22 Z" fill="#2e7d42" stroke="#1f4d2c" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M44 22 C38 30 38 40 44 48 C50 40 50 30 44 22 Z" fill="#6fbf73" stroke="#1f4d2c" stroke-width="2" stroke-linejoin="round"/>
-  <line x1="20" y1="26" x2="20" y2="44" stroke="#1f4d2c" stroke-width="1.5"/>
-  <line x1="44" y1="26" x2="44" y2="44" stroke="#1f4d2c" stroke-width="1.5"/>
+  <style>
+    /* Themed inside the file rather than by the page stylesheet, because an
+       icon loaded as an image is its own document and cannot see the page.
+       Light values stay as the literal fallbacks in the attributes below, so
+       light output is unchanged; only the dark branch declares anything. */
+    svg { color: #1f4d2c; }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        color: #8fd493;
+        --i-mid: #57b06e;
+        --i-hi: #a9dcae;
+        --i-bg: #12160f;
+        --i-warm: #e6c56e;
+        --i-warm-line: #c9a35a;
+        --i-warm-ink: #ddcb90;
+        --i-warm-bg: #2a2413;
+        --i-alarm: #d9755c;
+        --i-cool: #78bde4;
+      }
+    }
+  </style>
+  <line x1="8" y1="14" x2="56" y2="14" stroke="var(--i-ink, currentColor)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="20" y1="14" x2="20" y2="22" stroke="var(--i-warm-line, #c99a4a)" stroke-width="2"/>
+  <line x1="44" y1="14" x2="44" y2="22" stroke="var(--i-warm-line, #c99a4a)" stroke-width="2"/>
+  <path d="M20 22 C14 30 14 40 20 48 C26 40 26 30 20 22 Z" fill="var(--i-mid, #2e7d42)" stroke="var(--i-ink, currentColor)" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M44 22 C38 30 38 40 44 48 C50 40 50 30 44 22 Z" fill="var(--i-hi, #6fbf73)" stroke="var(--i-ink, currentColor)" stroke-width="2" stroke-linejoin="round"/>
+  <line x1="20" y1="26" x2="20" y2="44" stroke="var(--i-ink, currentColor)" stroke-width="1.5"/>
+  <line x1="44" y1="26" x2="44" y2="44" stroke="var(--i-ink, currentColor)" stroke-width="1.5"/>
 </svg>
