@@ -72,15 +72,32 @@ which is the single source of truth for every product link on the site:
 
 ```json
 "grow-tent-4x4": {
-  "label": "4x4 ft grow tent kit",
-  "url": "https://www.amazon.com/s?k=4x4+grow+tent+kit"
+  "label": "4x4 ft grow tent",
+  "url": "https://www.amazon.com/s?k=4x4+grow+tent",
+  "criteria": "Alloy steel poles and thick canvas rated to carry a light and a fan without sagging; check the port diameter against your fan's duct size."
 }
 ```
 
-Right now, those URLs are **plain, non-tagged** Amazon search/product
-links — clicking them takes a visitor to Amazon, but no commission is
-attributed to this site yet, because there's no Associates account behind
-them.
+### What the links point at, and what the copy may therefore say
+
+Every `url` in the registry is an Amazon **category search**, not a product
+page. That is a deliberate choice: search URLs survive a listing going out
+of stock, where a hardcoded ASIN goes dead.
+
+It has one consequence the copy has to respect. A search result set has no
+fixed contents, so an article can never assert a fact about "the product"
+behind one of these links — its composition, its specs, its price, its
+brand history. All of those describe whatever the query returns today.
+
+So the copy names no products. It gives shopping criteria instead: what to
+look for, what a tool measures, what it cannot measure. That is what the
+`criteria` field on each entry is for — it is the claim the article is
+allowed to make.
+
+If a specific ASIN is ever sourced for an entry, this is reversible: put
+the product URL in `url`, add an `asin` field, and the product-specific
+claims can come back — attached to a real product and verified against
+that listing.
 
 ### Once you're approved for Amazon Associates
 
