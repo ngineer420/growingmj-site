@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grow Room Calculators — VPD, CFM, DLI and EC/PPM — Growing MJ</title>
-<meta name="description" content="Four free grow room calculators: VPD with a leaf-temperature offset, grow tent exhaust fan CFM with filter and ducting derates, DLI from PPFD, and EC to PPM on the 500, 640 and 700 scales.">
+<title>Grow Room Tools — Deficiency Diagnosis, VPD, CFM, DLI and EC/PPM — Growing MJ</title>
+<meta name="description" content="Five free grow room tools: a symptom-first deficiency diagnoser with a pH-lockout gate, VPD with a leaf-temperature offset, grow tent exhaust fan CFM with filter and ducting derates, DLI from PPFD, and EC to PPM on the 500, 640 and 700 scales.">
 <link rel="canonical" href="https://growingmj.com/tools/">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#f7f5ee" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#161a15" media="(prefers-color-scheme: dark)">
-<meta property="og:title" content="Grow Room Calculators &mdash; VPD, CFM, DLI and EC/PPM">
-<meta property="og:description" content="Four free grow room calculators: VPD with a leaf-temperature offset, grow tent exhaust fan CFM with filter and ducting derates, DLI from PPFD, and EC to PPM on the 500, 640 and 700 scales.">
+<meta property="og:title" content="Grow Room Tools &mdash; Deficiency Diagnosis, VPD, CFM, DLI and EC/PPM">
+<meta property="og:description" content="Five free grow room tools: a symptom-first deficiency diagnoser with a pH-lockout gate, VPD with a leaf-temperature offset, grow tent exhaust fan CFM with filter and ducting derates, DLI from PPFD, and EC to PPM on the 500, 640 and 700 scales.">
 <meta property="og:image" content="https://growingmj.com/images/photos/grow-tent-setup.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://growingmj.com/tools/">
@@ -20,16 +20,17 @@
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "Grow Room Calculators",
-  "description": "Four free grow room calculators: VPD with a leaf-temperature offset, grow tent exhaust fan CFM with filter and ducting derates, DLI from PPFD, and EC to PPM on the 500, 640 and 700 scales.",
+  "name": "Grow Room Tools",
+  "description": "Five free grow room tools: a symptom-first deficiency diagnoser with a pH-lockout gate, VPD with a leaf-temperature offset, grow tent exhaust fan CFM with filter and ducting derates, DLI from PPFD, and EC to PPM on the 500, 640 and 700 scales.",
   "url": "https://growingmj.com/tools/",
   "mainEntity": {
     "@type": "ItemList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "VPD Calculator", "url": "https://growingmj.com/tools/vpd-calculator/" },
-      { "@type": "ListItem", "position": 2, "name": "Grow Tent Fan (CFM) Calculator", "url": "https://growingmj.com/tools/grow-tent-fan-calculator/" },
-      { "@type": "ListItem", "position": 3, "name": "DLI Calculator", "url": "https://growingmj.com/tools/dli-calculator/" },
-      { "@type": "ListItem", "position": 4, "name": "EC to PPM Converter", "url": "https://growingmj.com/tools/ppm-ec-converter/" }
+      { "@type": "ListItem", "position": 1, "name": "Deficiency Diagnosis — symptom-first identifier", "url": "https://growingmj.com/tools/deficiency-diagnosis/" },
+      { "@type": "ListItem", "position": 2, "name": "VPD Calculator", "url": "https://growingmj.com/tools/vpd-calculator/" },
+      { "@type": "ListItem", "position": 3, "name": "Grow Tent Fan (CFM) Calculator", "url": "https://growingmj.com/tools/grow-tent-fan-calculator/" },
+      { "@type": "ListItem", "position": 4, "name": "DLI Calculator", "url": "https://growingmj.com/tools/dli-calculator/" },
+      { "@type": "ListItem", "position": 5, "name": "EC to PPM Converter", "url": "https://growingmj.com/tools/ppm-ec-converter/" }
     ]
   }
 }
@@ -52,7 +53,7 @@
       "name": "Which calculator should I use first?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If the plants are already in the tent, start with VPD — it is the single number that ties your temperature and humidity together and explains most transpiration problems. If you are still buying gear, start with the fan calculator, because an undersized exhaust fan is the hardest mistake to fix later."
+        "text": "If something already looks wrong on the plant, start with the deficiency diagnoser — it is the only one here that takes symptoms rather than numbers, and it checks pH lockout before it will name a nutrient. If the plants look fine and you are tuning the room, start with VPD, the single number that ties your temperature and humidity together. If you are still buying gear, start with the fan calculator, because an undersized exhaust fan is the hardest mistake to fix later."
       }
     },
     {
@@ -95,8 +96,8 @@
 <main>
   <div class="wrap">
 
-    <h1 class="page-title">Grow Room Calculators</h1>
-    <p class="page-subtitle">Four numbers that decide whether an indoor grow works, worked out for you.</p>
+    <h1 class="page-title">Grow Room Tools</h1>
+    <p class="page-subtitle">Four numbers that decide whether an indoor grow works, worked out for you — and one tool for when you have no number yet, only a plant that looks wrong.</p>
 
     <p style="max-width:700px;">
       Every one of these runs in your browser. Nothing is uploaded, nothing is
@@ -111,6 +112,14 @@
     </p>
 
     <div class="article-grid tool-grid">
+
+      <div class="article-card">
+        <div class="card-icon"><img src="/images/icons/nutrient-deficiency.svg" alt="" width="28" height="28"></div>
+        <span class="tool-card-tag">Diagnosis</span>
+        <h3><a href="/tools/deficiency-diagnosis/">Deficiency Diagnosis</a></h3>
+        <p>Five questions about what you can see, answered with a ranked shortlist rather than one confident guess &mdash; pH lockout checked first, the non-nutrient causes kept on the list, and a published source behind every claim.</p>
+        <a class="read-more" href="/tools/deficiency-diagnosis/">Open the identifier &rarr;</a>
+      </div>
 
       <div class="article-card">
         <div class="card-icon"><img src="/images/icons/vpd.svg" alt="" width="28" height="28"></div>
@@ -147,7 +156,7 @@
     </div>
 
     <div style="max-width:700px; margin-top:3rem;">
-      <h2 style="color:var(--accent-ink);">Why These Four</h2>
+      <h2 style="color:var(--accent-ink);">Why These Five</h2>
       <p>
         An indoor grow is four control loops wearing a trench coat. Light in
         (DLI), water out (VPD), air through (CFM), and salt in solution (EC).
@@ -155,6 +164,16 @@
         being out of range, and nearly every one of them is invisible without a
         number: a tent can look and smell perfect at 0.4 kPa while the plants
         quietly stop drinking.
+      </p>
+      <p>
+        The fifth tool exists because that is not how anyone actually arrives.
+        Nobody walks into a tent thinking &ldquo;my EC is wrong&rdquo;; they walk
+        in and see a yellow leaf. The deficiency diagnoser takes that entry point
+        and turns it into a measurement worth making, which usually means sending
+        you to one of the other four with a specific question instead of a vague
+        worry. It is also the only one that will tell you what it has ruled
+        <em>out</em>, and the only one that answers in bands rather than a
+        number &mdash; because five questions cannot support a percentage.
       </p>
       <p>
         The other reason to run the numbers is money. Two of these — the fan
@@ -172,7 +191,7 @@
         </div>
         <div class="faq-item">
           <h3>Which calculator should I use first?</h3>
-          <p>If the plants are already in the tent, start with VPD &mdash; it is the single number that ties your temperature and humidity together and explains most transpiration problems. If you are still buying gear, start with the fan calculator, because an undersized exhaust fan is the hardest mistake to fix later.</p>
+          <p>If something already looks wrong on the plant, start with the <a href="/tools/deficiency-diagnosis/">deficiency diagnoser</a> &mdash; it is the only one here that takes symptoms rather than numbers, and it checks pH lockout before it will name a nutrient. If the plants look fine and you are tuning the room, start with VPD, the single number that ties your temperature and humidity together. If you are still buying gear, start with the fan calculator, because an undersized exhaust fan is the hardest mistake to fix later.</p>
         </div>
         <div class="faq-item">
           <h3>Why do different websites give different answers for the same inputs?</h3>
