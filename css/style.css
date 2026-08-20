@@ -876,8 +876,14 @@ nav.main-nav a[aria-current] {
 .dx-refs { font-size: 0.85rem; color: var(--ink-soft); padding-left: 1.3rem; }
 .dx-refs li { margin-bottom: 0.5rem; }
 .dx-refs a { word-break: break-word; }
-sup.dx-cite { font-size: 0.7rem; font-weight: 600; }
-sup.dx-cite a { text-decoration: none; }
+/* The diagnosis tool grew reference markers before the site had a citation
+   standard, under an older class name and with bracketed numerals, and its
+   JavaScript builds them. The markup is left alone; only the colour and weight
+   are brought into line with `.cite` so the two read as one system. If they are
+   ever unified, `.cite` and `#src-N` are the target. */
+sup.dx-cite { font-size: 0.7rem; font-weight: 700; }
+sup.dx-cite a { text-decoration: none; color: var(--accent-ink); }
+sup.dx-cite a:hover, sup.dx-cite a:focus { text-decoration: underline; }
 
 /* ---------------------------------------------------------------------------
    Article template.
@@ -1087,8 +1093,89 @@ article.post > .byline {
   padding-left: 1.35rem;
   margin: 0;
 }
-.article-sources li { margin-bottom: 0.55rem; line-height: 1.5; }
+.article-sources li { margin-bottom: 0.55rem; line-height: 1.5; scroll-margin-top: 1.5rem; }
 .article-sources a { word-break: break-word; }
+
+/* The entry a marker just jumped to. Without this the reader lands on a list
+   of twelve identical-looking lines and has to count. The tint fades on its
+   own so it does not become permanent page furniture. */
+.article-sources li:target {
+  background: var(--wash-2);
+  box-shadow: 0 0 0 0.35rem var(--wash-2);
+  border-radius: 2px;
+}
+
+/* Retrieval date and the contract the markers make with the reader. */
+.sources-note {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin: 1.1rem 0 0;
+  line-height: 1.5;
+}
+
+/* Inline citation marker.
+   The whole point of the citation standard is that prose survives being read
+   straight through, so this is the smallest thing that can still be clicked:
+   a superscript numeral, accent-toned, no brackets, no parenthetical. It sits
+   at the end of a sentence and points at the numbered entry in .article-sources.
+   Styled as superscript rather than wrapped in <sup> so the marker is one
+   element and one class — greppable, and cheap enough to type that the rule
+   "one marker per claim cluster" is the path of least resistance. */
+.cite {
+  font-family: var(--font-ui);
+  font-size: 0.62em;
+  font-weight: 700;
+  font-variant-numeric: lining-nums;
+  line-height: 0;
+  vertical-align: super;
+  color: var(--accent-ink);
+  text-decoration: none;
+  padding: 0 0.06em;
+  /* A superscript numeral is a ~12px tap target, which is unusable on a phone.
+     The hit area is grown on a pseudo-element instead of with padding: it is
+     absolutely positioned, so it adds height without touching layout, and it
+     is inset to zero horizontally so two adjacent markers cannot overlap each
+     other's target. */
+  position: relative;
+}
+.cite::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem 0;
+}
+.cite:hover, .cite:focus { text-decoration: underline; }
+/* Two sources on one claim render as "2,5" rather than as two markers that
+   run together into a meaningless "25". */
+.cite + .cite::before { content: ","; }
+
+/* A one-line equation set off from the prose. Sans, because a serif italic
+   `x` next to a multiplication sign is a genuinely ambiguous thing to read. */
+.formula {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  background: var(--wash-2);
+  border-left: 3px solid var(--accent-ink);
+  border-radius: 0 4px 4px 0;
+  padding: 0.7rem 0.9rem;
+  margin: 1.3rem 0;
+  max-width: var(--measure);
+  overflow-x: auto;
+}
+
+/* Source line under a table whose figures are cited in the table rather than
+   in the body. Deliberately a sibling of .table-scroll, not a <caption>: a
+   caption inherits the table's min-width and would sit inside the horizontal
+   scroller, pushing its own second line off a phone screen. */
+.table-source {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: -0.9rem 0 1.6rem;
+  max-width: var(--measure);
+}
 
 /* Section headings get an id so the contents list can reach them; give the
    browser somewhere to stop that is not underneath the heading itself. */
