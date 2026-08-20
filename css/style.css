@@ -333,35 +333,28 @@ article.post > blockquote,
 article.post > .callout,
 article.post > .product-box,
 article.post > .disclosure-banner,
+article.post > .disclosure-inline,
+article.post > .crumbs,
+article.post > .standfirst,
+article.post > .byline,
+article.post > .key-facts,
+article.post > .article-toc,
+article.post > .article-sources,
 article.post > .faq-section,
 article.post > .related-articles { max-width: var(--measure); }
 
-article.post > p,
+article.post > p:not([class]),
 article.post > ul,
-article.post > ol {
+article.post > ol,
+article.post > blockquote {
   font-family: var(--font-text);
   font-size: 1.06rem;
   line-height: 1.62;
   text-wrap: pretty;
 }
-article.post > p { margin: 0 0 1.15em; }
+article.post > p:not([class]) { margin: 0 0 1.15em; }
 article.post > ul, article.post > ol { margin: 0 0 1.3em; }
 article.post > ul > li, article.post > ol > li { margin-bottom: 0.35em; }
-
-/* The byline furniture is interface, not prose, so it keeps the UI voice even
-   though it is made of <p> elements sitting directly in the article. */
-article.post > p.meta,
-article.post > p.updated,
-article.post > p.photo-credit,
-article.post > p.signature {
-  font-family: var(--font-ui);
-  line-height: 1.5;
-  text-wrap: initial;
-}
-article.post > p.meta { font-size: 0.9rem; }
-article.post > p.updated { font-size: 0.82rem; }
-article.post > p.photo-credit { font-size: 0.78rem; }
-article.post > p.signature { font-size: 0.95rem; }
 
 /* Child selectors, not descendant ones. `article.post h3` is (0,1,2) and beat
    `.faq-item h3` at (0,1,1), so a rule meant for section headings was silently
@@ -376,7 +369,8 @@ article.post > h3 { color: var(--heading-ink); margin: 1.9rem 0 0.45rem; }
    headings themselves stay readable ink. */
 article.post > h2::before,
 .faq-section > h2::before,
-.related-articles > h2::before {
+.related-articles > h2::before,
+.article-sources > h2::before {
   content: "";
   display: block;
   width: 2.1rem;
@@ -415,6 +409,10 @@ article.post .signature { color: var(--ink-soft); font-size: 0.95rem; font-style
   border-top: 1px solid var(--border);
 }
 .related-articles h2 { margin-top: 0; }
+/* Used as a grid cell on the guides hub, where the separator rule and the top
+   margin are the grid's job, not the component's — the container has a gap and
+   its children must not add margins on top of it. */
+.article-grid > .related-articles { margin-top: 0; padding-top: 0; border-top: 0; }
 .related-articles ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
 .related-articles li {
   background: var(--cream);
@@ -465,6 +463,17 @@ article.post .signature { color: var(--ink-soft); font-size: 0.95rem; font-style
   border-radius: 8px;
   padding: 1rem 1.25rem;
   margin: 1.5rem 0;
+}
+
+/* Both of these are prose in a box, so they read in the reading voice and at
+   the reading measure wherever they are used. On the guide hubs they sit
+   straight in the 920px wrap and were running past 100 characters a line. */
+.callout, .product-box { max-width: var(--measure); }
+.callout p, .product-box p {
+  font-family: var(--font-text);
+  font-size: 1.03rem;
+  line-height: 1.6;
+  text-wrap: pretty;
 }
 
 /* Footer */
@@ -869,3 +878,255 @@ nav.main-nav a[aria-current] {
 .dx-refs a { word-break: break-word; }
 sup.dx-cite { font-size: 0.7rem; font-weight: 600; }
 sup.dx-cite a { text-decoration: none; }
+
+/* ---------------------------------------------------------------------------
+   Article template.
+   The old order was: affiliate-disclosure banner, a 60px decorative icon
+   circle, then the H1. At 390px that meant the first 844px of every article
+   was chrome and legal copy and the reader's whole first screen was spent on a
+   notice they did not ask for. The order below puts the title first and gives
+   the disclosure a permanent, compact home instead of a temporary loud one.
+   --------------------------------------------------------------------------- */
+
+/* Breadcrumb. Replaces the icon circle, which did no orientation work; the
+   icon survives at 20px inside it, where it identifies the section rather
+   than just filling space. */
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.45rem;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.9rem;
+}
+.crumbs a { color: var(--ink-soft); text-decoration-color: var(--border); }
+.crumbs a:hover { color: var(--accent-ink); }
+/* Separators lead, for the same reason as in the byline: at 390px the trail
+   wraps, and a slash left dangling at the end of a line reads as a typo. */
+.crumbs > a ~ *::before {
+  content: "/";
+  color: var(--border);
+  margin-right: 0.45rem;
+}
+.crumb-icon { width: 20px; height: 20px; flex: none; margin-right: 0.2rem; }
+
+/* Standfirst. Every article already carried this sentence in its meta
+   description and its OG tags and never showed it to a human. */
+article.post > .standfirst {
+  font-family: var(--font-text);
+  font-size: clamp(1.08rem, 1.02rem + 0.28vw, 1.22rem);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin: 0 0 1.1rem;
+  text-wrap: pretty;
+}
+
+/* Byline row: category, last updated, reading time, and the affiliate
+   disclosure as one compact line rather than a 190px amber box above the
+   title. The disclosure stays on every page that carries an affiliate link —
+   both the FTC guidance and the Amazon Associates agreement require it — and
+   the full banner still appears next to the first affiliate link in the body,
+   where a reader is actually about to click one. */
+article.post > .byline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.6rem;
+  font-family: var(--font-ui);
+  font-size: 0.83rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0 0 1.4rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.byline .byline-cat { font-weight: 600; color: var(--ink); }
+/* Separators lead each item rather than trailing it. Trailing bullets leave a
+   dangling dot at the end of a wrapped line; a leading one just reads as a
+   list marker on the line it starts. */
+.byline > :not(:first-child)::before {
+  content: "\00b7";
+  color: var(--border);
+  margin-right: 0.55rem;
+}
+/* The disclosure is a pill, already separated by its own outline, and it is the
+   item most likely to be pushed onto a second line — where a leading middot
+   would read as a stray mark. */
+.byline > :last-child::before { content: none; margin: 0; }
+.byline-disclosure {
+  color: var(--notice-ink);
+  background: var(--notice-bg);
+  border: 1px solid var(--notice-line);
+  border-radius: 999px;
+  /* Sized to clear a 24px tap target: it is the page's legal disclosure, so it
+     has to be reachable with a thumb, not only readable. */
+  padding: 0.28rem 0.7rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.byline-disclosure:hover { color: var(--notice-ink); text-decoration: underline; }
+/* On a phone the four items cannot sit on one line. Separators are dropped
+   there rather than kept, because a middot that lands first on a wrapped line
+   reads as a stray mark; spacing alone does the same job. The disclosure takes
+   a row of its own so it never wraps mid-phrase. */
+@media (max-width: 640px) {
+  article.post > .byline { font-size: 0.8rem; gap: 0.2rem 0.85rem; }
+  .byline > :not(:first-child)::before { content: none; margin: 0; }
+  .byline > :last-child { flex-basis: 100%; margin-top: 0.35rem; }
+}
+@media (min-width: 641px) {
+  .byline > :last-child { margin-left: 0.15rem; }
+}
+
+/* The in-body disclosure. What used to be a 190px amber box above the H1 is a
+   single compact line sitting against the first affiliate link in the copy,
+   which is where a reader is actually about to click one. The standing
+   disclosure is in the byline above, and the full Amazon Associates statement
+   is in the footer of every page. */
+.disclosure-inline {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--notice-ink);
+  background: var(--notice-bg);
+  border-left: 3px solid var(--notice-line);
+  border-radius: 0 6px 6px 0;
+  padding: 0.55rem 0.9rem;
+  margin: 0 0 1.3rem;
+}
+.disclosure-inline a { color: var(--notice-ink); }
+
+/* Key facts. The article's own answer to its own headline question, lifted
+   verbatim from the FAQ at the foot so the reader gets it without scrolling
+   7,000px to find it. */
+.key-facts {
+  background: var(--wash);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-ink);
+  border-radius: 8px;
+  padding: 0.95rem 1.2rem;
+  margin: 0 0 1.5rem;
+}
+.key-facts .kf-title {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin: 0 0 0.45rem;
+}
+.key-facts .kf-q {
+  font-family: var(--font-text);
+  font-weight: 700;
+  color: var(--heading-ink);
+  font-size: 1.02rem;
+  line-height: 1.3;
+  margin: 0 0 0.35rem;
+}
+.key-facts .kf-a {
+  font-family: var(--font-text);
+  font-size: 1rem;
+  line-height: 1.55;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* Table of contents. Every article on this site is over 1,400 words and the
+   longest runs 14 sections over 7,500px with no navigation of any kind. */
+.article-toc { margin: 0 0 1.75rem; }
+.toc-box {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--wash-2);
+  padding: 0.6rem 0.95rem;
+  font-family: var(--font-ui);
+}
+.toc-box > summary {
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.toc-box[open] > summary { margin-bottom: 0.6rem; }
+.toc-box ol {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.15rem;
+  font-size: 0.88rem;
+}
+/* No counter: one article numbers its own sections ("1. Overwatering") and a
+   generated number in front of that reads as "1. 1. Overwatering". A hanging
+   indent gives the same scannable left edge without competing with the copy. */
+.toc-box li {
+  margin: 0 0 0.45rem;
+  line-height: 1.35;
+  padding-left: 0.7rem;
+  text-indent: -0.7rem;
+}
+.toc-box a { color: var(--ink); text-decoration: none; }
+.toc-box a:hover { color: var(--accent-ink); text-decoration: underline; }
+
+/* Per-article sources. The site had no per-article reference list anywhere;
+   this is the slot for one. */
+.article-sources {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.article-sources h2 { margin-top: 0; }
+.article-sources ol {
+  font-family: var(--font-ui);
+  font-size: 0.87rem;
+  color: var(--ink-soft);
+  padding-left: 1.35rem;
+  margin: 0;
+}
+.article-sources li { margin-bottom: 0.55rem; line-height: 1.5; }
+.article-sources a { word-break: break-word; }
+
+/* Section headings get an id so the contents list can reach them; give the
+   browser somewhere to stop that is not underneath the heading itself. */
+article.post > h2[id] { scroll-margin-top: 1.25rem; }
+
+/* The desktop rail.
+   led-vs-hps-grow-lights.html ran 7,520px of article inside 260px of dead
+   margin on each side. The contents list moves into that margin and sticks;
+   the absolutely positioned rail spans the card so the sticky box has
+   somewhere to travel, and the card reserves the space with padding so
+   nothing is ever overlapped. */
+@media (min-width: 1120px) {
+  .wrap.article-wrap { max-width: 1140px; }
+  .article-wrap article.post {
+    max-width: 1080px;
+    position: relative;
+    padding-right: 18.5rem;
+  }
+  .article-wrap .article-toc {
+    position: absolute;
+    top: 2rem;
+    right: 2.25rem;
+    bottom: 2.5rem;
+    width: 15rem;
+    max-width: none;
+    margin: 0;
+  }
+  .article-wrap .toc-box {
+    position: sticky;
+    top: 1.5rem;
+    max-height: calc(100vh - 3rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: transparent;
+    border: 0;
+    border-left: 2px solid var(--border);
+    border-radius: 0;
+    padding: 0.1rem 0 0.1rem 1rem;
+  }
+  .article-wrap .toc-box > summary { margin-bottom: 0.6rem; }
+}
