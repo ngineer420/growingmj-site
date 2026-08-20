@@ -1,162 +1,207 @@
 {
-  "_readme": "Central affiliate link registry for growingmj.com. Each key is an affiliate ID referenced in article HTML as href=\"[[AFFILIATE:<id>]]\". The 'url' field is a PLAIN (non-tagged) Amazon search URL for a specific, currently-sold product -- specific-name searches instead of hardcoded product-page/ASIN links so they don't go dead when a listing changes. Do not add an Amazon tracking tag here manually for every entry -- instead set 'amazon_tag' below once you're approved, then run scripts/apply_affiliate_links.py to stamp every placeholder across the whole site in one pass. See README.md for full instructions.",
+  "_readme": "Central affiliate link registry for growingmj.com. Each key is an affiliate ID referenced in article HTML as href=\"[[AFFILIATE:<id>]]\" (or, once stamped, as the finished URL). Run scripts/apply_affiliate_links.py to stamp every placeholder across the whole site in one pass. See README.md for full instructions.",
+  "_link_policy": "Every URL below is an Amazon CATEGORY SEARCH, not a product page. A search result set has no fixed contents, so the article copy attached to these links must only assert what a category can support -- selection criteria, what the tool measures, what it cannot do -- and must never assert a fact about a specific product (its composition, its specs, its price, its brand history). The 'criteria' field on each entry is the shopping instruction the copy is allowed to give. If a specific ASIN is ever added for an entry, replace 'url' with that product URL, add an 'asin' field, and the product-specific claims may come back attached to it -- verified against that listing.",
   "amazon_tag": "ngineer420-20",
   "links": {
     "grow-tent-2x2": {
-      "label": "VIVOSUN 2x2 ft grow tent",
-      "url": "https://www.amazon.com/s?k=VIVOSUN+2x2+grow+tent"
+      "label": "2x2 ft grow tent",
+      "url": "https://www.amazon.com/s?k=2x2+grow+tent",
+      "criteria": "Metal poles rather than plastic connectors, 600D or heavier fabric, and vent ports sized for the fan you plan to use."
     },
     "grow-tent-4x4": {
-      "label": "AC Infinity Cloudlab 844 4x4 ft grow tent",
-      "url": "https://www.amazon.com/s?k=AC+Infinity+Cloudlab+844+4x4+grow+tent"
+      "label": "4x4 ft grow tent",
+      "url": "https://www.amazon.com/s?k=4x4+grow+tent",
+      "criteria": "Alloy steel poles and thick canvas rated to carry a light and a fan without sagging; check the port diameter against your fan's duct size."
     },
     "led-grow-light-quantum": {
-      "label": "Spider Farmer SF-4000 LED quantum board grow light",
-      "url": "https://www.amazon.com/s?k=Spider+Farmer+SF-4000+LED+grow+light"
+      "label": "full-spectrum LED grow light for a 4x4 footprint",
+      "url": "https://www.amazon.com/s?k=full+spectrum+LED+grow+light+4x4",
+      "criteria": "A bar-style layout rather than one dense panel, a published PPFD map for the footprint you are covering, and a dimmer."
     },
     "grow-light-timer": {
-      "label": "BN-LINK 7-day digital programmable outlet timer",
-      "url": "https://www.amazon.com/s?k=BN-LINK+7+day+digital+programmable+outlet+timer"
+      "label": "7-day digital outlet timer",
+      "url": "https://www.amazon.com/s?k=7+day+digital+outlet+timer+battery+backup",
+      "criteria": "Battery backup so a power blip does not silently shift the schedule, and a wattage rating at or above your fixture's draw."
     },
     "hydroponic-kit-dwc": {
-      "label": "General Hydroponics WaterFarm complete hydroponic system",
-      "url": "https://www.amazon.com/s?k=General+Hydroponics+WaterFarm+complete+system"
+      "label": "complete hydroponic system kit",
+      "url": "https://www.amazon.com/s?k=complete+hydroponic+system+kit",
+      "criteria": "Reservoir, growing chamber and air pump in one box, with replacement parts still sold separately."
     },
     "ph-meter": {
-      "label": "Apera Instruments PH20 pH meter",
-      "url": "https://www.amazon.com/s?k=Apera+Instruments+PH20+pH+meter"
+      "label": "digital pH meter",
+      "url": "https://www.amazon.com/s?k=digital+pH+meter+calibration+solution",
+      "criteria": "A replaceable probe, two-point calibration, and calibration solution included or cheaply available."
     },
     "ppm-ec-meter": {
-      "label": "Apera Instruments EC20 EC/TDS meter kit",
-      "url": "https://www.amazon.com/s?k=Apera+Instruments+EC20+EC+meter+kit"
+      "label": "EC/TDS meter",
+      "url": "https://www.amazon.com/s?k=EC+TDS+meter+hydroponics",
+      "criteria": "Automatic temperature compensation, and a stated conversion factor if it reports PPM rather than raw EC."
     },
     "air-pump-stone": {
-      "label": "General Hydroponics dual diaphragm air pump",
-      "url": "https://www.amazon.com/s?k=General+Hydroponics+dual+diaphragm+air+pump"
+      "label": "dual-outlet air pump and air stone",
+      "url": "https://www.amazon.com/s?k=dual+outlet+air+pump+air+stone+hydroponics",
+      "criteria": "Two outlets so one pump runs two buckets or a spare stone, and airline tubing included."
     },
     "indoor-herb-garden-kit": {
-      "label": "AeroGarden Harvest countertop hydroponic garden",
-      "url": "https://www.amazon.com/s?k=AeroGarden+Harvest+countertop+garden"
+      "label": "countertop hydroponic herb garden",
+      "url": "https://www.amazon.com/s?k=countertop+hydroponic+herb+garden+kit",
+      "criteria": "Check whether it accepts your own seeds and plain nutrient solution or only the maker's refill pods."
     },
     "seed-starting-tray": {
-      "label": "Jump Start seedling heat mat, tray, and dome kit",
-      "url": "https://www.amazon.com/s?k=Jump+Start+seedling+heat+mat+tray+dome+kit"
+      "label": "seedling heat mat, tray and humidity dome kit",
+      "url": "https://www.amazon.com/s?k=seedling+heat+mat+tray+humidity+dome+kit",
+      "criteria": "A vented dome, a tray without holes for bottom watering, and a mat sized to the tray."
     },
     "hygrometer-thermometer": {
-      "label": "ThermoPro TP50 digital hygrometer/thermometer",
-      "url": "https://www.amazon.com/s?k=ThermoPro+TP50+digital+hygrometer+thermometer"
+      "label": "digital thermometer/hygrometer",
+      "url": "https://www.amazon.com/s?k=digital+thermometer+hygrometer+indoor",
+      "criteria": "A remote probe or a small enough body to sit at canopy height, and a min/max memory."
     },
     "inline-fan-carbon-filter": {
-      "label": "AC Infinity Cloudline inline fan and carbon filter kit",
-      "url": "https://www.amazon.com/s?k=AC+Infinity+Cloudline+inline+fan+carbon+filter+kit"
+      "label": "inline fan and carbon filter kit",
+      "url": "https://www.amazon.com/s?k=inline+fan+carbon+filter+kit+grow+tent",
+      "criteria": "A speed controller, a published noise figure at the CFM you need, and a duct diameter matching your tent's ports."
     },
     "soil-moisture-meter": {
-      "label": "XLUX T10 soil moisture meter (no battery)",
-      "url": "https://www.amazon.com/s?k=XLUX+T10+soil+moisture+meter"
+      "label": "capacitive soil moisture meter",
+      "url": "https://www.amazon.com/s?k=capacitive+soil+moisture+meter",
+      "criteria": "Must say capacitive or dielectric. The cheap two-prong analog dials that need no battery read electrical conductivity, so fertilizer salts push them toward 'wet' regardless of actual water content."
     },
     "self-watering-planter": {
-      "label": "Gardenix Decor self-watering planter pot",
-      "url": "https://www.amazon.com/s?k=Gardenix+Decor+self+watering+planter"
+      "label": "self-watering planter",
+      "url": "https://www.amazon.com/s?k=self+watering+planter+water+level+indicator",
+      "criteria": "A visible water-level window or float, and an overflow so a heavy watering cannot drown the reservoir."
     },
     "potting-mix-general": {
-      "label": "Miracle-Gro Indoor Potting Mix",
-      "url": "https://www.amazon.com/s?k=Miracle-Gro+Indoor+Potting+Mix"
+      "label": "indoor potting mix",
+      "url": "https://www.amazon.com/s?k=indoor+potting+mix+peat+perlite",
+      "criteria": "Read the ingredient panel: a peat or coir base with perlite already blended in, and no garden soil or topsoil listed."
     },
     "coco-coir-growing-medium": {
-      "label": "General Hydroponics CocoTek coco coir brick",
-      "url": "https://www.amazon.com/s?k=General+Hydroponics+CocoTek+coco+coir+brick"
+      "label": "coco coir brick",
+      "url": "https://www.amazon.com/s?k=coco+coir+brick+chips+hydroponics",
+      "criteria": "A blend of fiber and chips rather than straight fiber, and a note that it has been buffered or rinsed."
     },
     "clip-fan-grow-tent": {
-      "label": "Hurricane Classic 6-inch clip fan",
-      "url": "https://www.amazon.com/s?k=Hurricane+Classic+6+inch+clip+fan"
+      "label": "6-inch clip fan",
+      "url": "https://www.amazon.com/s?k=6+inch+clip+fan+grow+tent",
+      "criteria": "A clamp that grips a tent pole, and a low speed that is genuinely low."
     },
     "pruning-snips": {
-      "label": "Fiskars Micro-Tip pruning snips",
-      "url": "https://www.amazon.com/s?k=Fiskars+Micro-Tip+pruning+snips"
+      "label": "micro-tip pruning snips",
+      "url": "https://www.amazon.com/s?k=micro+tip+pruning+snips",
+      "criteria": "Bypass blades rather than anvil, spring-action handles, and tips narrow enough to reach into a crowded pot."
     },
     "neem-oil-spray": {
-      "label": "Bonide Neem Max cold-pressed neem oil concentrate",
-      "url": "https://www.amazon.com/s?k=Bonide+Neem+Max+concentrate"
+      "label": "cold-pressed neem oil concentrate",
+      "url": "https://www.amazon.com/s?k=cold+pressed+neem+oil+concentrate",
+      "criteria": "Cold-pressed rather than clarified hydrophobic extract, and a label that gives a dilution rate for edible plants."
     },
     "yellow-sticky-traps": {
-      "label": "Sticky Trapz dual-sided yellow sticky traps",
-      "url": "https://www.amazon.com/s?k=Sticky+Trapz+dual+sided+yellow+sticky+traps"
+      "label": "dual-sided yellow sticky traps",
+      "url": "https://www.amazon.com/s?k=dual+sided+yellow+sticky+traps+plants",
+      "criteria": "Adhesive on both faces, and stakes short enough to sit in a houseplant pot."
     },
     "insecticidal-soap": {
-      "label": "Garden Safe Brand insecticidal soap",
-      "url": "https://www.amazon.com/s?k=Garden+Safe+Brand+insecticidal+soap"
+      "label": "insecticidal soap",
+      "url": "https://www.amazon.com/s?k=insecticidal+soap+ready+to+use+plants",
+      "criteria": "Ready-to-use if you have a few plants, concentrate if you have many; either way check the label lists edibles."
     },
     "general-purpose-fertilizer": {
-      "label": "Dyna-Gro Foliage-Pro 9-3-6 liquid fertilizer",
-      "url": "https://www.amazon.com/s?k=Dyna-Gro+Foliage-Pro+9-3-6+liquid+fertilizer"
+      "label": "complete liquid fertilizer",
+      "url": "https://www.amazon.com/s?k=complete+liquid+fertilizer+micronutrients+houseplant",
+      "criteria": "The guaranteed analysis should list the micronutrients, not just N-P-K, and give the nitrogen sources so you can see how much of it is urea."
     },
     "cal-mag-supplement": {
-      "label": "General Hydroponics CALiMAGic cal-mag supplement",
-      "url": "https://www.amazon.com/s?k=General+Hydroponics+CALiMAGic"
+      "label": "cal-mag supplement",
+      "url": "https://www.amazon.com/s?k=cal+mag+supplement+hydroponics",
+      "criteria": "Calcium and magnesium both stated as a percentage, and a dilution rate given per gallon."
     },
     "ducting-and-clamps": {
-      "label": "TerraBloom insulated ducting with clamps",
-      "url": "https://www.amazon.com/s?k=TerraBloom+insulated+ducting+with+clamps"
+      "label": "insulated ducting with clamps",
+      "url": "https://www.amazon.com/s?k=insulated+ducting+clamps+grow+tent",
+      "criteria": "Clamps included, and a diameter matching both the fan and the tent's ports."
     },
     "indoor-vegetable-seed-kit": {
-      "label": "Survival Garden Seeds 20-variety vegetable starter collection",
-      "url": "https://www.amazon.com/s?k=Survival+Garden+Seeds+20+variety+vegetable+starter+collection"
+      "label": "multi-variety vegetable seed collection",
+      "url": "https://www.amazon.com/s?k=vegetable+seed+variety+pack",
+      "criteria": "A packed-for date within the current year, and the packet marked open-pollinated if you intend to save seed."
     },
     "seed-starting-mix": {
-      "label": "Espoma Organic Seed Starter mix",
-      "url": "https://www.amazon.com/s?k=Espoma+Organic+Seed+Starter+mix"
+      "label": "seed starting mix",
+      "url": "https://www.amazon.com/s?k=seed+starting+mix",
+      "criteria": "Fine, milled texture with no visible bark, and sold as a starting mix rather than a potting mix."
     },
     "seedling-grow-light": {
-      "label": "iPower 2 ft T5 fluorescent grow light stand",
-      "url": "https://www.amazon.com/s?k=iPower+2+ft+T5+fluorescent+grow+light+stand"
+      "label": "seedling grow light stand",
+      "url": "https://www.amazon.com/s?k=seedling+grow+light+stand+adjustable+height",
+      "criteria": "Adjustable height in fixed steps you can change in seconds, and a footprint matching a 1020 tray."
+    },
+    "windowsill-grow-light": {
+      "label": "LED grow light bar for a shelf or windowsill",
+      "url": "https://www.amazon.com/s?k=LED+grow+light+bar+2+ft+shelf",
+      "criteria": "Sized to the shelf rather than to a tent: a 2 ft bar drawing tens of watts, a dimmer, and a mount that clips or sticks to the shelf above."
     },
     "rockwool-starter-cubes": {
-      "label": "Grodan A-OK rockwool starter cubes",
-      "url": "https://www.amazon.com/s?k=Grodan+A-OK+rockwool+starter+cubes"
+      "label": "rockwool starter cubes",
+      "url": "https://www.amazon.com/s?k=rockwool+starter+cubes",
+      "criteria": "Consistent cube dimensions in the sheet, and a stated density; pre-soak whatever you buy, since rockwool runs alkaline out of the bag."
     },
     "perlite": {
-      "label": "Espoma Organic Perlite",
-      "url": "https://www.amazon.com/s?k=Espoma+Organic+Perlite"
+      "label": "horticultural perlite",
+      "url": "https://www.amazon.com/s?k=horticultural+perlite",
+      "criteria": "100% perlite with no fertilizer added, coarse grade, and an OMRI listing if you are growing food."
     },
     "rooting-gel": {
-      "label": "HydroDynamics Clonex rooting gel",
-      "url": "https://www.amazon.com/s?k=HydroDynamics+Clonex+rooting+gel"
+      "label": "rooting gel",
+      "url": "https://www.amazon.com/s?k=rooting+gel+cuttings",
+      "criteria": "A gel rather than a powder, with the auxin concentration printed on the label."
     },
     "trellis-netting": {
-      "label": "VIVOSUN heavy-duty polyester trellis netting",
-      "url": "https://www.amazon.com/s?k=VIVOSUN+heavy+duty+polyester+trellis+netting"
+      "label": "trellis netting",
+      "url": "https://www.amazon.com/s?k=trellis+netting+grow+tent",
+      "criteria": "Square mesh around 6 inches, and a width matching your tent or shelf."
     },
     "soft-plant-ties": {
-      "label": "VELCRO Brand One-Wrap adjustable plant ties",
-      "url": "https://www.amazon.com/s?k=VELCRO+Brand+One-Wrap+plant+ties"
+      "label": "hook-and-loop plant ties",
+      "url": "https://www.amazon.com/s?k=hook+and+loop+plant+ties",
+      "criteria": "Sold as a roll you cut to length, and soft enough not to bite into a thickening stem."
     },
     "herb-drying-rack": {
-      "label": "iPower 8-layer hanging herb drying rack",
-      "url": "https://www.amazon.com/s?k=iPower+8+layer+hanging+herb+drying+rack"
+      "label": "hanging mesh drying rack",
+      "url": "https://www.amazon.com/s?k=hanging+mesh+herb+drying+rack",
+      "criteria": "Zippered sides for access, a collapsible frame, and a layer count matched to what you actually harvest."
     },
     "microgreens-seed-assortment": {
-      "label": "True Leaf Market microgreens seed assortment",
-      "url": "https://www.amazon.com/s?k=True+Leaf+Market+microgreens+seed+assortment"
+      "label": "microgreens seed assortment",
+      "url": "https://www.amazon.com/s?k=microgreens+seed+assortment+bulk",
+      "criteria": "Sold by the ounce or pound and labelled for sprouting or microgreens, with a packed-for date."
     },
     "growing-trays-1020": {
-      "label": "Bootstrap Farmer 1020 shallow growing trays (no holes)",
-      "url": "https://www.amazon.com/s?k=Bootstrap+Farmer+1020+shallow+trays+no+holes"
+      "label": "1020 growing trays",
+      "url": "https://www.amazon.com/s?k=1020+trays+heavy+duty+no+holes",
+      "criteria": "Heavier-gauge plastic than the dollar-store kind, and a matched pair: one with drainage holes, one without."
     },
     "drip-irrigation-kit": {
-      "label": "Raindrip automatic container drip irrigation kit",
-      "url": "https://www.amazon.com/s?k=Raindrip+automatic+container+drip+irrigation+kit"
+      "label": "container drip irrigation kit",
+      "url": "https://www.amazon.com/s?k=container+drip+irrigation+kit+indoor",
+      "criteria": "Quarter-inch tubing with adjustable drippers; check whether a timer is in the box or assumed."
     },
     "watering-stakes": {
-      "label": "Blumat Classic ceramic self-watering stakes",
-      "url": "https://www.amazon.com/s?k=Blumat+Classic+ceramic+watering+stakes"
+      "label": "ceramic self-watering stakes",
+      "url": "https://www.amazon.com/s?k=ceramic+self+watering+stakes",
+      "criteria": "Unglazed porous ceramic with tubing included, and replacement tubing sold separately."
     },
     "smart-plug-wifi": {
-      "label": "Kasa Smart Plug wifi outlet (2-pack)",
-      "url": "https://www.amazon.com/s?k=Kasa+Smart+Plug+HS103+2+pack"
+      "label": "wifi smart plug",
+      "url": "https://www.amazon.com/s?k=wifi+smart+plug+outlet",
+      "criteria": "A wattage rating above your fixture's draw, and a schedule that keeps running when the network is down."
     },
     "small-humidifier": {
-      "label": "LEVOIT Classic 200 ultrasonic cool mist humidifier",
-      "url": "https://www.amazon.com/s?k=LEVOIT+Classic+200+ultrasonic+humidifier"
+      "label": "small ultrasonic humidifier",
+      "url": "https://www.amazon.com/s?k=small+ultrasonic+cool+mist+humidifier",
+      "criteria": "Cool mist, a tank you can refill from a tap without inverting it, and no auto-off that fires before the shelf is done."
     }
   }
 }
