@@ -1,0 +1,39 @@
+{
+  "_readme": "Canonical US residential electricity rate for every running-cost figure on growingmj.com. It used to be hardcoded as $0.15/kWh in three articles and was about 19% low. Update THIS file when the rate goes stale, then run scripts/check_electricity_rate.py, which fails and names every article still carrying the old number. Do not edit the rate in an article without editing it here.",
+
+  "cents_per_kwh": 17.82,
+  "dollars_per_kwh": 0.1782,
+  "display": "17.8&cent;/kWh",
+  "as_of": "Rolling 12 months ending May 2026",
+  "retrieved": "2026-08-20",
+
+  "source": {
+    "publisher": "U.S. Energy Information Administration",
+    "title": "Electric Power Monthly, Table 5.3 — Average Price of Electricity to Ultimate Customers by End-Use Sector",
+    "sector": "Residential, 50 states and DC",
+    "page": "https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_03",
+    "data_file": "https://www.eia.gov/electricity/monthly/xls/table_5_03.xlsx",
+    "note": "The HTML table page renders via JavaScript and gives an automated fetch only boilerplate. Cite the HTML page to readers; parse the .xlsx."
+  },
+
+  "why_this_series": "The rolling 12-month average is the right statistic for evergreen copy. Residential rates are strongly seasonal — May 2026 alone was 18.44 and the 2026 year-to-date figure was 18.11, both of which would read as wrong for most of the year. Annual 2025 (17.30) is the other defensible choice but is already stale by mid-2026.",
+
+  "other_series_same_table": {
+    "annual_2024_final": 16.48,
+    "annual_2025_preliminary": 17.30,
+    "ytd_2026_jan_may": 18.11,
+    "may_2026_alone": 18.44,
+    "rolling_12mo_ending_may_2025": 16.69
+  },
+
+  "staleness_warning": "The residential rate has risen every year since 2020 (13.66 in 2021, 15.04 in 2022, 16.00 in 2023, 16.48 in 2024, 17.30 in 2025). Expect this to be low again within a year. Every article that uses it shows the as-of period in visible copy so a stale figure is obvious to the reader rather than silent.",
+
+  "derived_figures": [
+    { "article": "articles/choosing-a-grow-tent-for-beginners.html", "kwh_per_month": 72,  "dollars_per_month": 12.83, "basis": "150 W at 16 h/day, 30 days" },
+    { "article": "articles/choosing-a-grow-tent-for-beginners.html", "kwh_per_month": 216, "dollars_per_month": 38.49, "basis": "450 W at 16 h/day, 30 days" },
+    { "article": "articles/led-vs-hps-grow-lights.html",             "kwh_per_month": 216, "dollars_per_month": 38.49, "basis": "450 W LED at 16 h/day, 30 days" },
+    { "article": "articles/led-vs-hps-grow-lights.html",             "kwh_per_month": 288, "dollars_per_month": 51.32, "basis": "600 W HPS at 16 h/day, 30 days" },
+    { "article": "articles/understanding-grow-light-schedules.html", "kwh_per_month": 96,  "dollars_per_month": 17.11, "basis": "200 W at 16 h/day, 30 days" },
+    { "article": "articles/understanding-grow-light-schedules.html", "kwh_per_month": 144, "dollars_per_month": 25.66, "basis": "200 W at 24 h/day, 30 days" }
+  ]
+}
