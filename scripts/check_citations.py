@@ -44,15 +44,13 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Pages that predate the standard and are scheduled for the batch rewrites.
-# Both grew a Sources block out of links that were already in their prose,
-# before there was a marker to tie a claim to an entry. Neither is wrong, and
-# neither conforms. Delete a name from here when its article has been through
-# the standard — the point of the list is that it shrinks to nothing.
+# These grew a Sources block out of links that were already in their prose,
+# before there was a marker to tie a claim to an entry. Neither wrong nor
+# conforming. Delete a name from here when its article has been through the
+# standard — the point of the list is that it shrinks to nothing.
 #
-#   houseplant-care-fundamentals.html    -> issue #18 (voice/citation batch 1)
 #   propagating-plants-from-cuttings.html -> issue #19 (voice/citation batch 2)
 EXEMPT = {
-    "houseplant-care-fundamentals.html",
     "propagating-plants-from-cuttings.html",
 }
 
