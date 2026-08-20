@@ -1146,8 +1146,11 @@ article.post > .byline {
 }
 .cite:hover, .cite:focus { text-decoration: underline; }
 /* Two sources on one claim render as "2,5" rather than as two markers that
-   run together into a meaningless "25". */
-.cite + .cite::before { content: ","; }
+   run together into a meaningless "25". The comma is opt-in via .cite-pair
+   rather than a `.cite + .cite` sibling rule: sibling combinators ignore text
+   nodes, so that version fired on ANY two citations sharing a paragraph and
+   printed 37 stray leading commas across 11 articles. */
+.cite-pair::before { content: ","; }
 
 /* A one-line equation set off from the prose. Sans, because a serif italic
    `x` next to a multiplication sign is a genuinely ambiguous thing to read. */
