@@ -37,6 +37,13 @@ articles/
   automating-your-indoor-garden-watering.html
   growing-microgreens-indoors.html
   understanding-grow-light-schedules.html
+guides/
+  index.html                   Guide hubs: the four control loops, plus the plant
+  light/index.html             Light in (DLI)      — pairs with /tools/dli-calculator/
+  water/index.html             Water through (VPD) — pairs with /tools/vpd-calculator/
+  air/index.html               Air through (CFM)   — pairs with /tools/grow-tent-fan-calculator/
+  feeding/index.html           Salt in solution (EC) — pairs with /tools/ppm-ec-converter/
+  plants/index.html            The plant itself    — pairs with /tools/deficiency-diagnosis/
 css/style.css                  All site styling
 data/affiliate-links.json      Central affiliate link registry (see below)
 scripts/apply_affiliate_links.py   One-command script to stamp your real Amazon tag site-wide
